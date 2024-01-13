@@ -16,9 +16,34 @@
                 <label asp-for="Username" class="form-label"></label>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                <input asp-for="Input.DoctorName" class="form-control" placeholder="Please enter your phone number." />
+                <label asp-for="Input.DoctorName" class="form-label"></label>
+                <span asp-validation-for="Input.DoctorName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.DoctorPhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
+                <label asp-for="Input.DoctorPhoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.DoctorPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.DoctorSpecialization" class="form-control" placeholder="Please enter your Specialization." />
+                <label asp-for="Input.DoctorSpecialization" class="form-label"></label>
+                <span asp-validation-for="Input.DoctorSpecialization" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.DoctorAvailavleTime" class="form-control" placeholder="Please enter your AvailavleTime." />
+                <label asp-for="Input.DoctorAvailavleTime" class="form-label"></label>
+                <span asp-validation-for="Input.DoctorAvailavleTime" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.DoctorExperience" class="form-control" placeholder="Please enter your DoctorExperience in (xx Years) format." />
+                <label asp-for="Input.DoctorExperience" class="form-label"></label>
+                <span asp-validation-for="Input.DoctorExperience" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.DoctorNationality" class="form-control" placeholder="Please enter your Nationality." />
+                <label asp-for="Input.DoctorNationality" class="form-label"></label>
+                <span asp-validation-for="Input.DoctorNationality" class="text-danger"></span>
             </div>
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
