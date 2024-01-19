@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthcareMonitoring.Shared.Domain
 {
-	internal class MedicalReport
+	public class MedicalReport
 	{
 	}
 }
