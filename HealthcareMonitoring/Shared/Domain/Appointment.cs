@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthcareMonitoring.Shared.Domain
 {
-	internal class Appointment
+	public class Appointment
 	{
 	}
 }
