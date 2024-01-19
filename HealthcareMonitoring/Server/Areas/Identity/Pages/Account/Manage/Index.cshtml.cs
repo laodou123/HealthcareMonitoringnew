@@ -70,23 +70,23 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account.Manage
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var DoctorName = await _userManager.GetDoctorNameAsync(user);
-            var DoctorPhoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            var DoctorSpecialization = await _userManager.GetSpecializationAsync(user);
-            var DoctorAvailavleTime = await _userManager.GetAvailavleTimeAsync(user);
-            var DoctorExperience = await _userManager.GetExperienceAsync(user);
-            var DoctorNationality = await _userManager.GetNationalityAsync(user);
+            //var DoctorName = await _userManager.GetDoctorNameAsync(user);
+            //var DoctorPhoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //var DoctorSpecialization = await _userManager.GetSpecializationAsync(user);
+            //var DoctorAvailableTime = await _userManager.GetAvailavleTimeAsync(user);
+            //var DoctorExperience = await _userManager.GetExperienceAsync(user);
+            //var DoctorNationality = await _userManager.GetNationalityAsync(user);
 
             Username = userName;
 
             Input = new InputModel
             {
-                DoctorName = DoctorName,
-                DoctorPhoneNumber = DoctorPhoneNumber,
-                DoctorSpecialization = DoctorSpecialization,
-                DoctorAvailavleTime = DoctorAvailavleTime,
-                DoctorExperience = DoctorExperience,
-                DoctorNationality = DoctorNationality
+                //DoctorName = DoctorName,
+                //DoctorPhoneNumber = DoctorPhoneNumber,
+                //DoctorSpecialization = DoctorSpecialization,
+                //DoctorAvailavleTime = DoctorAvailableTime,
+                //DoctorExperience = DoctorExperience,
+                //DoctorNationality = DoctorNationality
             };
         }
 
@@ -115,67 +115,67 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
-            var DoctorName = await _userManager.GetDoctorNameAsync(user);
-            if (Input.DoctorName != DoctorName)
-            {
-                var setDoctorNameResult = await _userManager.SetDoctorNameAsync(user, Input.DoctorName);
-                if (!setDoctorNameResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set DoctorName.";
-                    return RedirectToPage();
-                }
-            }
+            //var DoctorName = await _userManager.GetDoctorNameAsync(user);
+            //if (Input.DoctorName != DoctorName)
+            //{
+            //    var setDoctorNameResult = await _userManager.SetDoctorNameAsync(user, Input.DoctorName);
+            //    if (!setDoctorNameResult.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set DoctorName.";
+            //        return RedirectToPage();
+            //    }
+            //}
 
-            var DoctorPhoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.DoctorPhoneNumber != DoctorPhoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.DoctorPhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
-            }
-            var DoctorSpecialization = await _userManager.GetSpecializationAsync(user);
-            if (Input.DoctorSpecialization != DoctorSpecialization)
-            {
-                var setDoctorSpecialization = await _userManager.SetSpecializationAsync(user, Input.DoctorSpecialization);
-                if (!setDoctorSpecialization.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set DoctorSpecialization.";
-                    return RedirectToPage();
-                }
-            }
-            var DoctorAvailavleTime = await _userManager.GetAvailavleTimeAsync(user);
-            if (Input.DoctorAvailavleTime != DoctorAvailavleTime)
-            {
-                var setDoctorAvailavleTime = await _userManager.SetAvailavleTimeAsync(user, Input.DoctorAvailavleTime);
-                if (!setDoctorAvailavleTime.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set DoctorAvailavleTime.";
-                    return RedirectToPage();
-                }
-            }
-            var DoctorExperience = await _userManager.GetExperienceAsync(user);
-            if (Input.DoctorExperience != DoctorExperience)
-            {
-                var setDoctorExperience = await _userManager.SetExperienceAsync(user, Input.DoctorExperience);
-                if (!setDoctorExperience.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set DoctorExperience.";
-                    return RedirectToPage();
-                }
-            }
-            var DoctorNationality = await _userManager.GetNationalityAsync(user);
-            if (Input.DoctorNationality != DoctorNationality)
-            {
-                var setDoctorNationality = await _userManager.SetNationalityAsync(user, Input.DoctorNationality);
-                if (!setDoctorNationality.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set DoctorNationality.";
-                    return RedirectToPage();
-                }
-            }
+            //var DoctorPhoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //if (Input.DoctorPhoneNumber != DoctorPhoneNumber)
+            //{
+            //    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.DoctorPhoneNumber);
+            //    if (!setPhoneResult.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set phone number.";
+            //        return RedirectToPage();
+            //    }
+            //}
+            //var DoctorSpecialization = await _userManager.GetSpecializationAsync(user);
+            //if (Input.DoctorSpecialization != DoctorSpecialization)
+            //{
+            //    var setDoctorSpecialization = await _userManager.SetSpecializationAsync(user, Input.DoctorSpecialization);
+            //    if (!setDoctorSpecialization.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set DoctorSpecialization.";
+            //        return RedirectToPage();
+            //    }
+            //}
+            //var DoctorAvailavleTime = await _userManager.GetAvailavleTimeAsync(user);
+            //if (Input.DoctorAvailavleTime != DoctorAvailavleTime)
+            //{
+            //    var setDoctorAvailavleTime = await _userManager.SetAvailavleTimeAsync(user, Input.DoctorAvailavleTime);
+            //    if (!setDoctorAvailavleTime.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set DoctorAvailavleTime.";
+            //        return RedirectToPage();
+            //    }
+            //}
+            //var DoctorExperience = await _userManager.GetExperienceAsync(user);
+            //if (Input.DoctorExperience != DoctorExperience)
+            //{
+            //    var setDoctorExperience = await _userManager.SetExperienceAsync(user, Input.DoctorExperience);
+            //    if (!setDoctorExperience.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set DoctorExperience.";
+            //        return RedirectToPage();
+            //    }
+            //}
+            //var DoctorNationality = await _userManager.GetNationalityAsync(user);
+            //if (Input.DoctorNationality != DoctorNationality)
+            //{
+            //    var setDoctorNationality = await _userManager.SetNationalityAsync(user, Input.DoctorNationality);
+            //    if (!setDoctorNationality.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set DoctorNationality.";
+            //        return RedirectToPage();
+            //    }
+            //}
            
 
             await _signInManager.RefreshSignInAsync(user);
