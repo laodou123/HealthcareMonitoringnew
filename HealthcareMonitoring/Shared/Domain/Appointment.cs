@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace HealthcareMonitoring.Shared.Domain
 {
-	public class Appointment
+	public class Appointment : BaseDomainModel
 	{
+		public string Location { get; set; }
+		public DateTime? Date { get; set; }
+
+		public string Type { get; set; }
+
 	}
 }
