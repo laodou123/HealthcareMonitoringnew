@@ -1,4 +1,5 @@
 ﻿@inject NavigationManager Navigation
+@inject IAppContext AppContext
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -15,11 +16,22 @@
                         <span class="oi oi-person" aria-hidden="true"></span> @context.User.Identity?.Name!
                     </NavLink>
                 </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="/profile" Match="NavLinkMatch.All">
-                        <span class="oi oi-person" aria-hidden="true"></span> Profile
-                    </NavLink>
-                </div>
+                @if (AppContext.IsDoctor)
+                {
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="/profile" Match="NavLinkMatch.All">
+                            <span class="oi oi-person" aria-hidden="true"></span> Profile
+                        </NavLink>
+                    </div>
+                }
+                @if (AppContext.IsDoctor)
+                {
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="/patients" Match="NavLinkMatch.All">
+                            <span class="oi oi-person" aria-hidden="true"></span> 病人信息
+                        </NavLink>
+                    </div>
+                }
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="#" @onclick="BeginLogOut" Match="NavLinkMatch.All">
                         <span class="oi oi-account-logout" aria-hidden="true"></span> Log Out

@@ -1,0 +1,19 @@
+﻿@page "/patients"
+@using HealthcareMonitoring.Shared.Domain;
+
+<h3>PatientList</h3>
+
+<Table TItem="Patient" EditDialogShowMaximizeButton="true"
+       IsPagination="true" PageItemsSource="@PageItemsSource"
+       IsStriped="true" IsBordered="true"
+       ShowToolbar="false" ShowSkeleton="true"
+       IsExtendButtonsInRowHeader="true" ShowExtendButtons="true" ShowExtendDeleteButton="false" ShowExtendEditButton="false"
+       OnQueryAsync="OnQueryAsync">
+    <TableColumns>
+        <TableColumn @bind-Field="context.Name"></TableColumn>
+    </TableColumns>
+    <RowButtonTemplate>
+        <Button Icon="fa-fw fa-solid fa-pen-to-square" Text="Report" OnClick="() => OnClickReportButton(context)" Color="Color.Primary" Size="Size.ExtraSmall" />
+        <Button Icon="fa-fw fa-solid fa-pen-to-square" Text="Prescription" OnClick="() => OnClickPrescriptionButton(context)" Color="Color.Success" Size="Size.ExtraSmall" />
+    </RowButtonTemplate>
+</Table>
