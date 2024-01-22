@@ -1,0 +1,21 @@
+﻿<ValidateForm Model="Value" OnValidSubmit="OnSubmit">
+    <div class="row g-3 form-inline">
+        <div class="col-12 col-sm-6">
+            <BootstrapInput @bind-Value="Value.MedicinePrescriptionDoctor"></BootstrapInput>
+        </div>
+        <div class="col-12 col-sm-6">
+            <BootstrapInput @bind-Value="Value.MedicineName"></BootstrapInput>
+        </div>
+        <div class="col-12 col-sm-6">
+            <BootstrapInput @bind-Value="Value.MedicineQuantity"></BootstrapInput>
+        </div>
+        <div class="col-12 col-sm-6">
+            <BootstrapInput @bind-Value="Value.MedicineUsage"></BootstrapInput>
+        </div>
+        <div class="col-12">
+            <Textarea @bind-Value="Value.MedicineDescription" rows="3"></Textarea>
+        </div>
+    </div>
+</ValidateForm>
+
+
