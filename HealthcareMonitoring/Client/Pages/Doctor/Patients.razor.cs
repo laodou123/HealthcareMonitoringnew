@@ -1,10 +1,17 @@
 using BootstrapBlazor.Components;
+using HealthcareMonitoring.Client.Components;
+using Microsoft.AspNetCore.Components;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HealthcareMonitoring.Client.Pages.Doctor;
 
 public partial class Patients
 {
     private readonly List<int> PageItemsSource = new() { 20, 40, 80 };
+
+    [Inject]
+    [NotNull]
+    private DialogService? DialogService { get; set; }
 
     private Task<QueryData<HealthcareMonitoring.Shared.Domain.Patient>> OnQueryAsync(QueryPageOptions options)
     {
@@ -26,7 +33,10 @@ public partial class Patients
 
     private async Task OnClickReportButton(HealthcareMonitoring.Shared.Domain.Patient item)
     {
-        await Task.Delay(0);
+        await DialogService.ShowSaveDialog<ReportDialog>("Medical Report", () =>
+        {
+            return Task.FromResult(true);
+        });
     }
 
     private async Task OnClickPrescriptionButton(HealthcareMonitoring.Shared.Domain.Patient item)
