@@ -3,6 +3,21 @@
 
 <h3>Doctor Profile</h3>
 
-<div class="p-3">
-    <Editor Height="400" Value="@_profileString" OnValueChanged="OnSaveProfileAsync" PlaceHolder=""></Editor>
-</div>
+<ValidateForm Model="_doctor" OnValidSubmit="OnSubmit">
+    <div class="row g-3 form-inline">
+        <div class="col-12 col-sm-6">
+            <BootstrapInput @bind-Value="_doctor.DoctorName"></BootstrapInput>
+        </div>
+        <div class="col-12 col-sm-6">
+            <BootstrapInput @bind-Value="_doctor.DoctorPhoneNumber"></BootstrapInput>
+        </div>
+        <div class="col-12">
+            <Textarea @bind-Value="_doctor.DoctorSpecialization" rows="10"></Textarea>
+            @* <Editor Height="400" Value="@_doctor.DoctorSpecialization" OnValueChanged="OnSaveProfileAsync" PlaceHolder=""></Editor> *@
+        </div>
+        <div class="col-12">
+            <Button ButtonType="ButtonType.Submit" Text="Submit"></Button>
+        </div>
+    </div>
+</ValidateForm>
+
