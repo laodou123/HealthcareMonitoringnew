@@ -12,6 +12,7 @@
        OnQueryAsync="OnQueryAsync">
     <TableColumns>
         <TableColumn @bind-Field="context.Name"></TableColumn>
+        <TableColumn @bind-Field="context.Report"></TableColumn>
     </TableColumns>
     <RowButtonTemplate>
         <Button Icon="fa-fw fa-solid fa-pen-to-square" Text="Report" OnClick="() => OnClickReportButton(context)" Color="Color.Primary" Size="Size.ExtraSmall" />
