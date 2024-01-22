@@ -12,24 +12,25 @@ public partial class MainLayout
 {
     [Inject]
     [NotNull]
-    private AuthenticationStateProvider? AuthenticationStateProvider { get; set; }
-
-    [Inject]
-    [NotNull]
     private IAppContext? AppContext { get; set; }
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
 
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
     /// <returns></returns>
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-
-        if (state.User.Identity != null && state.User.Identity.IsAuthenticated)
+        if (AuthenticationState != null)
         {
-            AppContext.UserName = state.User.Identity.Name;
-            AppContext.IsDoctor = true;
+            var state = await AuthenticationState;
+            if (state.User.Identity != null && state.User.Identity.IsAuthenticated)
+            {
+                AppContext.UserName = state.User.Identity.Name;
+                AppContext.IsDoctor = true;
+            }
         }
     }
 }
