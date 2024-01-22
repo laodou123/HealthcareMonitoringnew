@@ -36,6 +36,14 @@ public partial class Patients
         await DialogService.ShowSaveDialog<ReportDialog>("Medical Report", () =>
         {
             return Task.FromResult(true);
+        }, dict =>
+        {
+            dict.Add("Value", item.Report);
+            dict.Add("OnValueChanged", new Func<string, Task>(v =>
+            {
+                item.Report = v;
+                return Task.CompletedTask;
+            }));
         });
     }
 
