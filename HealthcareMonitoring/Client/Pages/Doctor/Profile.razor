@@ -3,5 +3,5 @@
 <h3>Doctor Profile</h3>
 
 <div class="p-3">
-    <Editor Height="400" @bind-Value="@_profileString" PlaceHolder=""></Editor>
+    <Editor Height="400" Value="@_profileString" OnValueChanged="OnSaveProfileAsync" PlaceHolder=""></Editor>
 </div>
