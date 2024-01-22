@@ -15,11 +15,17 @@ public partial class Patients
 
     private Task<QueryData<HealthcareMonitoring.Shared.Domain.Patient>> OnQueryAsync(QueryPageOptions options)
     {
-        var items = new List<HealthcareMonitoring.Shared.Domain.Patient>();
-        items.Add(new HealthcareMonitoring.Shared.Domain.Patient()
+        var items = new List<HealthcareMonitoring.Shared.Domain.Patient>
         {
-            Name = "张三"
-        });
+            new()
+            {
+                Name = "张三",
+                Prescription = new()
+                {
+                    MedicineName = "Test"
+                }
+            }
+        };
 
         return Task.FromResult(new QueryData<HealthcareMonitoring.Shared.Domain.Patient>()
         {
@@ -47,8 +53,19 @@ public partial class Patients
         });
     }
 
-    private async Task OnClickPrescriptionButton(HealthcareMonitoring.Shared.Domain.Patient item)
+    private async Task OnClickPrescriptionButton(HealthcareMonitoring.Shared.Domain.Prescription item)
     {
-        await Task.Delay(0);
+        await DialogService.ShowSaveDialog<PrescriptionDialog>("Prescription Dialog", () =>
+        {
+            return Task.FromResult(true);
+        }, dict =>
+        {
+            dict.Add("Value", item);
+            dict.Add("OnValueChanged", new Func<HealthcareMonitoring.Shared.Domain.Prescription, Task>(v =>
+            {
+                item = v;
+                return Task.CompletedTask;
+            }));
+        });
     }
 }

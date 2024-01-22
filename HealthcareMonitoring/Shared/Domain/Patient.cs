@@ -1,4 +1,6 @@
-﻿namespace HealthcareMonitoring.Shared.Domain;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace HealthcareMonitoring.Shared.Domain;
 
 public class Patient
 {
@@ -6,5 +8,6 @@ public class Patient
 
     public string? Report { get; set; }
 
+    [NotNull]
     public Prescription? Prescription { get; set; }
 }
