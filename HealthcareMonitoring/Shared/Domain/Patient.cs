@@ -11,8 +11,5 @@ namespace HealthcareMonitoring.Shared.Domain
 		public Boolean Allergies { get; set; }
 
 		public string? AllergiesDescription { get; set; }
-
-
-
 	}
 }

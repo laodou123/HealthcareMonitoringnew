@@ -13,45 +13,45 @@ public partial class Patients
     [NotNull]
     private DialogService? DialogService { get; set; }
 
-    private Task<QueryData<HealthcareMonitoring.Shared.Domain.Patient>> OnQueryAsync(QueryPageOptions options)
-    {
-        var items = new List<HealthcareMonitoring.Shared.Domain.Patient>
-        {
-            new()
-            {
-                Name = "张三",
-                Prescription = new()
-                {
-                    MedicineName = "Test"
-                }
-            }
-        };
+    //private Task<QueryData<HealthcareMonitoring.Shared.Domain.Patient>> OnQueryAsync(QueryPageOptions options)
+    //{
+    //    var items = new List<HealthcareMonitoring.Shared.Domain.Patient>
+    //    {
+    //        new()
+    //        {
+    //            Name = "张三",
+    //            Prescription = new()
+    //            {
+    //                MedicineName = "Test"
+    //            }
+    //        }
+    //    };
 
-        return Task.FromResult(new QueryData<HealthcareMonitoring.Shared.Domain.Patient>()
-        {
-            Items = items,
-            TotalCount = 1,
-            IsSorted = true,
-            IsFiltered = true,
-            IsSearch = true
-        });
-    }
+    //    return Task.FromResult(new QueryData<HealthcareMonitoring.Shared.Domain.Patient>()
+    //    {
+    //        Items = items,
+    //        TotalCount = 1,
+    //        IsSorted = true,
+    //        IsFiltered = true,
+    //        IsSearch = true
+    //    });
+    //}
 
-    private async Task OnClickReportButton(HealthcareMonitoring.Shared.Domain.Patient item)
-    {
-        await DialogService.ShowSaveDialog<ReportDialog>("Medical Report", () =>
-        {
-            return Task.FromResult(true);
-        }, dict =>
-        {
-            dict.Add("Value", item.Report);
-            dict.Add("OnValueChanged", new Func<string, Task>(v =>
-            {
-                item.Report = v;
-                return Task.CompletedTask;
-            }));
-        });
-    }
+    //private async Task OnClickReportButton(HealthcareMonitoring.Shared.Domain.Patient item)
+    //{
+    //    await DialogService.ShowSaveDialog<ReportDialog>("Medical Report", () =>
+    //    {
+    //        return Task.FromResult(true);
+    //    }, dict =>
+    //    {
+    //        dict.Add("Value", item.Report);
+    //        dict.Add("OnValueChanged", new Func<string, Task>(v =>
+    //        {
+    //            item.Report = v;
+    //            return Task.CompletedTask;
+    //        }));
+    //    });
+    //}
 
     private async Task OnClickPrescriptionButton(HealthcareMonitoring.Shared.Domain.Prescription item)
     {
