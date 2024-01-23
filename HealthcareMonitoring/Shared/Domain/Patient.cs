@@ -2,7 +2,7 @@
 
 namespace HealthcareMonitoring.Shared.Domain;
 
-public class Patient
+public class Patient : BaseDomainModel
 {
     public string? Name { get; set; }
 
