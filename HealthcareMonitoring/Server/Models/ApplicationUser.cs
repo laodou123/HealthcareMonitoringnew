@@ -9,5 +9,11 @@ namespace HealthcareMonitoring.Server.Models
         public string? LastName { get; set; }
         public string? PhoneNo { get; set; }
 
+        public string? NRIC {  get; set; }
+        public string? Gender { get; set; }
+
+        public string? Address { get; set; }
+        public DateTime? DOB { get; set; }
+
     }
 }

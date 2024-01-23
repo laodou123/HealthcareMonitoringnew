@@ -107,13 +107,22 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
             [Required]
             public string UserRole { get; set; }
-
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
+			[Required]
+			public string FirstName { get; set; }
+			[Required]
+			public string LastName { get; set; }
 
             [Required]
             public string PhoneNo { get; set; }
-        }
+			[Required]
+			public string? NRIC { get; set; }
+			[Required]
+			public string? Gender { get; set; }
+			[Required]
+			public string? Address { get; set; }
+			[Required]
+			public DateTime? DOB { get; set; }
+		}
 
 
 
@@ -133,6 +142,14 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.NRIC = Input.NRIC;
+                user.Address = Input.Address;
+                user.DOB = Input.DOB;
+                user.Gender = Input.Gender;
+                user.PhoneNumber = user.PhoneNo = Input.PhoneNo;
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
