@@ -108,11 +108,6 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
             [Required]
             public string UserRole { get; set; }
 
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-
-            [Required]
-            public string PhoneNo { get; set; }
         }
 
 
