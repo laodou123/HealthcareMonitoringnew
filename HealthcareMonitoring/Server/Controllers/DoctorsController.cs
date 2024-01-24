@@ -14,13 +14,13 @@ namespace HealthcareMonitoring.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DiagnosesController : ControllerBase
+    public class DoctorsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
         //private readonly ApplicationDbContext _context;
 
-        public DiagnosesController(IUnitOfWork unitOfWork)
+        public DoctorsController(IUnitOfWork unitOfWork)
         {
             //_context = context;
             _unitOfWork = unitOfWork;
@@ -28,37 +28,37 @@ namespace HealthcareMonitoring.Server.Controllers
 
         // GET: api/Doctors
         [HttpGet]
-        public async Task<IActionResult> GetDiagnosis()
+        public async Task<IActionResult> GetDoctors()
         {
-            var diagnoses = await _unitOfWork.Doctors.GetAll();
-            return Ok(diagnoses);
+            var doctors = await _unitOfWork.Doctors.GetAll();
+            return Ok(doctors);
         }
 
         // GET: api/Doctors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Diagnosis>> GetDiagnosis(int id)
+        public async Task<ActionResult<Doctor>> GetDoctor(int id)
         {
 
-            var diagnosis = await _unitOfWork.Doctors.Get(q => q.Id == id);
+            var doctor = await _unitOfWork.Doctors.Get(q => q.Id == id);
 
-            if (diagnosis == null)
+            if (doctor == null)
             {
                 return NotFound();
             }
 
-            return Ok(diagnosis);
+            return Ok(doctor);
         }
         // PUT: api/Doctors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDiagnosis(int id, Diagnosis diagnosis)
+        public async Task<IActionResult> PutDoctor(int id, Doctor doctor)
         {
-            if (id != diagnosis.Id)
+            if (id != doctor.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Diagnoses.Update(diagnosis);
+            _unitOfWork.Doctors.Update(doctor);
 
             try
             {
@@ -66,7 +66,7 @@ namespace HealthcareMonitoring.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await DiagnosisExists(id))
+                if (!await DoctorExists(id))
                 {
                     return NotFound();
                 }
@@ -82,33 +82,33 @@ namespace HealthcareMonitoring.Server.Controllers
         // POST: api/Doctors
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Diagnosis>> PostDiagnosis(Diagnosis diagnosis)
+        public async Task<ActionResult<Doctor>> PostDoctor(Doctor doctor)
         {
-            await _unitOfWork.Diagnoses.Insert(diagnosis);
+            await _unitOfWork.Doctors.Insert(doctor);
             await _unitOfWork.Save(HttpContext);
-            return CreatedAtAction("GetDiagnosis", new { id = diagnosis.Id }, diagnosis);
+            return CreatedAtAction("GetDoctor", new { id = doctor.Id }, doctor);
         }
 
         // DELETE: api/Doctors/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDiagnosis(int id)
+        public async Task<IActionResult> DeleteDoctor(int id)
         {
-            var diagnosis = await _unitOfWork.Diagnoses.Get(q => q.Id == id);
-            if (diagnosis == null)
+            var doctor = await _unitOfWork.Doctors.Get(q => q.Id == id);
+            if (doctor == null)
             {
                 return NotFound();
             }
-            await _unitOfWork.Diagnoses.Delete(id);
+            await _unitOfWork.Doctors.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
 
         }
 
-        private async Task<bool> DiagnosisExists(int id)
+        private async Task<bool> DoctorExists(int id)
         {
-            var diagnosis = await _unitOfWork.Diagnoses.Get(q => q.Id == id);
-            return diagnosis != null;
+            var doctor = await _unitOfWork.Doctors.Get(q => q.Id == id);
+            return doctor != null;
         }
     }
 }

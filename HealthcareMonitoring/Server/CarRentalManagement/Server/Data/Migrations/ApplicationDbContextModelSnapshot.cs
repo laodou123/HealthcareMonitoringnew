@@ -273,7 +273,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Appointments", (string)null);
                 });
 
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Diagnosis", b =>
@@ -313,7 +313,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Diagnosis");
+                    b.ToTable("Diagnosis", (string)null);
 
                     b.HasData(
                         new
@@ -381,7 +381,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
 
                     b.HasData(
                         new
@@ -437,7 +437,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("medRDailies");
+                    b.ToTable("medRDailies", (string)null);
 
                     b.HasData(
                         new
@@ -559,7 +559,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MedicalReports");
+                    b.ToTable("MedicalReports", (string)null);
 
                     b.HasData(
                         new
@@ -678,7 +678,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasIndex("PrescriptionId");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Prescription", b =>
@@ -729,7 +729,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("prescriptions");
+                    b.ToTable("prescriptions", (string)null);
 
                     b.HasData(
                         new

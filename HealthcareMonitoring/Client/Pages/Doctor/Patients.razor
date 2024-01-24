@@ -1,4 +1,6 @@
-﻿@page "/patients"
+﻿@page "/patients/"
+@inject HttpClient _client
+@inject IJSRuntime js
 @attribute [Authorize]
 @using HealthcareMonitoring.Shared.Domain;
 

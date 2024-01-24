@@ -1,0 +1,12 @@
+﻿namespace HealthcareMonitoring.Client.Static
+{
+    public static class Endpoints
+    {
+        private static readonly string Prefix = "api";
+
+        public static readonly string Doctors = $"{Prefix}/Doctors";
+        public static readonly string Patients = $"{Prefix}/Patients";
+        public static readonly string Prescriptions = $"{Prefix}/Prescriptions";
+
+    }
+}
