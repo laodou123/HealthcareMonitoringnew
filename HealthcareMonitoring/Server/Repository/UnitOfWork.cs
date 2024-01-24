@@ -33,7 +33,7 @@ namespace HealthcareMonitoring.Server.Repository
             => _doctors ??= new GenericRepository<Doctor>(_context);
         public IGenericRepository<Diagnosis> Diagnoses
             => _diagnoses ??= new GenericRepository<Diagnosis>(_context);
-        public IGenericRepository<Prescription> prescriptions
+        public IGenericRepository<Prescription> Prescriptions
            => _prescriptions ??= new GenericRepository<Prescription>(_context);
 
 
