@@ -1,4 +1,5 @@
 using HealthcareMonitoring.Client;
+using HealthcareMonitoring.Client.Services;
 using HealthcareMonitoring.Shared.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -9,7 +10,10 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddBootstrapBlazor();
+
 builder.Services.AddScoped<IAppContext, DefaultAppContext>();
+
+builder.Services.AddScoped<DoctorService>();
 
 
 builder.Services.AddHttpClient("HealthcareMonitoring.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))

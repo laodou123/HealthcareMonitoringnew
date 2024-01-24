@@ -10,10 +10,11 @@ public partial class Profile
 {
     private HealthcareMonitoring.Shared.Domain.Doctor _doctor = new();
 
-    private Task OnSaveProfileAsync(string profileString)
+    private async Task OnSaveProfileAsync(string profileString)
     {
+
+        await DoctorService.UpdateAsync(_doctor);
         // TODO: 保存到数据库中
-        return Task.CompletedTask;
     }
 
     private Task OnSubmit(EditContext context)

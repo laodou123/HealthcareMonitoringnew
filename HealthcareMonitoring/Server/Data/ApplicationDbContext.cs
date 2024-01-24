@@ -1,9 +1,10 @@
 ﻿using Duende.IdentityServer.EntityFramework.Options;
+using HealthcareMonitoring.Server.Configurations.Entities;
 using HealthcareMonitoring.Server.Models;
+using HealthcareMonitoring.Shared.Domain;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using HealthcareMonitoring.Shared.Domain;
 
 namespace HealthcareMonitoring.Server.Data
 {
@@ -22,5 +23,17 @@ namespace HealthcareMonitoring.Server.Data
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Prescription> prescriptions { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new DoctorSeedConfiguration());
+            builder.ApplyConfiguration(new MedRDailySeedConfiguration());
+            builder.ApplyConfiguration(new PrescriptionSeedConfiguration());
+            builder.ApplyConfiguration(new MedicalReportSeedConfiguration());
+            builder.ApplyConfiguration(new DiagnosisSeedConfiguration());
+            
+
+        }
     }
+
 }
