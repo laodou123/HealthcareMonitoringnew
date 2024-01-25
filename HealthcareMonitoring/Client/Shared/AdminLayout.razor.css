@@ -1,0 +1,13 @@
+﻿.page {
+    display: flex;
+}
+
+.sidebar {
+    width: 280px;
+    background-color: rgb(0 0 0 / 78%);
+}
+
+main {
+    padding: 1rem;
+    flex: 1;
+}
