@@ -4,19 +4,16 @@ using HealthcareMonitoring.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace HealthcareMonitoring.Server.Data.Migrations
+namespace HealthcareMonitoring.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240124170441_newdb")]
-    partial class newdb
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -390,7 +387,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 25, 1, 4, 41, 341, DateTimeKind.Local).AddTicks(7416),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 25, 16, 45, 2, 616, DateTimeKind.Local).AddTicks(6739),
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorName = "张三",
