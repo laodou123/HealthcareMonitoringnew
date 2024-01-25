@@ -15,7 +15,7 @@
             <hr />
             <div>
                 <div class="form-floating mb-3">
-                    <label asp-for="Input.UserRole" class="control-label">Role</label>
+                   
                     <div class="form-check">
                         <input asp-for="Input.UserRole" class="form-check-input" type="radio" value="User" id="roleUser" />
                         <label class="form-check-label" for="roleUser">User</label>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-check">
                         <input asp-for="Input.UserRole" class="form-check-input" type="radio" value="Doctor" id="roleDoctor" />
-                        <label class="form-check-label" for="roleAdmin">Doctor</label>
+                        <label class="form-check-label" for="roleDoctor">Doctor</label>
                     </div>
                     <span asp-validation-for="Input.UserRole" class="text-danger"></span>
                 </div>
