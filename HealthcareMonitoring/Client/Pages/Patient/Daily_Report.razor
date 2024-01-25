@@ -1,0 +1,59 @@
+﻿@page "/patient/dailyreport"
+@using HealthcareMonitoring.Client.Static;
+@inject HttpClient _client
+@inject NavigationManager _navManager
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/PatientProfile.css">
+
+</head>
+
+<div class="form-wrapper">
+    <h3>Update Daily status</h3>
+    <EditForm Model="@med" OnValidSubmit="CreateDailyReport">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <fieldset disabled="@Disabled">
+            <div class="form-group">
+                <label>Beats per minute: </label>
+                <InputNumber @bind-Value="med.bpm" class="form-control" />
+                <ValidationMessage For="@(() => med.bpm)" />
+            </div>
+            <div class="form-group">
+                <label>Systolic Pressure: </label>
+                <InputNumber @bind-Value="med.systolicPressure" class="form-control" />
+                <ValidationMessage For="@(() => med.systolicPressure)" />
+            </div>
+            <div class="form-group">
+                <label>Diastolic Pressure: </label>
+                <InputNumber @bind-Value="med.diastolicPressure" class="form-control" />
+                <ValidationMessage For="@(() => med.diastolicPressure)" />
+            </div>
+            
+            <div class="form-group">
+                <label>Blood Sugar Level: </label>
+                <InputNumber @bind-Value="med.bloodSugarLevel" class="form-control" />
+                <ValidationMessage For="@(() => med.bloodSugarLevel)" />
+            </div>
+            
+            <Button type="submit" class="btn btn-primary btn-block">
+                Update Profile
+            </Button>
+        </fieldset>
+    </EditForm>
+</div>
+
+@code {
+    public bool Disabled { get; set; } = false;
+
+
+    MedRDaily med = new MedRDaily();
+
+    private async Task CreateDailyReport()
+    {
+        await _client.PostAsJsonAsync(Endpoints.MedRDailies, med);
+        _navManager.NavigateTo("/");
+    }
+}
+

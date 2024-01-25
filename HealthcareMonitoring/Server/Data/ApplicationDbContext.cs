@@ -31,7 +31,8 @@ namespace HealthcareMonitoring.Server.Data
             builder.ApplyConfiguration(new PrescriptionSeedConfiguration());
             builder.ApplyConfiguration(new MedicalReportSeedConfiguration());
             builder.ApplyConfiguration(new DiagnosisSeedConfiguration());
-            
+            builder.ApplyConfiguration(new PatientSeedConfiguration());
+
 
         }
     }

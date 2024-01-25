@@ -4,6 +4,7 @@ using HealthcareMonitoring.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthcareMonitoring.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240125123239_resetDB")]
+    partial class resetDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -314,15 +317,6 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Diagnosis");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DiagnosisDate = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DiagnosisText = "Test",
-                            DiagnosisTime = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Doctor", b =>
@@ -382,19 +376,6 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Doctors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 25, 16, 45, 2, 616, DateTimeKind.Local).AddTicks(6739),
-                            DoctorExperience = 5,
-                            DoctorIntroduction = "张三",
-                            DoctorName = "张三",
-                            DoctorNationality = "中国",
-                            DoctorPhoneNumber = 123456789,
-                            DoctorSpecialization = "心脏病"
-                        });
                 });
 
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.MedRDaily", b =>
@@ -420,6 +401,9 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PatientId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -437,25 +421,9 @@ namespace HealthcareMonitoring.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("medRDailies");
+                    b.HasIndex("PatientId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            bloodSugarLevel = 1,
-                            bpm = 1,
-                            diastolicPressure = 1,
-                            systolicPressure = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            bloodSugarLevel = 15,
-                            bpm = 5,
-                            diastolicPressure = 12,
-                            systolicPressure = 10
-                        });
+                    b.ToTable("medRDailies");
                 });
 
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.MedicalReport", b =>
@@ -560,62 +528,6 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MedicalReports");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            MedicalType = "1",
-                            PR_Interval = 1f,
-                            P_wave = "1",
-                            QRS_Complex = 1f,
-                            QT_Interval = 1f,
-                            ST_Interval = 1f,
-                            T_Wave = "1",
-                            fev1 = 1f,
-                            fev1_fvc_ratio = 1f,
-                            fvc = 1f,
-                            hb = 1f,
-                            hct = 1f,
-                            heartRate = 1,
-                            lumarSpine = 1f,
-                            pef = 1f,
-                            plt = 1f,
-                            rbc = 1f,
-                            rhythm = "Test",
-                            totalHip = 1f,
-                            tscoreH = 1f,
-                            tscoreL = 1f,
-                            tv = 1f,
-                            wbc = 1f
-                        },
-                        new
-                        {
-                            Id = 2,
-                            MedicalType = "Test",
-                            PR_Interval = 10f,
-                            P_wave = "Test",
-                            QRS_Complex = 10f,
-                            QT_Interval = 10f,
-                            ST_Interval = 10f,
-                            T_Wave = "Test",
-                            fev1 = 10f,
-                            fev1_fvc_ratio = 10f,
-                            fvc = 10f,
-                            hb = 10f,
-                            hct = 10f,
-                            heartRate = 10,
-                            lumarSpine = 10f,
-                            pef = 10f,
-                            plt = 10f,
-                            rbc = 10f,
-                            rhythm = "Test",
-                            totalHip = 10f,
-                            tscoreH = 10f,
-                            tscoreL = 10f,
-                            tv = 10f,
-                            wbc = 10f
-                        });
                 });
 
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Patient", b =>
@@ -654,6 +566,9 @@ namespace HealthcareMonitoring.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NRIC")
@@ -730,26 +645,6 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("prescriptions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            MedicineDescription = "Test",
-                            MedicineName = "Test",
-                            MedicinePrescriptionDoctor = "Test",
-                            MedicineQuantity = 1,
-                            MedicineUsage = "Test"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            MedicineDescription = "Test",
-                            MedicineName = "Test",
-                            MedicinePrescriptionDoctor = "Test",
-                            MedicineQuantity = 1,
-                            MedicineUsage = "Test"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -887,6 +782,15 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.MedRDaily", b =>
+                {
+                    b.HasOne("HealthcareMonitoring.Shared.Domain.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Patient", b =>

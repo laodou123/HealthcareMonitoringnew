@@ -51,6 +51,8 @@ namespace HealthcareMonitoring.Server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -118,11 +120,12 @@ namespace HealthcareMonitoring.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DoctorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DoctorPhoneNumber = table.Column<int>(type: "int", nullable: true),
-                    DoctorSpecialization = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DoctorAvailavleTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DoctorExperience = table.Column<int>(type: "int", nullable: true),
-                    DoctorNationality = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DoctorPhoneNumber = table.Column<int>(type: "int", nullable: false),
+                    DoctorSpecialization = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DoctorAvailavleTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DoctorExperience = table.Column<int>(type: "int", nullable: false),
+                    DoctorNationality = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DoctorIntroduction = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -192,28 +195,6 @@ namespace HealthcareMonitoring.Server.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MedicalReports", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "medRDailies",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    bpm = table.Column<int>(type: "int", nullable: false),
-                    systolicPressure = table.Column<int>(type: "int", nullable: false),
-                    diastolicPressure = table.Column<int>(type: "int", nullable: false),
-                    bloodSugarLevel = table.Column<int>(type: "int", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_medRDailies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -381,6 +362,7 @@ namespace HealthcareMonitoring.Server.Migrations
                     PhoneNumber = table.Column<int>(type: "int", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AllergyDes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -397,6 +379,34 @@ namespace HealthcareMonitoring.Server.Migrations
                         principalTable: "prescriptions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "medRDailies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    bpm = table.Column<int>(type: "int", nullable: false),
+                    systolicPressure = table.Column<int>(type: "int", nullable: false),
+                    diastolicPressure = table.Column<int>(type: "int", nullable: false),
+                    bloodSugarLevel = table.Column<int>(type: "int", nullable: false),
+                    PatientId = table.Column<int>(type: "int", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_medRDailies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_medRDailies_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -453,6 +463,11 @@ namespace HealthcareMonitoring.Server.Migrations
                 name: "IX_Keys_Use",
                 table: "Keys",
                 column: "Use");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_medRDailies_PatientId",
+                table: "medRDailies",
+                column: "PatientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Patients_PrescriptionId",
@@ -520,9 +535,6 @@ namespace HealthcareMonitoring.Server.Migrations
                 name: "medRDailies");
 
             migrationBuilder.DropTable(
-                name: "Patients");
-
-            migrationBuilder.DropTable(
                 name: "PersistedGrants");
 
             migrationBuilder.DropTable(
@@ -530,6 +542,9 @@ namespace HealthcareMonitoring.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Patients");
 
             migrationBuilder.DropTable(
                 name: "prescriptions");

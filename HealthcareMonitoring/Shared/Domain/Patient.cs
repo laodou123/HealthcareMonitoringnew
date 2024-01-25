@@ -10,6 +10,7 @@ public class Patient : BaseDomainModel
 
     [NotNull]
     public Prescription? Prescription { get; set; }
+    public int? PrescriptionId { get; set; }
 
     public string? NRIC { get; set; }
 
@@ -17,8 +18,9 @@ public class Patient : BaseDomainModel
     public DateTime? DOB { get; set; }
 
     public int? Age { get; set; }
-    public int PhoneNumber { get; set; }
+    public string? PhoneNumber { get; set; }
     public string? Address { get; set; }
     public string? AllergyDes { get; set; }
-
+    public string? LastName { get; set; }
+    
 }

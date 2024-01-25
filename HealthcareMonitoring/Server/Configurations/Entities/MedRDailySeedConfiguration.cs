@@ -17,6 +17,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                     systolicPressure = 1,
                     diastolicPressure = 1,
                     bloodSugarLevel=1,
+                    PatientId=1,
 
                 },
                  new MedRDaily
@@ -27,6 +28,8 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                      systolicPressure = 10,
                      diastolicPressure = 12,
                      bloodSugarLevel = 15,
+                     PatientId = 1,
+
 
                  }
             );

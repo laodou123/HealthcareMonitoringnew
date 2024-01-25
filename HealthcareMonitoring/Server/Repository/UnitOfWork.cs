@@ -19,6 +19,10 @@ namespace HealthcareMonitoring.Server.Repository
         private IGenericRepository<Doctor> _doctors;
         private IGenericRepository<Diagnosis> _diagnoses;
         private IGenericRepository<Prescription> _prescriptions;
+        private IGenericRepository<Patient> _patients;
+        private IGenericRepository<MedicalReport> _medicalReports;
+        private IGenericRepository<MedRDaily> _medicalReportsDaily;
+        private IGenericRepository<Appointment> _appointments;
 
 
         private UserManager<ApplicationUser> _userManager;
@@ -35,6 +39,14 @@ namespace HealthcareMonitoring.Server.Repository
             => _diagnoses ??= new GenericRepository<Diagnosis>(_context);
         public IGenericRepository<Prescription> Prescriptions
            => _prescriptions ??= new GenericRepository<Prescription>(_context);
+        public IGenericRepository<Patient> Patients
+           => _patients ??= new GenericRepository<Patient>(_context);
+        public IGenericRepository<MedicalReport> MedicalReport
+           => _medicalReports ??= new GenericRepository<MedicalReport>(_context);
+        public IGenericRepository<MedRDaily> MedRDaily
+           => _medicalReportsDaily ??= new GenericRepository<MedRDaily>(_context);
+        public IGenericRepository<Appointment> Appointments
+           => _appointments ??= new GenericRepository<Appointment>(_context);
 
 
         public void Dispose()

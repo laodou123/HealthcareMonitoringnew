@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace HealthcareMonitoring.Server.Data.Migrations
+namespace HealthcareMonitoring.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -273,7 +273,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Appointments", (string)null);
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Diagnosis", b =>
@@ -313,7 +313,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Diagnosis", (string)null);
+                    b.ToTable("Diagnosis");
 
                     b.HasData(
                         new
@@ -381,13 +381,13 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 25, 1, 4, 41, 341, DateTimeKind.Local).AddTicks(7416),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 25, 20, 46, 31, 102, DateTimeKind.Local).AddTicks(6486),
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorName = "张三",
@@ -420,6 +420,9 @@ namespace HealthcareMonitoring.Server.Data.Migrations
                     b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PatientId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -437,12 +440,15 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("medRDailies", (string)null);
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("medRDailies");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            PatientId = 1,
                             bloodSugarLevel = 1,
                             bpm = 1,
                             diastolicPressure = 1,
@@ -451,6 +457,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
                         new
                         {
                             Id = 2,
+                            PatientId = 1,
                             bloodSugarLevel = 15,
                             bpm = 5,
                             diastolicPressure = 12,
@@ -559,7 +566,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MedicalReports", (string)null);
+                    b.ToTable("MedicalReports");
 
                     b.HasData(
                         new
@@ -656,6 +663,9 @@ namespace HealthcareMonitoring.Server.Data.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NRIC")
                         .HasColumnType("nvarchar(max)");
 
@@ -665,7 +675,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("PrescriptionId")
+                    b.Property<int?>("PrescriptionId")
                         .HasColumnType("int");
 
                     b.Property<string>("Report")
@@ -678,7 +688,21 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasIndex("PrescriptionId");
 
-                    b.ToTable("Patients", (string)null);
+                    b.ToTable("Patients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "singapore",
+                            AllergyDes = "seafood",
+                            DOB = new DateTime(2024, 1, 25, 20, 46, 31, 102, DateTimeKind.Local).AddTicks(7238),
+                            Gender = "Male",
+                            LastName = "Tan",
+                            NRIC = "S1234567G",
+                            Name = "Jia Wei",
+                            PhoneNumber = 12345678
+                        });
                 });
 
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Prescription", b =>
@@ -729,7 +753,7 @@ namespace HealthcareMonitoring.Server.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("prescriptions", (string)null);
+                    b.ToTable("prescriptions");
 
                     b.HasData(
                         new
@@ -889,13 +913,20 @@ namespace HealthcareMonitoring.Server.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.MedRDaily", b =>
+                {
+                    b.HasOne("HealthcareMonitoring.Shared.Domain.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId");
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Patient", b =>
                 {
                     b.HasOne("HealthcareMonitoring.Shared.Domain.Prescription", "Prescription")
                         .WithMany()
-                        .HasForeignKey("PrescriptionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PrescriptionId");
 
                     b.Navigation("Prescription");
                 });

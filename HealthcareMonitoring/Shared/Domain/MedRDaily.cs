@@ -12,6 +12,8 @@ namespace HealthcareMonitoring.Shared.Domain
         public int systolicPressure { get; set; }
         public int diastolicPressure { get; set; }
         public int bloodSugarLevel { get; set; }
+        public virtual Patient Patient { get; set; }
+        public int? PatientId { get; set; }
 
     }
 }

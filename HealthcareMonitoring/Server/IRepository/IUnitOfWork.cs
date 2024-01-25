@@ -14,5 +14,10 @@ namespace HealthcareMonitoring.Server.IRepository
         IGenericRepository<Doctor> Doctors { get; }
         IGenericRepository<Diagnosis> Diagnoses { get; }
         IGenericRepository<Prescription> Prescriptions { get; }
+        IGenericRepository<Patient> Patients { get; }
+        IGenericRepository<MedRDaily> MedRDaily { get; }
+        IGenericRepository<MedicalReport> MedicalReport { get; }
+        IGenericRepository<Appointment> Appointments { get; }
+        
     }
 }
