@@ -1,10 +1,8 @@
-﻿@page "/patients/"
+﻿@page "/patients"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
 @using HealthcareMonitoring.Shared.Domain;
-
-<h3>PatientList</h3>
 
 <Table TItem="Patient" EditDialogShowMaximizeButton="true"
        IsPagination="true" PageItemsSource="@PageItemsSource"
