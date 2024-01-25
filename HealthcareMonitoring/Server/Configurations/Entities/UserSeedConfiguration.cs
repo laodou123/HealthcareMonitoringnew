@@ -20,6 +20,18 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 UserName = "admin@localhost.com",
                 NormalizedUserName = "ADMIN@LOCALHOST.COM",
                 PasswordHash = hasher.HashPassword(null, "P@ssword1")
+            },
+            new ApplicationUser
+            {
+                Id = "693e710c-008f-435b-a997-77f10812374d",
+                Email = "13858860788a@gmail.com",
+                NormalizedEmail = "13858860788A@GMAIL.COM",
+                FirstName = "Hu",
+                LastName = "Yi",
+                UserName = "13858860788a@gmail.com",
+                NormalizedUserName = "13858860788A@GMAIL.COM",
+                PasswordHash = hasher.HashPassword(null, "P@ssword1")
+
             }
             );
         }

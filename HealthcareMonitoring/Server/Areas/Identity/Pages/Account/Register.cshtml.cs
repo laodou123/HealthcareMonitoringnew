@@ -132,7 +132,7 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, Input.UserRole);
+                    var role = await _userManager.AddToRoleAsync(user, Input.UserRole);
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -154,7 +154,20 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+
+                        if (Input.UserRole == "Administrator")
+                        {
+                            return LocalRedirect("~/Admin");
+                        }
+                        else if (Input.UserRole == "User")
+                        {
+                            return LocalRedirect("~/User");
+                        }
+                        else if (Input.UserRole == "Doctor")
+                        {
+                            return LocalRedirect("~/Doctor");
+                        }
+
                     }
                 }
                 foreach (var error in result.Errors)

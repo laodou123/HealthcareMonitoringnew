@@ -4,6 +4,7 @@ using HealthcareMonitoring.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthcareMonitoring.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240125165852_userrole")]
+    partial class userrole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,7 +241,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "68f4dd27-bc79-4b55-8e5f-044b544a7350",
+                            ConcurrencyStamp = "157c6643-6beb-4cb7-acf0-d9e0b0089213",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +249,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAED6HeLnKsuVBVrntcIH7n0J6RR6zE6Akly0efQKbAI+/igcBL1OYHKHurQOH9MMJzQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF50YlN0zPo/PcYCHSTOOOCG0JuRio6OLf2Gpqn3F189Xmvr/5USxVlN2L/0sutAXA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9254ee94-7e09-4018-adbd-842f34d2c0fc",
+                            SecurityStamp = "d0312901-2129-40f1-838b-206ec7c81b7c",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -256,7 +259,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "693e710c-008f-435b-a997-77f10812374d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "48d32b32-35dd-4a51-aba2-638c76779df5",
+                            ConcurrencyStamp = "d6bee0fb-2f62-4ce1-80c4-1db63ae3c1c5",
                             Email = "13858860788a@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Hu",
@@ -264,9 +267,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "13858860788A@GMAIL.COM",
                             NormalizedUserName = "13858860788A@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM8otXjPRDsGc8WE4ZLjJyUq/2KDHMqMAhKZ1pEa2JB+9XVwK6lQrQCvAzx6VhgSnw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHlqy+9ull4NKTtnukQCeDMOs3VKbf0vWgVyMEnSbHnXzwpzm+LUgyeAhs76UCapXw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "526ea277-f960-47a4-93c8-d2f8275a7314",
+                            SecurityStamp = "e14c9b5b-caf2-40b6-a589-ea533a92093a",
                             TwoFactorEnabled = false,
                             UserName = "13858860788a@gmail.com"
                         });
@@ -425,7 +428,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 26, 1, 17, 5, 312, DateTimeKind.Local).AddTicks(2299),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 26, 0, 58, 52, 374, DateTimeKind.Local).AddTicks(2896),
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorName = "张三",
@@ -734,7 +737,7 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = 1,
                             Address = "singapore",
                             AllergyDes = "seafood",
-                            DOB = new DateTime(2024, 1, 26, 1, 17, 5, 312, DateTimeKind.Local).AddTicks(3654),
+                            DOB = new DateTime(2024, 1, 26, 0, 58, 52, 374, DateTimeKind.Local).AddTicks(4160),
                             Gender = "Male",
                             LastName = "Tan",
                             NRIC = "S1234567G",
@@ -852,12 +855,6 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
                             Name = "User",
                             NormalizedName = "USER"
-                        },
-                        new
-                        {
-                            Id = "cd2bcf0c-20db-474f-8407-5a6b159518bc",
-                            Name = "Doctor",
-                            NormalizedName = "DOCTOR"
                         });
                 });
 

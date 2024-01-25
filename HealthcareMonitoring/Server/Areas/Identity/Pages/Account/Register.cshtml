@@ -14,11 +14,22 @@
             <h2>Create a new account.</h2>
             <hr />
             <div>
-                <input type="radio" asp-for="Input.UserRole" id="patient" value="Patient">
-                <label for="patient">Patient</label>
-                <input type="radio" asp-for="Input.UserRole" id="doctor" value="Doctor">
-                <label for="doctor">Doctor</label>
-                <span asp-validation-for="Input.UserRole" class="text-danger"></span>
+                <div class="form-floating mb-3">
+                    <label asp-for="Input.UserRole" class="control-label">Role</label>
+                    <div class="form-check">
+                        <input asp-for="Input.UserRole" class="form-check-input" type="radio" value="User" id="roleUser" />
+                        <label class="form-check-label" for="roleUser">User</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="Input.UserRole" class="form-check-input" type="radio" value="Administrator" id="roleAdmin" />
+                        <label class="form-check-label" for="roleAdmin">Administrator</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="Input.UserRole" class="form-check-input" type="radio" value="Doctor" id="roleDoctor" />
+                        <label class="form-check-label" for="roleAdmin">Doctor</label>
+                    </div>
+                    <span asp-validation-for="Input.UserRole" class="text-danger"></span>
+                </div>
             </div>
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">

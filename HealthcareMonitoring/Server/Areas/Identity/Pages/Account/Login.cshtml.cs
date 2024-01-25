@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
 {
@@ -114,6 +115,28 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
+                {
+                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                    if (user!= null)
+                    {
+                        var roles = await _signInManager.UserManager.GetRolesAsync(user);
+                        if (roles.Contains("Administrator"))
+                        {
+                            return LocalRedirect("~/Admin");
+                        }
+                        else if (roles.Contains("User"))
+                        {
+                            return LocalRedirect("~/User");
+                        }
+                        else if (roles.Contains("Doctor"))
+                        {
+                            return LocalRedirect("~/Doctor");
+                        }
+                    }
+                    _logger.LogInformation("User logged in.");
+                    return LocalRedirect(returnUrl);
+                }
+                if (result.RequiresTwoFactor)
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);

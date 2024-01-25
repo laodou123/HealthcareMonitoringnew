@@ -32,6 +32,9 @@ namespace HealthcareMonitoring.Server.Data
             builder.ApplyConfiguration(new MedicalReportSeedConfiguration());
             builder.ApplyConfiguration(new DiagnosisSeedConfiguration());
             builder.ApplyConfiguration(new PatientSeedConfiguration());
+            builder.ApplyConfiguration(new UserSeedConfiguration());
+            builder.ApplyConfiguration(new RoleSeedConfiguration());
+            builder.ApplyConfiguration(new UserRoleSeedConfiguration());
 
 
         }

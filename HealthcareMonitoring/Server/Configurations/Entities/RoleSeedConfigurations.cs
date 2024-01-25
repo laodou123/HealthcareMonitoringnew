@@ -19,6 +19,12 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
                 Name = "User",
                 NormalizedName = "USER"
+            },
+            new IdentityRole
+            {
+                Id = "cd2bcf0c-20db-474f-8407-5a6b159518bc",
+                Name = "Doctor",
+                NormalizedName = "DOCTOR"
             }
             );
         }
