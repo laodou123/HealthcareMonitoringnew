@@ -13,6 +13,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
             {
                 Id = 1,
                 DoctorName = "张三",
+                DoctorLocation = "北京",
                 DoctorPhoneNumber = 123456789,
                 DoctorSpecialization = "心脏病",
                 DoctorAvailavleTime = System.DateTime.Now,

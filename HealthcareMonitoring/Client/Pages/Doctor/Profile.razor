@@ -24,6 +24,9 @@
         <div class="col-12 col-sm-6">
             <BootstrapInput @bind-Value="_doctor.DoctorAvailavleTime"></BootstrapInput>
         </div>
+        <div class="col-12 col-sm-6">
+            <BootstrapInput @bind-Value="_doctor.DoctorLocation"></BootstrapInput>
+        </div>
         <div class="col-12">
             <Editor Height="400" Value="@_doctor.DoctorIntroduction" OnValueChanged="OnSaveProfileAsync" PlaceHolder=""></Editor>
         </div>
