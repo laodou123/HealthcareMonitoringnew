@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthcareMonitoring.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240125124631_addedSeed")]
-    partial class addedSeed
+    [Migration("20240126050549_new")]
+    partial class @new
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -235,6 +235,44 @@ namespace HealthcareMonitoring.Server.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5cbf2c17-5248-4632-b703-4bea16d9a0c6",
+                            Email = "admin@localhost.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@LOCALHOST.COM",
+                            NormalizedUserName = "ADMIN@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJtd0QkFkLq/3moRuPh7fCzqnKn+uqnlm+ijgc9CXdlFQWXBjCaO12y/U/rxD3ce5A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e01c7047-69af-41ab-8680-c5d35edb9803",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@localhost.com"
+                        },
+                        new
+                        {
+                            Id = "693e710c-008f-435b-a997-77f10812374d",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c33b397a-29a0-46db-b197-3b01e00928fe",
+                            Email = "13858860788a@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Hu",
+                            LastName = "Yi",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "13858860788A@GMAIL.COM",
+                            NormalizedUserName = "13858860788A@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAECDY+DoELRhSeo0Pt2ZqrXzfv7uIjNDAAhLHaFaNAZdxxF4vOKuy20+xDPGjoVwqzw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c16f33eb-0802-4b67-b183-759c033e57b9",
+                            TwoFactorEnabled = false,
+                            UserName = "13858860788a@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Appointment", b =>
@@ -363,6 +401,10 @@ namespace HealthcareMonitoring.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("DoctorLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DoctorName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -382,6 +424,9 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Doctors");
@@ -390,9 +435,10 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 25, 20, 46, 31, 102, DateTimeKind.Local).AddTicks(6486),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 26, 13, 5, 49, 381, DateTimeKind.Local).AddTicks(2573),
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
+                            DoctorLocation = "北京",
                             DoctorName = "张三",
                             DoctorNationality = "中国",
                             DoctorPhoneNumber = 123456789,
@@ -675,8 +721,8 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PrescriptionId")
                         .HasColumnType("int");
@@ -699,12 +745,12 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = 1,
                             Address = "singapore",
                             AllergyDes = "seafood",
-                            DOB = new DateTime(2024, 1, 25, 20, 46, 31, 102, DateTimeKind.Local).AddTicks(7238),
+                            DOB = new DateTime(2024, 1, 26, 13, 5, 49, 381, DateTimeKind.Local).AddTicks(3479),
                             Gender = "Male",
                             LastName = "Tan",
                             NRIC = "S1234567G",
                             Name = "Jia Wei",
-                            PhoneNumber = 12345678
+                            PhoneNumber = "12345678"
                         });
                 });
 
@@ -804,6 +850,26 @@ namespace HealthcareMonitoring.Server.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "cd2bcf0c-20db-474f-8407-5a6b159518bc",
+                            Name = "Doctor",
+                            NormalizedName = "DOCTOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -893,6 +959,18 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            RoleId = "ad2bcf0c-20db-474f-8407-5a6b159518ba"
+                        },
+                        new
+                        {
+                            UserId = "693e710c-008f-435b-a997-77f10812374d",
+                            RoleId = "bd2bcf0c-20db-474f-8407-5a6b159518bb"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

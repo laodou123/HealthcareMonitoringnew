@@ -36,5 +36,6 @@ namespace HealthcareMonitoring.Shared.Domain
         [Display(Name = "Introduction")]
         [Required]
         public string? DoctorIntroduction { get; set; }
+        public string? userId { get; set; }
     }
 }

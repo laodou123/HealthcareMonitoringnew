@@ -21,6 +21,9 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using HealthcareMonitoring.Shared.Domain;
+using HealthcareMonitoring.Server.Data;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
 {
@@ -32,6 +35,7 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
 
         public RegisterModel(
@@ -39,7 +43,8 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender
+            IEmailSender emailSender,
+            ApplicationDbContext context
 
 
             )
@@ -50,6 +55,7 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
 
         }
 
@@ -144,6 +150,24 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
+                    if (Input.UserRole.Contains("Patient"))
+                    {
+                        var pat = CreatePatient();
+                        pat.userId = userId;
+                        _context.Patients.Add(pat);
+                        _context.SaveChanges();
+                    }
+                    else if (Input.UserRole.Contains("Doctor"))
+                    {
+                        var doc = CreateDoctor();
+                        doc.userId = userId;
+                        _context.Doctors.Add(doc);
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+
+                    }
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
@@ -159,9 +183,9 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                         {
                             return LocalRedirect("~/Admin");
                         }
-                        else if (Input.UserRole == "User")
+                        else if (Input.UserRole == "Patient")
                         {
-                            return LocalRedirect("~/User");
+                            return LocalRedirect("~/patient/homepage");
                         }
                         else if (Input.UserRole == "Doctor")
                         {
@@ -203,6 +227,16 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
             return (IUserEmailStore<ApplicationUser>)_userStore;
         }
 
+        private Patient CreatePatient()
+        {
+            Patient patient = new Patient();
+            return patient;
+        }
+        private Doctor CreateDoctor()
+        {
+            Doctor doctor = new Doctor();   
+            return doctor;
+        }
 
     }
 }
