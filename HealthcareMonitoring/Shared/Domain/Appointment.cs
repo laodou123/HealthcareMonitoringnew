@@ -11,7 +11,15 @@ namespace HealthcareMonitoring.Shared.Domain
         public string Location { get; set; }
         public DateTime? Date { get; set; }
 
+        public DateTime? Time { get; set; }
+
         public string Type { get; set; }
+
+        public virtual Doctor Doctor { get; set; }
+        public int? DoctorId { get; set; }
+        public virtual Patient Patient { get; set; }
+        public int? PatientId { get; set; }
+        public string? Reason { get; set; }
 
     }
 }

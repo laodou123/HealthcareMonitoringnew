@@ -160,7 +160,7 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                     else if (Input.UserRole.Contains("Doctor"))
                     {
                         var doc = CreateDoctor();
-                        doc.userId = userId;
+                        doc.UserId = userId;
                         _context.Doctors.Add(doc);
                         _context.SaveChanges();
                     }

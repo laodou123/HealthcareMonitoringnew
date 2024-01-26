@@ -8,6 +8,6 @@
         public static readonly string Patients = $"{Prefix}/Patients";
         public static readonly string Prescriptions = $"{Prefix}/Prescriptions";
         public static readonly string MedRDailies = $"{Prefix}/MedRDailies";
-
+        public static readonly string Appointments = $"{Prefix}/Appointments";
     }
 }

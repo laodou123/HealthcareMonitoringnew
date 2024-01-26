@@ -1,1 +1,74 @@
-﻿
+﻿@page "/patient/bookappointment"
+@using HealthcareMonitoring.Client.Static;
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/PatientProfile.css">
+
+</head>
+<div class="form-wrapper">
+    <h3>Book Your Appointment</h3>
+    <EditForm Model="@app" OnValidSubmit="CreateAppointment">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <fieldset disabled="@Disabled">
+
+            <div class="form-group">
+                <label>Select Date and Time:</label>
+                <input type="datetime-local" @bind="@app.Date" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+            </div>
+            <div class="form-group">
+                <label>Doctor - Location: </label>
+                <div>
+                    <InputSelect @bind-Value="app.DoctorId" class="form-control">
+                        <option value="">-- Select Doctor & Location --</option>
+                        @if (doctors != null)
+                        {
+                            foreach (var doc in doctors)
+                            {
+                                <option value="@doc.Id">@doc.DoctorName -- @doc.DoctorLocation</option>
+                            }
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => app.DoctorId)" />
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Reason: </label>
+                <InputText @bind-Value="app.Reason" class="form-control" />
+                <ValidationMessage For="@(() => app.Reason)" />
+            </div>
+
+            <Button type="submit" class="btn btn-primary btn-block">
+                Book Appointment
+            </Button>
+        </fieldset>
+    </EditForm>
+</div>
+
+@code {
+    public bool Disabled { get; set; } = false;
+    Appointment app = new Appointment();
+    private IList<Doctor>? doctors;
+    private IList<Patient>? patients;
+
+    protected async override Task OnInitializedAsync()
+    {
+        doctors = await _client.GetFromJsonAsync<IList<Doctor>>($"{Endpoints.Doctors}");
+    }
+
+    private async Task CreateAppointment()
+    {
+        await _client.PostAsJsonAsync(Endpoints.Appointments, app);
+        _navManager.NavigateTo("/patient/homepage");
+    }
+
+    }
+
+
+
+
