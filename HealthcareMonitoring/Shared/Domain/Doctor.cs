@@ -10,6 +10,7 @@ namespace HealthcareMonitoring.Shared.Domain
     public class Doctor : BaseDomainModel
     {
         public string? UserId { get; set; }
+        public string? Email { get; set; }
         [Display(Name = "Name")]
         [Required]
         public string? DoctorName {  get; set; }

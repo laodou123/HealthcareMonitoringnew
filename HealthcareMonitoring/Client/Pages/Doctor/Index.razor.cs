@@ -36,7 +36,7 @@ public partial class Index
         var doctors = await client.GetFromJsonAsync<List<HealthcareMonitoring.Shared.Domain.Doctor>?>(Url);
         if (doctors != null)
         {
-            _doctor = doctors.FirstOrDefault(i => i.UserId == userName);
+            _doctor = doctors.FirstOrDefault(i => i.Email == userName);
         }
 
         _doctor ??= new() { UserId = userName };
