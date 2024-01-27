@@ -2,36 +2,44 @@
 @attribute [Authorize]
 @inject DoctorService DoctorService
 
-<ValidateForm Model="_doctor" OnValidSubmit="OnSubmit">
-    <div class="row g-3 form-inline">
-        <h2>Complete Your Profile</h2>
-        <h3>Doctor's Information</h3>
-        <div class="col-12 col-sm-6">
-            <BootstrapInput @bind-Value="_doctor.DoctorName"></BootstrapInput>
+@if (_doctor != null)
+{
+    <ValidateForm Model="_doctor" OnValidSubmit="OnSubmit">
+        <div class="row g-3 form-inline">
+            <h2>Complete Your Profile</h2>
+            <h3>Doctor's Information</h3>
+            <div class="col-12 col-sm-6">
+                <BootstrapInput @bind-Value="_doctor.DoctorName"></BootstrapInput>
+            </div>
+            <div class="col-12 col-sm-6">
+                <BootstrapInput @bind-Value="_doctor.DoctorPhoneNumber"></BootstrapInput>
+            </div>
+            <div class="col-12 col-sm-6">
+                <BootstrapInput @bind-Value="_doctor.DoctorSpecialization"></BootstrapInput>
+            </div>
+            <div class="col-12 col-sm-6">
+                <BootstrapInput @bind-Value="_doctor.DoctorNationality"></BootstrapInput>
+            </div>
+            <div class="col-12 col-sm-6">
+                <BootstrapInput @bind-Value="_doctor.DoctorExperience"></BootstrapInput>
+            </div>
+            <div class="col-12 col-sm-6">
+                <BootstrapInput @bind-Value="_doctor.DoctorAvailavleTime"></BootstrapInput>
+            </div>
+            <div class="col-12 col-sm-6">
+                <BootstrapInput @bind-Value="_doctor.DoctorLocation"></BootstrapInput>
+            </div>
+            <div class="col-12">
+                <label required="true" class="form-label">Introduction</label>
+                <Editor Height="400" @bind-Value="@_doctor.DoctorIntroduction" PlaceHolder="Please input introduction ..."></Editor>
+            </div>
+            <div class="col-12">
+                <Button ButtonType="ButtonType.Submit" Text="Submit"></Button>
+            </div>
         </div>
-        <div class="col-12 col-sm-6">
-            <BootstrapInput @bind-Value="_doctor.DoctorPhoneNumber"></BootstrapInput>
-        </div>
-        <div class="col-12 col-sm-6">
-            <BootstrapInput @bind-Value="_doctor.DoctorSpecialization"></BootstrapInput>
-        </div>
-        <div class="col-12 col-sm-6">
-            <BootstrapInput @bind-Value="_doctor.DoctorNationality"></BootstrapInput>
-        </div>
-        <div class="col-12 col-sm-6">
-            <BootstrapInput @bind-Value="_doctor.DoctorExperience"></BootstrapInput>
-        </div>
-        <div class="col-12 col-sm-6">
-            <BootstrapInput @bind-Value="_doctor.DoctorAvailavleTime"></BootstrapInput>
-        </div>
-        <div class="col-12 col-sm-6">
-            <BootstrapInput @bind-Value="_doctor.DoctorLocation"></BootstrapInput>
-        </div>
-        <div class="col-12">
-            <Editor Height="400" Value="@_doctor.DoctorIntroduction" OnValueChanged="OnSaveProfileAsync" PlaceHolder=""></Editor>
-        </div>
-        <div class="col-12">
-            <Button ButtonType="ButtonType.Submit" Text="Submit"></Button>
-        </div>
-    </div>
-</ValidateForm>
+    </ValidateForm>
+}
+else
+{
+    <div>loading ...</div>
+}

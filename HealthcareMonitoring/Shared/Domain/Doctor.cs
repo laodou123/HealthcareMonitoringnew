@@ -33,9 +33,9 @@ namespace HealthcareMonitoring.Shared.Domain
         [Display(Name = "Nationality")]
         [Required]
         public string? DoctorNationality {  get; set; }
+
         [Display(Name = "Introduction")]
         [Required]
         public string? DoctorIntroduction { get; set; }
-        
     }
 }
