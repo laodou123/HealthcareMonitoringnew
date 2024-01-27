@@ -374,8 +374,8 @@ namespace HealthcareMonitoring.Server.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Time = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DoctorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    patientId = table.Column<int>(type: "int", nullable: true),
+                    DoctorId = table.Column<int>(type: "int", nullable: true),
+                    PatientId = table.Column<int>(type: "int", nullable: true),
                     Reason = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -388,8 +388,13 @@ namespace HealthcareMonitoring.Server.Migrations
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Appointments_Patients_patientId",
-                        column: x => x.patientId,
+                        name: "FK_Appointments_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Appointments_Patients_PatientId",
+                        column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id");
                 });
@@ -437,8 +442,8 @@ namespace HealthcareMonitoring.Server.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "a68a7065-2a3b-4971-bd6f-c0bab8893220", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEI7rZDGeFfROQq7Zw7vvRPoizL/tnMH+4dC/cXhdWAcc2/Bh4xLS9+XQ9zRJJ7qTFA==", null, false, "3a8fee9b-73c8-4abc-a123-bbc623673f12", false, "admin@localhost.com" },
-                    { "693e710c-008f-435b-a997-77f10812374d", 0, "deecf28d-a9c9-4a39-869d-27a9f1f4ad48", "13858860788a@gmail.com", false, "Hu", "Yi", false, null, "13858860788A@GMAIL.COM", "13858860788A@GMAIL.COM", "AQAAAAIAAYagAAAAEO8owcW/cKbWMtFqb1MEVfA4k9BMjTQa00hd0YVCay/Ss0eILTyihrtvFrhCMg9bFA==", null, false, "421f9363-a0fe-4b6c-9704-8d8b9f13dace", false, "13858860788a@gmail.com" }
+                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "60c061c2-6285-4a17-80c9-411899e2fb51", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEEBDvUCwDVcWJb1Zk+jx1trdl11rbS2dHKR2oigUaw0TVBGTPdtjJqb+fux/aiiwMQ==", null, false, "c0ba7356-c529-4f0e-aa03-8cd36594f1f4", false, "admin@localhost.com" },
+                    { "693e710c-008f-435b-a997-77f10812374d", 0, "5ca2a2d9-56bc-495b-aa40-cd993281c136", "13858860788a@gmail.com", false, "Hu", "Yi", false, null, "13858860788A@GMAIL.COM", "13858860788A@GMAIL.COM", "AQAAAAIAAYagAAAAELErjH8J7qHj2OD7uIPp/JK3Tt3JNcx2WtvGDUPEGB3cNbgVuD/73Q9h1/NNEeZmag==", null, false, "a282b7d5-3fc3-4a57-b5e6-fe6991c53080", false, "13858860788a@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -449,7 +454,7 @@ namespace HealthcareMonitoring.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Doctors",
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "DoctorAvailavleTime", "DoctorExperience", "DoctorIntroduction", "DoctorLocation", "DoctorName", "DoctorNationality", "DoctorPhoneNumber", "DoctorSpecialization", "UpdatedBy", "UserId" },
-                values: new object[] { 1, null, null, null, null, null, new DateTime(2024, 1, 26, 16, 15, 39, 142, DateTimeKind.Local).AddTicks(1399), 5, "张三", "北京", "张三", "中国", 123456789, "心脏病", null, null });
+                values: new object[] { 1, null, null, null, null, null, new DateTime(2024, 1, 27, 18, 36, 5, 604, DateTimeKind.Local).AddTicks(8358), 5, "张三", "北京", "张三", "中国", 123456789, "心脏病", null, null });
 
             migrationBuilder.InsertData(
                 table: "MedicalReports",
@@ -463,7 +468,7 @@ namespace HealthcareMonitoring.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Patients",
                 columns: new[] { "Id", "Address", "Age", "AllergyDes", "CreatedBy", "DOB", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "Gender", "LastName", "NRIC", "Name", "PhoneNumber", "PrescriptionId", "Report", "UpdatedBy", "userId" },
-                values: new object[] { 1, "singapore", null, "seafood", null, new DateTime(2024, 1, 26, 16, 15, 39, 142, DateTimeKind.Local).AddTicks(2194), null, null, null, null, "Male", "Tan", "S1234567G", "Jia Wei", "12345678", null, null, null, null });
+                values: new object[] { 1, "singapore", null, "seafood", null, new DateTime(2024, 1, 27, 18, 36, 5, 604, DateTimeKind.Local).AddTicks(9741), null, null, null, null, "Male", "Tan", "S1234567G", "Jia Wei", "12345678", null, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "prescriptions",
@@ -493,9 +498,14 @@ namespace HealthcareMonitoring.Server.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_patientId",
+                name: "IX_Appointments_DoctorId",
                 table: "Appointments",
-                column: "patientId");
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_PatientId",
+                table: "Appointments",
+                column: "PatientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -611,9 +621,6 @@ namespace HealthcareMonitoring.Server.Migrations
                 name: "Diagnosis");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
-
-            migrationBuilder.DropTable(
                 name: "Keys");
 
             migrationBuilder.DropTable(
@@ -624,6 +631,9 @@ namespace HealthcareMonitoring.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "PersistedGrants");
+
+            migrationBuilder.DropTable(
+                name: "Doctors");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
