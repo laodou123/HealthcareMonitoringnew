@@ -1,12 +1,8 @@
-using HealthcareMonitoring.Shared.Domain;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
-using System.Diagnostics.CodeAnalysis;
 
 namespace HealthcareMonitoring.Client.Pages.Doctor;
 
-public partial class Profile
+public partial class Index
 {
     private HealthcareMonitoring.Shared.Domain.Doctor _doctor = new();
 
