@@ -153,7 +153,7 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                     if (Input.UserRole.Contains("Patient"))
                     {
                         var pat = CreatePatient();
-                        pat.userId = userId;
+                        pat.UserId = userId;
                         _context.Patients.Add(pat);
                         _context.SaveChanges();
                     }
