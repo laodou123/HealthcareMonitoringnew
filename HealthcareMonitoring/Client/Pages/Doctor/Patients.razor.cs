@@ -1,6 +1,5 @@
 using BootstrapBlazor.Components;
 using HealthcareMonitoring.Client.Components;
-using HealthcareMonitoring.Shared.Domain;
 using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Json;
@@ -44,12 +43,7 @@ public partial class Patients
             return Task.FromResult(true);
         }, dict =>
         {
-            dict.Add("Value", item.Report);
-            dict.Add("OnValueChanged", new Func<string, Task>(v =>
-            {
-                item.Report = v;
-                return Task.CompletedTask;
-            }));
+            dict.Add("Value", item);
         });
     }
 

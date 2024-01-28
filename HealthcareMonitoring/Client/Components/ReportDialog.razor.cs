@@ -1,9 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Net.Http.Json;
 using HealthcareMonitoring.Shared.Domain;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
+using System.Diagnostics.CodeAnalysis;
+using System.Net.Http.Json;
 
 namespace HealthcareMonitoring.Client.Components;
 
@@ -12,14 +11,14 @@ public partial class ReportDialog
     [Inject]
     [NotNull]
     private IHttpClientFactory? HttpClientFactory { get; set; }
-    [Inject]
-    [NotNull]
-    private AuthenticationStateProvider? AuthenticationStateProvider { get; set; }
 
     private const string Url = "api/MedicalReports";
+
     private HealthcareMonitoring.Shared.Domain.MedicalReport? _report;
+
     [Parameter]
-    public string? Value { get; set; }
+    [NotNull]
+    public Patient? Value { get; set; }
 
     [Parameter]
     [NotNull]
@@ -29,31 +28,29 @@ public partial class ReportDialog
     {
         await base.OnInitializedAsync();
 
-        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var userName = state.User?.Identity?.Name;
-
-
         //从数据库中读取 Doctor Profile
-       var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
+        var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
 
-        var reports = await client.GetFromJsonAsync<List<HealthcareMonitoring.Shared.Domain.MedicalReport>?>(Url);
-
-
-        if (reports != null)
+        if (Value.ReportId.HasValue)
         {
-            _report = reports.FirstOrDefault(i => i.Email == userName);
+            _report = await client.GetFromJsonAsync<HealthcareMonitoring.Shared.Domain.MedicalReport>($"{Url}/{Value}");
         }
-
-        _report ??= new() { Email = userName };
-        await client.PostAsJsonAsync(Url, _report);
-    }
-        private async Task OnSubmit(EditContext context)
+        else
         {
-            // 写回数据库
-            if (_report != null)
-            {
-                var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
-                await client.PutAsJsonAsync($"{Url}/{_report.Id}", _report);
-            }
+            _report = new HealthcareMonitoring.Shared.Domain.MedicalReport();
+            var result = await client.PostAsJsonAsync(Url, _report);
+            var t = await result.Content.ReadFromJsonAsync<MedicalReport>();
+
         }
     }
+
+    private async Task OnSubmit(EditContext context)
+    {
+        // 写回数据库
+        if (_report != null)
+        {
+            var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
+            await client.PutAsJsonAsync($"{Url}/{_report.Id}", _report);
+        }
+    }
+}

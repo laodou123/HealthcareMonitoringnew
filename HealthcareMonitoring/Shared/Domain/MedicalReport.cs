@@ -8,7 +8,6 @@ namespace HealthcareMonitoring.Shared.Domain
 {
     public class MedicalReport : BaseDomainModel
     {
-        public String? Email { get; set; }
         public int heartRate { get; set; }
         public string rhythm { get; set; }
         public string P_wave { get; set; }

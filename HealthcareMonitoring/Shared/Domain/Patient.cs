@@ -6,7 +6,7 @@ public class Patient : BaseDomainModel
 {
     public string? Name { get; set; }
 
-    public string? Report { get; set; }
+    public int? ReportId { get; set; }
 
     [NotNull]
     public Prescription? Prescription { get; set; }
