@@ -101,6 +101,7 @@ namespace HealthcareMonitoring.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DoctorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DoctorPhoneNumber = table.Column<int>(type: "int", nullable: false),
                     DoctorLocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -442,8 +443,8 @@ namespace HealthcareMonitoring.Server.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "60c061c2-6285-4a17-80c9-411899e2fb51", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEEBDvUCwDVcWJb1Zk+jx1trdl11rbS2dHKR2oigUaw0TVBGTPdtjJqb+fux/aiiwMQ==", null, false, "c0ba7356-c529-4f0e-aa03-8cd36594f1f4", false, "admin@localhost.com" },
-                    { "693e710c-008f-435b-a997-77f10812374d", 0, "5ca2a2d9-56bc-495b-aa40-cd993281c136", "13858860788a@gmail.com", false, "Hu", "Yi", false, null, "13858860788A@GMAIL.COM", "13858860788A@GMAIL.COM", "AQAAAAIAAYagAAAAELErjH8J7qHj2OD7uIPp/JK3Tt3JNcx2WtvGDUPEGB3cNbgVuD/73Q9h1/NNEeZmag==", null, false, "a282b7d5-3fc3-4a57-b5e6-fe6991c53080", false, "13858860788a@gmail.com" }
+                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "705a9f40-e078-4b18-96e2-aec9e47548c2", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEF5v7wgQZASOvI2cbMXm1K6VMpDWG5piZROW0WSjFYAy4GbS66GKjC/wYOnCohqLBw==", null, false, "b88c053f-27eb-411c-bb92-da7d70f00977", false, "admin@localhost.com" },
+                    { "693e710c-008f-435b-a997-77f10812374d", 0, "f4fdfa9f-85c5-4e85-b00e-c6f8eac8d063", "13858860788a@gmail.com", false, "Hu", "Yi", false, null, "13858860788A@GMAIL.COM", "13858860788A@GMAIL.COM", "AQAAAAIAAYagAAAAEFpDMjPosvSStxhE7r0CXHp1AwcAb4KMoaHvRAOFNBMmyw0x+ceoDqNWJrustEsG0w==", null, false, "8cbf9c7f-0d84-4a57-bbad-3c5a1544104d", false, "13858860788a@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -453,8 +454,8 @@ namespace HealthcareMonitoring.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "Doctors",
-                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "DoctorAvailavleTime", "DoctorExperience", "DoctorIntroduction", "DoctorLocation", "DoctorName", "DoctorNationality", "DoctorPhoneNumber", "DoctorSpecialization", "UpdatedBy", "UserId" },
-                values: new object[] { 1, null, null, null, null, null, new DateTime(2024, 1, 27, 18, 36, 5, 604, DateTimeKind.Local).AddTicks(8358), 5, "张三", "北京", "张三", "中国", 123456789, "心脏病", null, null });
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "DoctorAvailavleTime", "DoctorExperience", "DoctorIntroduction", "DoctorLocation", "DoctorName", "DoctorNationality", "DoctorPhoneNumber", "DoctorSpecialization", "Email", "UpdatedBy", "UserId" },
+                values: new object[] { 1, null, null, null, null, null, new DateTime(2024, 1, 28, 11, 47, 9, 159, DateTimeKind.Local).AddTicks(8774), 5, "张三", "北京", "张三", "中国", 123456789, "心脏病", "13858860788aaa@gmail.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "MedicalReports",
@@ -468,7 +469,7 @@ namespace HealthcareMonitoring.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Patients",
                 columns: new[] { "Id", "Address", "Age", "AllergyDes", "CreatedBy", "DOB", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "Gender", "LastName", "NRIC", "Name", "PhoneNumber", "PrescriptionId", "Report", "UpdatedBy", "userId" },
-                values: new object[] { 1, "singapore", null, "seafood", null, new DateTime(2024, 1, 27, 18, 36, 5, 604, DateTimeKind.Local).AddTicks(9741), null, null, null, null, "Male", "Tan", "S1234567G", "Jia Wei", "12345678", null, null, null, null });
+                values: new object[] { 1, "singapore", null, "seafood", null, new DateTime(2024, 1, 28, 11, 47, 9, 160, DateTimeKind.Local).AddTicks(437), null, null, null, null, "Male", "Tan", "S1234567G", "Jia Wei", "12345678", null, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "prescriptions",

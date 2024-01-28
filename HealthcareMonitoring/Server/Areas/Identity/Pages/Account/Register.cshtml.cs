@@ -159,7 +159,11 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                     }
                     else if (Input.UserRole.Contains("Doctor"))
                     {
-
+                        var doc = CreateDoctor();
+                        doc.UserId = userId;
+                        doc.Email = Input.Email;
+                        _context.Doctors.Add(doc);
+                        _context.SaveChanges();
                     }
                     else
                     {
@@ -232,6 +236,15 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
         private Doctor CreateDoctor()
         {
             Doctor doctor = new Doctor();   
+            doctor.DoctorAvailavleTime = DateTime.Now;
+            doctor.DoctorExperience = 0;
+            doctor.DoctorIntroduction = " ";
+            doctor.DoctorLocation = " ";
+            doctor.DoctorNationality = " ";
+            doctor.DoctorPhoneNumber = 0;
+            doctor.DoctorSpecialization = " ";
+            doctor.DoctorName = " ";
+
             return doctor;
         }
 

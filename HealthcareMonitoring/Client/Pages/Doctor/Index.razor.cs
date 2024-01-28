@@ -39,7 +39,7 @@ public partial class Index
             _doctor = doctors.FirstOrDefault(i => i.Email == userName);
         }
 
-        _doctor ??= new() { UserId = userName };
+        _doctor ??= new() { Email = userName };
         await client.PostAsJsonAsync(Url, _doctor);
     }
 

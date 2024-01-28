@@ -12,6 +12,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
             new Doctor
             {
                 Id = 1,
+                Email = "13858860788aaa@gmail.com",
                 DoctorName = "张三",
                 DoctorLocation = "北京",
                 DoctorPhoneNumber = 123456789,
@@ -19,7 +20,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 DoctorAvailavleTime = System.DateTime.Now,
                 DoctorExperience = 5,
                 DoctorNationality = "中国",
-                DoctorIntroduction = "张三"
+                DoctorIntroduction = "张三",
 
             }
         );

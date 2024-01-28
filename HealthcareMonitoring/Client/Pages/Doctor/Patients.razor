@@ -13,6 +13,10 @@
     <TableColumns>
         <TableColumn @bind-Field="context.Name"></TableColumn>
         <TableColumn @bind-Field="context.Report"></TableColumn>
+        <TableColumn @bind-Field="context.Prescription"></TableColumn>
+        <TableColumn @bind-Field="context.NRIC"></TableColumn>
+        <TableColumn @bind-Field="context.PhoneNumber"></TableColumn>
+
     </TableColumns>
     <RowButtonTemplate>
         <Button Icon="fa-fw fa-solid fa-pen-to-square" Text="Report" OnClick="() => OnClickReportButton(context)" Color="Color.Primary" Size="Size.ExtraSmall" />
