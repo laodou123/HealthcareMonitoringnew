@@ -15,7 +15,7 @@ public partial class ReportDialog
 
     private const string Url = "api/MedicalReports";
 
-    private MedicalReport? _report = new MedicalReport();
+    private HealthcareMonitoring.Shared.Domain.MedicalReport? _report;
 
     [Parameter]
     [NotNull]
@@ -38,6 +38,7 @@ public partial class ReportDialog
         {
             _report = new HealthcareMonitoring.Shared.Domain.MedicalReport();
             var result = await client.PostAsJsonAsync("api/MedicalReports", _report);
+
             await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
         }
         /*if (Value.ReportId.HasValue)
@@ -58,15 +59,15 @@ public partial class ReportDialog
     private async Task OnSubmit(EditContext context)
     {
         var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
-        var response = await client.PostAsJsonAsync<MedicalReport>("api/MedicalReports", _report);
+        
+        var response = await client.PostAsJsonAsync<MedicalReport>("api/MedicalReports", _report); 
 
         if (response.IsSuccessStatusCode)
         {
             var num = await response.Content.ReadFromJsonAsync<MedicalReport>();
 
-            Patient patient = Value;
-            patient.ReportId = num.Id;
-            await client.PostAsJsonAsync($"api/Patients/{patient.Id}", patient);
+            Value.ReportId = num.Id;
+            await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
         }
 
 

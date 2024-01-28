@@ -9,6 +9,9 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Prescription> builder)
         {
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            builder.HasKey(e => e.Id);
             builder.HasData(
                 new Prescription
                 {

@@ -8,6 +8,12 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Doctor> builder)
         {
+
+
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            builder.HasKey(e => e.Id);
+
             builder.HasData(
             new Doctor
             {

@@ -84,6 +84,7 @@ namespace HealthcareMonitoring.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<MedicalReport>> PostMedicalReport(MedicalReport medicalreport)
         {
+            medicalreport.Id = default;
             await _unitOfWork.MedicalReports.Insert(medicalreport);
             await _unitOfWork.Save(HttpContext);
             return CreatedAtAction("GetMedicalReport", new { id = medicalreport.Id }, medicalreport);

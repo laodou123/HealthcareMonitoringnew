@@ -8,6 +8,9 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            builder.HasKey(e => e.Id);
             var hasher = new PasswordHasher<ApplicationUser>();
             builder.HasData(
             new ApplicationUser
