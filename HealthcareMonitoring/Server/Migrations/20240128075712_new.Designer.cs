@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthcareMonitoring.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240128034709_new")]
+    [Migration("20240128075712_new")]
     partial class @new
     {
         /// <inheritdoc />
@@ -241,7 +241,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "705a9f40-e078-4b18-96e2-aec9e47548c2",
+                            ConcurrencyStamp = "51832572-dd6e-4f49-80e8-c1b031c1d838",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF5v7wgQZASOvI2cbMXm1K6VMpDWG5piZROW0WSjFYAy4GbS66GKjC/wYOnCohqLBw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF6F9iIMF6XsIg0Oa94RMXjAadyc0rVl9wo/OWsQPsah4V3LDscDFR9AhVvD9zDKBw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b88c053f-27eb-411c-bb92-da7d70f00977",
+                            SecurityStamp = "7bfa3e9f-a8e1-444d-9a32-763f61a09ade",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -259,7 +259,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "693e710c-008f-435b-a997-77f10812374d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f4fdfa9f-85c5-4e85-b00e-c6f8eac8d063",
+                            ConcurrencyStamp = "8016c95d-1cc3-46e2-a804-709f5898a294",
                             Email = "13858860788a@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Hu",
@@ -267,9 +267,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "13858860788A@GMAIL.COM",
                             NormalizedUserName = "13858860788A@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFpDMjPosvSStxhE7r0CXHp1AwcAb4KMoaHvRAOFNBMmyw0x+ceoDqNWJrustEsG0w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBhxhB3ihibZ/wD6U5NnFargYCODRSZd3nSBhVaJc2ex6dsS0ZR3W9veXeBvMpuBTQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8cbf9c7f-0d84-4a57-bbad-3c5a1544104d",
+                            SecurityStamp = "dc6874de-b0e8-4351-afbf-f3455cb36dae",
                             TwoFactorEnabled = false,
                             UserName = "13858860788a@gmail.com"
                         });
@@ -454,7 +454,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 28, 11, 47, 9, 159, DateTimeKind.Local).AddTicks(8774),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 28, 15, 57, 12, 149, DateTimeKind.Local).AddTicks(5559),
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "北京",
@@ -555,6 +555,9 @@ namespace HealthcareMonitoring.Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MedicalType")
@@ -768,7 +771,7 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = 1,
                             Address = "singapore",
                             AllergyDes = "seafood",
-                            DOB = new DateTime(2024, 1, 28, 11, 47, 9, 160, DateTimeKind.Local).AddTicks(437),
+                            DOB = new DateTime(2024, 1, 28, 15, 57, 12, 149, DateTimeKind.Local).AddTicks(7157),
                             Gender = "Male",
                             LastName = "Tan",
                             NRIC = "S1234567G",
@@ -798,6 +801,9 @@ namespace HealthcareMonitoring.Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MedicineDescription")
