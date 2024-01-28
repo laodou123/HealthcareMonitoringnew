@@ -7,6 +7,7 @@ namespace HealthcareMonitoring.Shared.Domain
         [Display(Name = "Name")]
         [Required]
         public string? MedicineName { get; set; }
+        public String? Email { get; set; }
 
         [Display(Name = "Quantity")]
         [Required]
