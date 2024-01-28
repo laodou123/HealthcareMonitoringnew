@@ -41,7 +41,7 @@ namespace HealthcareMonitoring.Server.Repository
            => _prescriptions ??= new GenericRepository<Prescription>(_context);
         public IGenericRepository<Patient> Patients
            => _patients ??= new GenericRepository<Patient>(_context);
-        public IGenericRepository<MedicalReport> MedicalReport
+        public IGenericRepository<MedicalReport> MedicalReports
            => _medicalReports ??= new GenericRepository<MedicalReport>(_context);
         public IGenericRepository<MedRDaily> MedRDaily
            => _medicalReportsDaily ??= new GenericRepository<MedRDaily>(_context);

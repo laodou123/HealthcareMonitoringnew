@@ -16,7 +16,7 @@ namespace HealthcareMonitoring.Server.IRepository
         IGenericRepository<Prescription> Prescriptions { get; }
         IGenericRepository<Patient> Patients { get; }
         IGenericRepository<MedRDaily> MedRDaily { get; }
-        IGenericRepository<MedicalReport> MedicalReport { get; }
+        IGenericRepository<MedicalReport> MedicalReports { get; }
         IGenericRepository<Appointment> Appointments { get; }
         
     }

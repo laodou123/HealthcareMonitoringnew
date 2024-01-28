@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthcareMonitoring.Server.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthcareMonitoring.Server.Data;
+using HealthcareMonitoring.Server.IRepository;
 using HealthcareMonitoring.Shared.Domain;
 
 namespace HealthcareMonitoring.Server.Controllers
@@ -14,61 +16,57 @@ namespace HealthcareMonitoring.Server.Controllers
     [ApiController]
     public class MedicalReportsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public MedicalReportsController(ApplicationDbContext context)
+        //private readonly ApplicationDbContext _context;
+
+        public MedicalReportsController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            //_context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: api/MedicalReports
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MedicalReport>>> GetMedicalReports()
+        public async Task<IActionResult> GetMedicalReports()
         {
-          if (_context.MedicalReports == null)
-          {
-              return NotFound();
-          }
-            return await _context.MedicalReports.ToListAsync();
+            var medicalreports = await _unitOfWork.MedicalReports.GetAll();
+            return Ok(medicalreports);
         }
 
         // GET: api/MedicalReports/5
         [HttpGet("{id}")]
         public async Task<ActionResult<MedicalReport>> GetMedicalReport(int id)
         {
-          if (_context.MedicalReports == null)
-          {
-              return NotFound();
-          }
-            var medicalReport = await _context.MedicalReports.FindAsync(id);
 
-            if (medicalReport == null)
+            var medicalreport = await _unitOfWork.MedicalReports.Get(q => q.Id == id);
+
+            if (medicalreport == null)
             {
                 return NotFound();
             }
 
-            return medicalReport;
+            return Ok(medicalreport);
         }
-
         // PUT: api/MedicalReports/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMedicalReport(int id, MedicalReport medicalReport)
+        public async Task<IActionResult> PutMedicalReport(int id, MedicalReport medicalreport)
         {
-            if (id != medicalReport.Id)
+            if (id != medicalreport.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(medicalReport).State = EntityState.Modified;
+            _unitOfWork.MedicalReports.Update(medicalreport);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _unitOfWork.Save(HttpContext);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MedicalReportExists(id))
+                if (!await MedicalReportExists(id))
                 {
                     return NotFound();
                 }
@@ -84,41 +82,33 @@ namespace HealthcareMonitoring.Server.Controllers
         // POST: api/MedicalReports
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<MedicalReport>> PostMedicalReport(MedicalReport medicalReport)
+        public async Task<ActionResult<MedicalReport>> PostMedicalReport(MedicalReport medicalreport)
         {
-          if (_context.MedicalReports == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.MedicalReports'  is null.");
-          }
-            _context.MedicalReports.Add(medicalReport);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetMedicalReport", new { id = medicalReport.Id }, medicalReport);
+            await _unitOfWork.MedicalReports.Insert(medicalreport);
+            await _unitOfWork.Save(HttpContext);
+            return CreatedAtAction("GetDoctor", new { id = medicalreport.Id }, medicalreport);
         }
 
         // DELETE: api/MedicalReports/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMedicalReport(int id)
         {
-            if (_context.MedicalReports == null)
+            var medicalreport = await _unitOfWork.MedicalReports.Get(q => q.Id == id);
+            if (medicalreport == null)
             {
                 return NotFound();
             }
-            var medicalReport = await _context.MedicalReports.FindAsync(id);
-            if (medicalReport == null)
-            {
-                return NotFound();
-            }
-
-            _context.MedicalReports.Remove(medicalReport);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.MedicalReports.Delete(id);
+            await _unitOfWork.Save(HttpContext);
 
             return NoContent();
+
         }
 
-        private bool MedicalReportExists(int id)
+        private async Task<bool> MedicalReportExists(int id)
         {
-            return (_context.MedicalReports?.Any(e => e.Id == id)).GetValueOrDefault();
+            var medicalreport = await _unitOfWork.MedicalReports.Get(q => q.Id == id);
+            return medicalreport != null;
         }
     }
 }
