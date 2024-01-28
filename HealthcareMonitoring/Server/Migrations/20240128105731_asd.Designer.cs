@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthcareMonitoring.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240128075712_new")]
-    partial class @new
+    [Migration("20240128105731_asd")]
+    partial class asd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "51832572-dd6e-4f49-80e8-c1b031c1d838",
+                            ConcurrencyStamp = "7bb13487-8400-48ce-ae93-c46987b2ae4a",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF6F9iIMF6XsIg0Oa94RMXjAadyc0rVl9wo/OWsQPsah4V3LDscDFR9AhVvD9zDKBw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPwLf4sZccD+1h7FWb3gtcbhPZeGrLDRSKkj4OqsbWj7Y38ZUiov9rAcXK8c+bswTQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7bfa3e9f-a8e1-444d-9a32-763f61a09ade",
+                            SecurityStamp = "a6d45944-ee2f-49c1-9039-c696c1cc6b6a",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -259,7 +259,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "693e710c-008f-435b-a997-77f10812374d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8016c95d-1cc3-46e2-a804-709f5898a294",
+                            ConcurrencyStamp = "b6610e09-298d-4afe-b8b9-2082be581184",
                             Email = "13858860788a@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Hu",
@@ -267,9 +267,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "13858860788A@GMAIL.COM",
                             NormalizedUserName = "13858860788A@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBhxhB3ihibZ/wD6U5NnFargYCODRSZd3nSBhVaJc2ex6dsS0ZR3W9veXeBvMpuBTQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBQLh5Z+mUWmDG40dJHMlffkpuXEvQOEUVafmvsXyiWqWvqltwy9PBZEhPUYaLRxow==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dc6874de-b0e8-4351-afbf-f3455cb36dae",
+                            SecurityStamp = "ee185071-1627-45e0-92ed-04ca9c38fe4d",
                             TwoFactorEnabled = false,
                             UserName = "13858860788a@gmail.com"
                         });
@@ -454,7 +454,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 28, 15, 57, 12, 149, DateTimeKind.Local).AddTicks(5559),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 28, 18, 57, 31, 324, DateTimeKind.Local).AddTicks(2900),
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "北京",
@@ -555,9 +555,6 @@ namespace HealthcareMonitoring.Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MedicalType")
@@ -738,6 +735,9 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MedicalReportId")
+                        .HasColumnType("int");
+
                     b.Property<string>("NRIC")
                         .HasColumnType("nvarchar(max)");
 
@@ -747,11 +747,8 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PrescriptionId")
+                    b.Property<int?>("ReportId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Report")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -761,7 +758,7 @@ namespace HealthcareMonitoring.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PrescriptionId");
+                    b.HasIndex("MedicalReportId");
 
                     b.ToTable("Patients");
 
@@ -771,7 +768,7 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = 1,
                             Address = "singapore",
                             AllergyDes = "seafood",
-                            DOB = new DateTime(2024, 1, 28, 15, 57, 12, 149, DateTimeKind.Local).AddTicks(7157),
+                            DOB = new DateTime(2024, 1, 28, 18, 57, 31, 324, DateTimeKind.Local).AddTicks(4416),
                             Gender = "Male",
                             LastName = "Tan",
                             NRIC = "S1234567G",
@@ -1049,11 +1046,11 @@ namespace HealthcareMonitoring.Server.Migrations
 
             modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Patient", b =>
                 {
-                    b.HasOne("HealthcareMonitoring.Shared.Domain.Prescription", "Prescription")
+                    b.HasOne("HealthcareMonitoring.Shared.Domain.MedicalReport", "MedicalReport")
                         .WithMany()
-                        .HasForeignKey("PrescriptionId");
+                        .HasForeignKey("MedicalReportId");
 
-                    b.Navigation("Prescription");
+                    b.Navigation("MedicalReport");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

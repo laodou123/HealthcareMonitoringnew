@@ -86,7 +86,7 @@ namespace HealthcareMonitoring.Server.Controllers
         {
             await _unitOfWork.MedicalReports.Insert(medicalreport);
             await _unitOfWork.Save(HttpContext);
-            return CreatedAtAction("GetDoctor", new { id = medicalreport.Id }, medicalreport);
+            return CreatedAtAction("GetMedicalReport", new { id = medicalreport.Id }, medicalreport);
         }
 
         // DELETE: api/MedicalReports/5

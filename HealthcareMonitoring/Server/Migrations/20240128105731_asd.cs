@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HealthcareMonitoring.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class @new : Migration
+    public partial class asd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -146,7 +146,6 @@ namespace HealthcareMonitoring.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     heartRate = table.Column<int>(type: "int", nullable: false),
                     rhythm = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     P_wave = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -339,8 +338,8 @@ namespace HealthcareMonitoring.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Report = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PrescriptionId = table.Column<int>(type: "int", nullable: true),
+                    ReportId = table.Column<int>(type: "int", nullable: true),
+                    MedicalReportId = table.Column<int>(type: "int", nullable: true),
                     NRIC = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DOB = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -361,9 +360,9 @@ namespace HealthcareMonitoring.Server.Migrations
                 {
                     table.PrimaryKey("PK_Patients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Patients_prescriptions_PrescriptionId",
-                        column: x => x.PrescriptionId,
-                        principalTable: "prescriptions",
+                        name: "FK_Patients_MedicalReports_MedicalReportId",
+                        column: x => x.MedicalReportId,
+                        principalTable: "MedicalReports",
                         principalColumn: "Id");
                 });
 
@@ -445,8 +444,8 @@ namespace HealthcareMonitoring.Server.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "51832572-dd6e-4f49-80e8-c1b031c1d838", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEF6F9iIMF6XsIg0Oa94RMXjAadyc0rVl9wo/OWsQPsah4V3LDscDFR9AhVvD9zDKBw==", null, false, "7bfa3e9f-a8e1-444d-9a32-763f61a09ade", false, "admin@localhost.com" },
-                    { "693e710c-008f-435b-a997-77f10812374d", 0, "8016c95d-1cc3-46e2-a804-709f5898a294", "13858860788a@gmail.com", false, "Hu", "Yi", false, null, "13858860788A@GMAIL.COM", "13858860788A@GMAIL.COM", "AQAAAAIAAYagAAAAEBhxhB3ihibZ/wD6U5NnFargYCODRSZd3nSBhVaJc2ex6dsS0ZR3W9veXeBvMpuBTQ==", null, false, "dc6874de-b0e8-4351-afbf-f3455cb36dae", false, "13858860788a@gmail.com" }
+                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "7bb13487-8400-48ce-ae93-c46987b2ae4a", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEPwLf4sZccD+1h7FWb3gtcbhPZeGrLDRSKkj4OqsbWj7Y38ZUiov9rAcXK8c+bswTQ==", null, false, "a6d45944-ee2f-49c1-9039-c696c1cc6b6a", false, "admin@localhost.com" },
+                    { "693e710c-008f-435b-a997-77f10812374d", 0, "b6610e09-298d-4afe-b8b9-2082be581184", "13858860788a@gmail.com", false, "Hu", "Yi", false, null, "13858860788A@GMAIL.COM", "13858860788A@GMAIL.COM", "AQAAAAIAAYagAAAAEBQLh5Z+mUWmDG40dJHMlffkpuXEvQOEUVafmvsXyiWqWvqltwy9PBZEhPUYaLRxow==", null, false, "ee185071-1627-45e0-92ed-04ca9c38fe4d", false, "13858860788a@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -457,21 +456,21 @@ namespace HealthcareMonitoring.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Doctors",
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "DoctorAvailavleTime", "DoctorExperience", "DoctorIntroduction", "DoctorLocation", "DoctorName", "DoctorNationality", "DoctorPhoneNumber", "DoctorSpecialization", "Email", "UpdatedBy", "UserId" },
-                values: new object[] { 1, null, null, null, null, null, new DateTime(2024, 1, 28, 15, 57, 12, 149, DateTimeKind.Local).AddTicks(5559), 5, "张三", "北京", "张三", "中国", 123456789, "心脏病", "13858860788aaa@gmail.com", null, null });
+                values: new object[] { 1, null, null, null, null, null, new DateTime(2024, 1, 28, 18, 57, 31, 324, DateTimeKind.Local).AddTicks(2900), 5, "张三", "北京", "张三", "中国", 123456789, "心脏病", "13858860788aaa@gmail.com", null, null });
 
             migrationBuilder.InsertData(
                 table: "MedicalReports",
-                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "Email", "MedicalType", "PR_Interval", "P_wave", "QRS_Complex", "QT_Interval", "ST_Interval", "T_Wave", "UpdatedBy", "fev1", "fev1_fvc_ratio", "fvc", "hb", "hct", "heartRate", "lumarSpine", "pef", "plt", "rbc", "rhythm", "totalHip", "tscoreH", "tscoreL", "tv", "wbc" },
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "MedicalType", "PR_Interval", "P_wave", "QRS_Complex", "QT_Interval", "ST_Interval", "T_Wave", "UpdatedBy", "fev1", "fev1_fvc_ratio", "fvc", "hb", "hct", "heartRate", "lumarSpine", "pef", "plt", "rbc", "rhythm", "totalHip", "tscoreH", "tscoreL", "tv", "wbc" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, null, null, null, "1", 1f, "1", 1f, 1f, 1f, "1", null, 1f, 1f, 1f, 1f, 1f, 1, 1f, 1f, 1f, 1f, "Test", 1f, 1f, 1f, 1f, 1f },
-                    { 2, null, null, null, null, null, null, "Test", 10f, "Test", 10f, 10f, 10f, "Test", null, 10f, 10f, 10f, 10f, 10f, 10, 10f, 10f, 10f, 10f, "Test", 10f, 10f, 10f, 10f, 10f }
+                    { 1, null, null, null, null, null, "1", 1f, "1", 1f, 1f, 1f, "1", null, 1f, 1f, 1f, 1f, 1f, 1, 1f, 1f, 1f, 1f, "Test", 1f, 1f, 1f, 1f, 1f },
+                    { 2, null, null, null, null, null, "Test", 10f, "Test", 10f, 10f, 10f, "Test", null, 10f, 10f, 10f, 10f, 10f, 10, 10f, 10f, 10f, 10f, "Test", 10f, 10f, 10f, 10f, 10f }
                 });
 
             migrationBuilder.InsertData(
                 table: "Patients",
-                columns: new[] { "Id", "Address", "Age", "AllergyDes", "CreatedBy", "DOB", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "Gender", "LastName", "NRIC", "Name", "PhoneNumber", "PrescriptionId", "Report", "UpdatedBy", "userId" },
-                values: new object[] { 1, "singapore", null, "seafood", null, new DateTime(2024, 1, 28, 15, 57, 12, 149, DateTimeKind.Local).AddTicks(7157), null, null, null, null, "Male", "Tan", "S1234567G", "Jia Wei", "12345678", null, null, null, null });
+                columns: new[] { "Id", "Address", "Age", "AllergyDes", "CreatedBy", "DOB", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "Gender", "LastName", "MedicalReportId", "NRIC", "Name", "PhoneNumber", "ReportId", "UpdatedBy", "userId" },
+                values: new object[] { 1, "singapore", null, "seafood", null, new DateTime(2024, 1, 28, 18, 57, 31, 324, DateTimeKind.Local).AddTicks(4416), null, null, null, null, "Male", "Tan", null, "S1234567G", "Jia Wei", "12345678", null, null, null });
 
             migrationBuilder.InsertData(
                 table: "prescriptions",
@@ -571,9 +570,9 @@ namespace HealthcareMonitoring.Server.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patients_PrescriptionId",
+                name: "IX_Patients_MedicalReportId",
                 table: "Patients",
-                column: "PrescriptionId");
+                column: "MedicalReportId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersistedGrants_ConsumedTime",
@@ -627,13 +626,13 @@ namespace HealthcareMonitoring.Server.Migrations
                 name: "Keys");
 
             migrationBuilder.DropTable(
-                name: "MedicalReports");
-
-            migrationBuilder.DropTable(
                 name: "medRDailies");
 
             migrationBuilder.DropTable(
                 name: "PersistedGrants");
+
+            migrationBuilder.DropTable(
+                name: "prescriptions");
 
             migrationBuilder.DropTable(
                 name: "Doctors");
@@ -648,7 +647,7 @@ namespace HealthcareMonitoring.Server.Migrations
                 name: "Patients");
 
             migrationBuilder.DropTable(
-                name: "prescriptions");
+                name: "MedicalReports");
         }
     }
 }

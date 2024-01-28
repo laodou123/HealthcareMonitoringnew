@@ -21,9 +21,9 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 PhoneNumber = "12345678",
                 Address = "singapore",
                 AllergyDes ="seafood",
-                Prescription = null,
+      
                 Age = null,
-                PrescriptionId = null,
+
             }
         );
         }
