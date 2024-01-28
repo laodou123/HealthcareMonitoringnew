@@ -38,19 +38,16 @@ public partial class ReportDialog
         else
         {
             _report = new HealthcareMonitoring.Shared.Domain.MedicalReport();
-            var result = await client.PostAsJsonAsync(Url, _report);
-            var t = await result.Content.ReadFromJsonAsync<MedicalReport>();
+            var result = await client.PostAsJsonAsync("api/MedicalReports", _report);
 
+            Value.ReportId = 1;
+            await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
         }
     }
 
     private async Task OnSubmit(EditContext context)
     {
-        // 写回数据库
-        if (_report != null)
-        {
-            var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
-            await client.PutAsJsonAsync($"{Url}/{_report.Id}", _report);
-        }
+        var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
+        await client.PostAsJsonAsync("api/MedicalReports", _report);
     }
 }

@@ -38,12 +38,12 @@ public partial class Patients
 
     private async Task OnClickReportButton(HealthcareMonitoring.Shared.Domain.Patient item)
     {
-        await DialogService.ShowSaveDialog<ReportDialog>("Medical Report", () =>
-        {
-            return Task.FromResult(true);
-        }, dict =>
+        await DialogService.ShowSaveDialog<ReportDialog>("Medical Report", parametersFactory: dict =>
         {
             dict.Add("Value", item);
+        }, configureOption: options =>
+        {
+            options.ShowFooter = false;
         });
     }
 
