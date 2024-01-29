@@ -1,3 +1,4 @@
+using BootstrapBlazor.Components;
 using HealthcareMonitoring.Shared.Domain;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -12,7 +13,11 @@ public partial class PrescriptionDialog
     [NotNull]
     private IHttpClientFactory? HttpClientFactory { get; set; }
 
-    private HealthcareMonitoring.Shared.Domain.Prescription? _prescription;
+    [Inject]
+    [NotNull]
+    private ToastService? ToastService { get; set; }
+
+    private Prescription? _prescription;
 
     [Parameter]
     [NotNull]
@@ -69,6 +74,7 @@ public partial class PrescriptionDialog
             if (response.IsSuccessStatusCode)
             {
                 await OnCloseAsync();
+                await ToastService.Success("Save Prescription", "Save prescription successful");
             }
         }
     }
