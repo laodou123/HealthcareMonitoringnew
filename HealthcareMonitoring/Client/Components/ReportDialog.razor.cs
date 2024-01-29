@@ -1,10 +1,8 @@
 using HealthcareMonitoring.Shared.Domain;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Json;
-
 
 namespace HealthcareMonitoring.Client.Components;
 
@@ -14,17 +12,20 @@ public partial class ReportDialog
     [NotNull]
     private IHttpClientFactory? HttpClientFactory { get; set; }
 
-    private const string Url = "api/MedicalReports";
-
     private HealthcareMonitoring.Shared.Domain.MedicalReport? _report;
 
     [Parameter]
     [NotNull]
     public Patient? Value { get; set; }
-    [Parameter]
+
+    [CascadingParameter]
     [NotNull]
-    [EditorRequired]
-    public Func<string, Task>? OnValueChanged { get; set; }
+    private Func<Task>? OnCloseAsync { get; set; }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    /// <returns></returns>
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
@@ -37,48 +38,42 @@ public partial class ReportDialog
         }
         else
         {
-            _report = new HealthcareMonitoring.Shared.Domain.MedicalReport();
-            _report.MedicalType = " ";
-            _report.P_wave = " ";
-            _report.rhythm = " ";
-            _report.T_Wave = " ";
+            _report = new HealthcareMonitoring.Shared.Domain.MedicalReport
+            {
+                MedicalType = " ",
+                P_wave = " ",
+                rhythm = " ",
+                T_Wave = " "
+            };
             var result = await client.PostAsJsonAsync("api/MedicalReports", _report);
             if (result.IsSuccessStatusCode)
             {
                 var report = await result.Content.ReadFromJsonAsync<MedicalReport>();
-                Value.ReportId = report.Id;
-                await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
+                if (report != null)
+                {
+                    Value.ReportId = report.Id;
+                    await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
+                }
             }
         }
-        /*if (Value.ReportId.HasValue)
-        {
-            
-        }
-        else
-        {
-            _report = new HealthcareMonitoring.Shared.Domain.MedicalReport();
-            var result = await client.PostAsJsonAsync("api/MedicalReports", _report);
-
-            Value.ReportId = 1;
-            await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
-        }*/
-        StateHasChanged();
     }
 
     private async Task OnSubmit(EditContext context)
     {
-        var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
-
-        var response = await client.PostAsJsonAsync<MedicalReport>("api/MedicalReports", _report);
-
-        if (response.IsSuccessStatusCode)
+        if (_report != null)
         {
-            var num = await response.Content.ReadFromJsonAsync<MedicalReport>();
-
-            Value.ReportId = num.Id;
-            await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
+            var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
+            var reportResponse = await client.PostAsJsonAsync("api/MedicalReports", _report);
+            if (reportResponse.IsSuccessStatusCode)
+            {
+                var report = await reportResponse.Content.ReadFromJsonAsync<MedicalReport>();
+                if (report != null)
+                {
+                    Value.ReportId = report.Id;
+                    await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
+                    await OnCloseAsync();
+                }
+            }
         }
-
-
     }
 }
