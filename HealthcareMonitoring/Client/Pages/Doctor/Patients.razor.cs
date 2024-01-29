@@ -8,8 +8,6 @@ namespace HealthcareMonitoring.Client.Pages.Doctor;
 
 public partial class Patients
 {
-    private HealthcareMonitoring.Shared.Domain.Patient? _patient;
-
     private readonly List<int> PageItemsSource = new() { 20, 40, 80 };
 
     [Inject]
@@ -26,7 +24,7 @@ public partial class Patients
     {
         var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
         var patients = await client.GetFromJsonAsync<List<HealthcareMonitoring.Shared.Domain.Patient>?>(Url);
-
+        patients ??= new();
 
         return new QueryData<HealthcareMonitoring.Shared.Domain.Patient>()
         {
