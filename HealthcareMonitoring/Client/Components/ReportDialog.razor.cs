@@ -52,6 +52,7 @@ public partial class ReportDialog
                 if (report != null)
                 {
                     Value.ReportId = report.Id;
+                    _report.Id = report.Id;
                     await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
                 }
             }
@@ -63,16 +64,10 @@ public partial class ReportDialog
         if (_report != null)
         {
             var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
-            var reportResponse = await client.PostAsJsonAsync("api/MedicalReports", _report);
-            if (reportResponse.IsSuccessStatusCode)
+            var response = await client.PutAsJsonAsync($"api/MedicalReports/{_report.Id}", _report);
+            if (response.IsSuccessStatusCode)
             {
-                var report = await reportResponse.Content.ReadFromJsonAsync<MedicalReport>();
-                if (report != null)
-                {
-                    Value.ReportId = report.Id;
-                    await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
-                    await OnCloseAsync();
-                }
+                await OnCloseAsync();
             }
         }
     }
