@@ -1,27 +1,29 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HealthcareMonitoring.Shared.Domain
 {
+    [Table("Prescription")]
     public class Prescription : BaseDomainModel
     {
         [Display(Name = "Name")]
-        [Required]
+        [NotNull]
         public string? MedicineName { get; set; }
 
         [Display(Name = "Quantity")]
-        [Required]
-        public int? MedicineQuantity { get; set; }
+        public int MedicineQuantity { get; set; }
 
         [Display(Name = "Description")]
-        [Required]
+        [NotNull]
         public string? MedicineDescription { get; set; }
 
         [Display(Name = "Usage")]
-        [Required]
+        [NotNull]
         public string? MedicineUsage { get; set; }
 
         [Display(Name = "Doctor")]
-        [Required]
+        [NotNull]
         public string? MedicinePrescriptionDoctor { get; set; }
     }
 }

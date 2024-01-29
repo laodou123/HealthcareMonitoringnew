@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace HealthcareMonitoring.Shared.Domain;
+﻿namespace HealthcareMonitoring.Shared.Domain;
 
 public class Patient : BaseDomainModel
 {

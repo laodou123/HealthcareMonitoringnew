@@ -33,22 +33,27 @@ public partial class PrescriptionDialog
 
         //从数据库中读取 Doctor Profile
         var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
-        if (Value.ReportId.HasValue)
+        if (Value.PrescriptionId.HasValue)
         {
-            _prescription = await client.GetFromJsonAsync<Prescription>($"api/Prescriptions/{Value.ReportId}");
+            _prescription = await client.GetFromJsonAsync<Prescription>($"api/Prescriptions/{Value.PrescriptionId}");
         }
         else
         {
             _prescription = new HealthcareMonitoring.Shared.Domain.Prescription
             {
+                MedicineName = " ",
+                MedicineDescription = " ",
+                MedicineUsage = " ",
+                MedicinePrescriptionDoctor = " ",
+                MedicineQuantity = 0
             };
-            var result = await client.PostAsJsonAsync("api/MedicalReports", _prescription);
+            var result = await client.PostAsJsonAsync("api/Prescriptions", _prescription);
             if (result.IsSuccessStatusCode)
             {
-                var report = await result.Content.ReadFromJsonAsync<Prescription>();
-                if (report != null)
+                var p = await result.Content.ReadFromJsonAsync<Prescription>();
+                if (p != null)
                 {
-                    Value.ReportId = report.Id;
+                    Value.PrescriptionId = p.Id;
                     await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
                 }
             }
@@ -60,16 +65,10 @@ public partial class PrescriptionDialog
         if (_prescription != null)
         {
             var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
-            var reportResponse = await client.PostAsJsonAsync("api/Prescriptions", _prescription);
-            if (reportResponse.IsSuccessStatusCode)
+            var response = await client.PutAsJsonAsync($"api/Prescriptions/{_prescription.Id}", _prescription);
+            if (response.IsSuccessStatusCode)
             {
-                var report = await reportResponse.Content.ReadFromJsonAsync<Prescription>();
-                if (report != null)
-                {
-                    Value.ReportId = report.Id;
-                    await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
-                    await OnCloseAsync();
-                }
+                await OnCloseAsync();
             }
         }
     }

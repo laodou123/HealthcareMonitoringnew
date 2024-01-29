@@ -77,6 +77,7 @@ namespace HealthcareMonitoring.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Prescription>> PostPrescription(Prescription prescription)
         {
+            prescription.Id = default;
             await _unitOfWork.Prescriptions.Insert(prescription);
             await _unitOfWork.Save(HttpContext);
             return CreatedAtAction("GetPrescription", new { id = prescription.Id }, prescription);
