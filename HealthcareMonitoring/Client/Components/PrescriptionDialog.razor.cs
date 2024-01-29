@@ -16,7 +16,6 @@ public partial class PrescriptionDialog
 
     [Parameter]
     [NotNull]
-    [EditorRequired]
     public Patient? Value { get; set; }
 
     [CascadingParameter]
@@ -54,6 +53,7 @@ public partial class PrescriptionDialog
                 if (p != null)
                 {
                     Value.PrescriptionId = p.Id;
+                    _prescription.Id = p.Id;
                     await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
                 }
             }

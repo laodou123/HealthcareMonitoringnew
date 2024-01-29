@@ -19,9 +19,9 @@ namespace HealthcareMonitoring.Server.Data
         public DbSet<Diagnosis> Diagnosis { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<MedicalReport> MedicalReports { get; set; }
-        public DbSet<MedRDaily> medRDailies { get; set; }
+        public DbSet<MedRDaily> MedRDailies { get; set; }
         public DbSet<Patient> Patients { get; set; }
-        public DbSet<Prescription> prescriptions { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

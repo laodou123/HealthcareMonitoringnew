@@ -29,7 +29,7 @@ namespace HealthcareMonitoring.Server.Controllers
 
         // GET: api/Prescriptions/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Prescription>> GetPrescriptions(int id)
+        public async Task<ActionResult<Prescription>> GetPrescription(int id)
         {
 
             var prescription = await _unitOfWork.Prescriptions.Get(q => q.Id == id);
@@ -44,7 +44,7 @@ namespace HealthcareMonitoring.Server.Controllers
         // PUT: api/Prescriptions/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPrescriptions(int id, Prescription prescription)
+        public async Task<IActionResult> PutPrescription(int id, Prescription prescription)
         {
             if (id != prescription.Id)
             {

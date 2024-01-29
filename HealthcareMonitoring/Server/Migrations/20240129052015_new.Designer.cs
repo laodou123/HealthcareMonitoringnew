@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthcareMonitoring.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240128143111_new")]
+    [Migration("20240129052015_new")]
     partial class @new
     {
         /// <inheritdoc />
@@ -242,7 +242,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1340b56a-7331-4749-8229-430f9cee892c",
+                            ConcurrencyStamp = "5d5ed614-a98b-46ea-af45-91906cbc84a1",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -250,9 +250,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBghZrSwdqRLUa9duv0dAxieY3oXQbijEJdU6ftLovX+NusR+X6M0p6B5iolklHawA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ29WJDjtDp+ZAsM4mxmZEdxdjttMLiyDedvY0YCyKfsUtBR13dPnh54jcMPk0ZEeg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9cb21b78-b295-4e43-b502-4cd78195c708",
+                            SecurityStamp = "864acb5b-2e60-4204-84b2-8f5de68177a7",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -260,7 +260,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "693e710c-008f-435b-a997-77f10812374d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f66e41e5-1293-428c-b7d0-d0a6af14bd55",
+                            ConcurrencyStamp = "387eef40-b000-42a8-9180-0dadbbeb58a1",
                             Email = "13858860788a@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Hu",
@@ -268,9 +268,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "13858860788A@GMAIL.COM",
                             NormalizedUserName = "13858860788A@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECBl91NqzELt7uNGc585WGGq5pACZQ+y1I8GRy5wQfPMnrXsthyXG2wZxUVEitThYw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPAFvaYsps6qC6fN+sgwjtA2Jo4lGiZ8aoVlfiNjpKrjYq5cLMlVBKsBET4e5H0OPw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4b9e3d53-e0f8-48e5-9db7-41d841bce856",
+                            SecurityStamp = "0263e752-180b-4ff2-bcdd-ec8238fb174e",
                             TwoFactorEnabled = false,
                             UserName = "13858860788a@gmail.com"
                         });
@@ -455,7 +455,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 28, 22, 31, 11, 626, DateTimeKind.Local).AddTicks(7436),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 29, 13, 20, 15, 21, DateTimeKind.Local).AddTicks(7053),
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "北京",
@@ -468,7 +468,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 5,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 28, 22, 31, 11, 626, DateTimeKind.Local).AddTicks(7452),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 29, 13, 20, 15, 21, DateTimeKind.Local).AddTicks(7069),
                             DoctorExperience = 4,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "上海",
@@ -481,7 +481,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 3,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 28, 22, 31, 11, 626, DateTimeKind.Local).AddTicks(7455),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 29, 13, 20, 15, 21, DateTimeKind.Local).AddTicks(7072),
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "黑龙江",
@@ -494,7 +494,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 4,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 28, 22, 31, 11, 626, DateTimeKind.Local).AddTicks(7457),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 29, 13, 20, 15, 21, DateTimeKind.Local).AddTicks(7075),
                             DoctorExperience = 10,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "温州",
@@ -551,7 +551,7 @@ namespace HealthcareMonitoring.Server.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("medRDailies");
+                    b.ToTable("MedRDailies");
 
                     b.HasData(
                         new
@@ -778,9 +778,6 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MedicalReportId")
-                        .HasColumnType("int");
-
                     b.Property<string>("NRIC")
                         .HasColumnType("nvarchar(max)");
 
@@ -789,6 +786,9 @@ namespace HealthcareMonitoring.Server.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PrescriptionId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("ReportId")
                         .HasColumnType("int");
@@ -801,8 +801,6 @@ namespace HealthcareMonitoring.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MedicalReportId");
-
                     b.ToTable("Patients");
 
                     b.HasData(
@@ -811,7 +809,7 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = 1,
                             Address = "singapore",
                             AllergyDes = "seafood",
-                            DOB = new DateTime(2024, 1, 28, 22, 31, 11, 627, DateTimeKind.Local).AddTicks(158),
+                            DOB = new DateTime(2024, 1, 29, 13, 20, 15, 21, DateTimeKind.Local).AddTicks(9658),
                             Gender = "Male",
                             LastName = "Tan",
                             NRIC = "S1234567G",
@@ -843,27 +841,19 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("MedicineDescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MedicineName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MedicinePrescriptionDoctor")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("MedicineQuantity")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("MedicineUsage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
@@ -871,7 +861,7 @@ namespace HealthcareMonitoring.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("prescriptions");
+                    b.ToTable("Prescriptions");
 
                     b.HasData(
                         new
@@ -1086,15 +1076,6 @@ namespace HealthcareMonitoring.Server.Migrations
                         .HasForeignKey("PatientId");
 
                     b.Navigation("Patient");
-                });
-
-            modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Patient", b =>
-                {
-                    b.HasOne("HealthcareMonitoring.Shared.Domain.MedicalReport", "MedicalReport")
-                        .WithMany()
-                        .HasForeignKey("MedicalReportId");
-
-                    b.Navigation("MedicalReport");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
