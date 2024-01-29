@@ -9,7 +9,9 @@ namespace HealthcareMonitoring.Client.Pages.Doctor;
 public partial class Patients
 {
     private HealthcareMonitoring.Shared.Domain.Patient? _patient;
+
     private readonly List<int> PageItemsSource = new() { 20, 40, 80 };
+
     [Inject]
     [NotNull]
     private IHttpClientFactory? HttpClientFactory { get; set; }
@@ -47,19 +49,14 @@ public partial class Patients
         });
     }
 
-    private async Task OnClickPrescriptionButton(HealthcareMonitoring.Shared.Domain.Prescription item)
+    private async Task OnClickPrescriptionButton(HealthcareMonitoring.Shared.Domain.Patient item)
     {
-        await DialogService.ShowSaveDialog<PrescriptionDialog>("Prescription Dialog", () =>
-        {
-            return Task.FromResult(true);
-        }, dict =>
+        await DialogService.ShowSaveDialog<PrescriptionDialog>("Prescription Dialog", parametersFactory: dict =>
         {
             dict.Add("Value", item);
-            dict.Add("OnValueChanged", new Func<HealthcareMonitoring.Shared.Domain.Prescription, Task>(v =>
-            {
-                item = v;
-                return Task.CompletedTask;
-            }));
+        }, configureOption: options =>
+        {
+            options.ShowFooter = false;
         });
     }
 }
