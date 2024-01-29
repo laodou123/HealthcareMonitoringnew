@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HealthcareMonitoring.Server.IRepository;
-using Microsoft.AspNetCore.Http;
+﻿using HealthcareMonitoring.Server.IRepository;
+using HealthcareMonitoring.Shared.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HealthcareMonitoring.Server.Data;
-using HealthcareMonitoring.Server.IRepository;
-using HealthcareMonitoring.Shared.Domain;
 
 namespace HealthcareMonitoring.Server.Controllers
 {
