@@ -1,6 +1,7 @@
 using HealthcareMonitoring.Shared.Domain;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Json;
 
@@ -37,9 +38,17 @@ public partial class ReportDialog
         else
         {
             _report = new HealthcareMonitoring.Shared.Domain.MedicalReport();
+            _report.MedicalType = " ";
+            _report.P_wave = " ";
+            _report.rhythm = " ";
+            _report.T_Wave = " ";
             var result = await client.PostAsJsonAsync("api/MedicalReports", _report);
-
-            await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
+            if (result.IsSuccessStatusCode)
+            {
+                var report = await result.Content.ReadFromJsonAsync<MedicalReport>();
+                Value.ReportId = report.Id;
+                await client.PutAsJsonAsync($"api/Patients/{Value.Id}", Value);
+            }
         }
         /*if (Value.ReportId.HasValue)
         {
@@ -59,8 +68,8 @@ public partial class ReportDialog
     private async Task OnSubmit(EditContext context)
     {
         var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
-        
-        var response = await client.PostAsJsonAsync<MedicalReport>("api/MedicalReports", _report); 
+
+        var response = await client.PostAsJsonAsync<MedicalReport>("api/MedicalReports", _report);
 
         if (response.IsSuccessStatusCode)
         {

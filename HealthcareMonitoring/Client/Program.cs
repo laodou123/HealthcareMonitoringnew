@@ -9,7 +9,10 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddBootstrapBlazor();
+builder.Services.AddBootstrapBlazor(configureOptions: options =>
+{
+    options.IgnoreLocalizerMissing = true;
+});
 
 builder.Services.AddScoped<IAppContext, DefaultAppContext>();
 
