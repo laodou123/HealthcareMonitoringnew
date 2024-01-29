@@ -2,6 +2,9 @@
 @using HealthcareMonitoring.Client.Static;
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Components.Authorization
+@attribute [Authorize]
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,7 +62,7 @@
             <InputTextArea @bind-Value="patient.AllergyDes" class="form-control" />
             <ValidationMessage For="@(() => patient.AllergyDes)" />
         </div>
-        <Button type="submit" class="btn btn-primary btn-block">
+        <Button ButtonType="ButtonType.Submit" class="btn btn-primary btn-block">
             Update Profile
         </Button>
     </fieldset>
@@ -68,14 +71,37 @@
 
 @code {
     public bool Disabled { get; set; } = false;
-    
-    
+    public int id { get; set; }
+    private IList<Patient>? patients;
     Patient patient = new Patient();
 
-    private async Task CreatePatient()
+    protected async override Task OnInitializedAsync()
     {
+        patients = await _client.GetFromJsonAsync<IList<Patient>>($"{Endpoints.Patients}");
+        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userName = state.User?.Identity?.Name;
+        System.Console.WriteLine($"User Name: {userName}");
 
-        await _client.PostAsJsonAsync(Endpoints.Patients, patient);
-        _navManager.NavigateTo("/");
+        if (patients != null)
+        {
+            foreach (var pat in patients)
+            {
+                System.Console.WriteLine($"Pat id: {pat.Id}");
+                System.Console.WriteLine($"Pat Userid: {pat.UserId}");
+                if (pat.Email == userName)
+                {
+                    id = pat.Id;
+                    patient = pat;
+                    System.Console.WriteLine($"Pat id: {id}");
+                }
+            }
+        }
+        
+    }
+    async Task CreatePatient()
+    {
+      await _client.PutAsJsonAsync($"{Endpoints.Patients}/{id}", patient);
+      _navManager.NavigateTo("/");
+        
     }
 }

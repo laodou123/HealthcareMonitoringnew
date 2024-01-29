@@ -154,6 +154,7 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                     {
                         var pat = CreatePatient();
                         pat.UserId = userId;
+                        pat.Email = Input.Email;
                         _context.Patients.Add(pat);
                         _context.SaveChanges();
                     }
@@ -186,7 +187,7 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                         }
                         else if (Input.UserRole == "Patient")
                         {
-                            return LocalRedirect("~/patient/homepage");
+                            return LocalRedirect("~/patient/profile");
                         }
                         else if (Input.UserRole == "Doctor")
                         {
