@@ -4,10 +4,14 @@
 
 .sidebar {
     width: 280px;
-    background-color: rgb(0 0 0 / 78%);
+    background-color: #166b84;
 }
 
 main {
     padding: 1rem;
     flex: 1;
+}
+
+.top-row {
+    background-color: #00cdcd;
 }
