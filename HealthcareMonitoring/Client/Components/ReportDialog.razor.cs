@@ -1,3 +1,4 @@
+using BootstrapBlazor.Components;
 using HealthcareMonitoring.Shared.Domain;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -12,7 +13,7 @@ public partial class ReportDialog
     [NotNull]
     private IHttpClientFactory? HttpClientFactory { get; set; }
 
-    private HealthcareMonitoring.Shared.Domain.MedicalReport? _report;
+    private MedicalReport? _report;
 
     [Parameter]
     [NotNull]
@@ -21,6 +22,10 @@ public partial class ReportDialog
     [CascadingParameter]
     [NotNull]
     private Func<Task>? OnCloseAsync { get; set; }
+
+    [Inject]
+    [NotNull]
+    private ToastService? ToastService { get; set; }
 
     /// <summary>
     /// <inheritdoc/>
@@ -68,6 +73,7 @@ public partial class ReportDialog
             if (response.IsSuccessStatusCode)
             {
                 await OnCloseAsync();
+                await ToastService.Success("Save Report", "Save medical report Successful!");
             }
         }
     }

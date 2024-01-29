@@ -1,25 +1,26 @@
-﻿<ValidateForm Model="_prescription" OnValidSubmit="OnSubmit">
-    <div class="row g-3 form-inline">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <BootstrapInput @bind-Value="_prescription.MedicineName"></BootstrapInput>
+﻿@if (_prescription != null)
+{
+    <ValidateForm Model="_prescription" OnValidSubmit="OnSubmit">
+        <div class="row g-3 form-inline">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <BootstrapInput @bind-Value="_prescription.MedicineName"></BootstrapInput>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <BootstrapInput @bind-Value="_prescription.MedicineQuantity"></BootstrapInput>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <BootstrapInput @bind-Value="_prescription.MedicinePrescriptionDoctor"></BootstrapInput>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <BootstrapInput @bind-Value="_prescription.MedicineUsage"></BootstrapInput>
+            </div>
+            <div class="col-12">
+                <Textarea @bind-Value="_prescription.MedicineDescription" rows="3"></Textarea>
+            </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <BootstrapInput @bind-Value="_prescription.MedicineQuantity"></BootstrapInput>
+        <div class="form-footer">
+            <DialogCloseButton Text="Cancel"></DialogCloseButton>
+            <Button ButtonType="ButtonType.Submit" Text="Submit"></Button>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <BootstrapInput @bind-Value="_prescription.MedicinePrescriptionDoctor"></BootstrapInput>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <BootstrapInput @bind-Value="_prescription.MedicineUsage"></BootstrapInput>
-        </div>
-        <div class="col-12">
-            <Textarea @bind-Value="_prescription.MedicineDescription" rows="3"></Textarea>
-        </div>
-    </div>
-    <div class="form-footer">
-        <DialogCloseButton Text="Cancel"></DialogCloseButton>
-        <Button ButtonType="ButtonType.Submit" Text="Submit"></Button>
-    </div>
-</ValidateForm>
-
-
+    </ValidateForm>
+}

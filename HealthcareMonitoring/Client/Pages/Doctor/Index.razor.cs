@@ -1,3 +1,4 @@
+using BootstrapBlazor.Components;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
@@ -17,6 +18,10 @@ public partial class Index
     [Inject]
     [NotNull]
     private AuthenticationStateProvider? AuthenticationStateProvider { get; set; }
+
+    [Inject]
+    [NotNull]
+    private ToastService? ToastService { get; set; }
 
     private const string Url = "api/Doctors";
 
@@ -49,7 +54,11 @@ public partial class Index
         if (_doctor != null)
         {
             var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
-            await client.PutAsJsonAsync($"{Url}/{_doctor.Id}", _doctor);
+            var response = await client.PutAsJsonAsync($"{Url}/{_doctor.Id}", _doctor);
+            if (response.IsSuccessStatusCode)
+            {
+                await ToastService.Success("Save Profile", "Save doctor profile successful");
+            }
         }
     }
 }
