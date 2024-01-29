@@ -7,8 +7,8 @@ public class Patient : BaseDomainModel
     public string? Name { get; set; }
 
     public int? ReportId { get; set; }
-    public virtual MedicalReport? MedicalReport { get; set; }
 
+    public int? PrescriptionId { get; set; }
 
     public string? NRIC { get; set; }
 
