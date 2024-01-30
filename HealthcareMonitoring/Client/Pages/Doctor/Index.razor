@@ -16,7 +16,8 @@
                     <BootstrapInput @bind-Value="_doctor.DoctorPhoneNumber"></BootstrapInput>
                 </div>
                 <div class="col-12 col-sm-6">
-                    <Select @bind-Value="_specialization" DisplayText="Specialization" SkipValidate="true"></Select>
+                    <label required="true" class="form-label">Specialization</label>
+                    <Select @bind-Value="_specialization" ShowLabel="false" SkipValidate="true"></Select>
                 </div>
                 <div class="col-12 col-sm-6">
                     <BootstrapInput @bind-Value="_doctor.DoctorNationality"></BootstrapInput>
@@ -25,7 +26,8 @@
                     <BootstrapInput @bind-Value="_doctor.DoctorExperience"></BootstrapInput>
                 </div>
                 <div class="col-12 col-sm-6">
-                    <DateTimeRange @bind-Value="_rangeValue" DisplayText="AvailableTime" SkipValidate="true"></DateTimeRange>
+                    <label required="true" class="form-label">AvailableTime</label>
+                    <DateTimeRange @bind-Value="_rangeValue" ShowLabel="false" SkipValidate="true"></DateTimeRange>
                 </div>
                 <div class="col-12 col-sm-6">
                     <BootstrapInput @bind-Value="_doctor.DoctorLocation"></BootstrapInput>
