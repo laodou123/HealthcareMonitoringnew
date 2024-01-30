@@ -71,9 +71,17 @@
             <div class="col-12">
                 <Textarea @bind-Value="_report.MedicalType" rows="3"></Textarea>
             </div>
+            @if (_diagnosis)
+            {
+                <div class="col-12">
+                    <label class="form-label">Diagnosis</label>
+                    <Textarea rows="6" readonly Value="@_diagnosisResult" ShowLabel="false"></Textarea>
+                </div>
+            }
         </div>
         <div class="form-footer">
             <DialogCloseButton Text="Cancel"></DialogCloseButton>
+            <Button Icon="fa-solid fa-stethoscope" Text="Diagnosis" IsAsync="true" Color="Color.Warning" OnClick="OnClickDiagnosis"></Button>
             <Button ButtonType="ButtonType.Submit" Icon="fa-solid fa-save" Text="Save"></Button>
         </div>
     </ValidateForm>

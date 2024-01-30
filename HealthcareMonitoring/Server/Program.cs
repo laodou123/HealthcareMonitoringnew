@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using HealthcareMonitoring.Server.IRepository;
 using HealthcareMonitoring.Server.Repository;
+using BootstrapBlazor.Components;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +36,16 @@ builder.Services.AddMvc(options =>
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+// 增加 AzureOpenAI 服务
+builder.Services.AddBootstrapBlazorAzureOpenAIService();
+
+builder.Services.Configure<AzureOpenAIOption>(op =>
+{
+    op.Endpoint = "https://vsyishimaochengwang.openai.azure.com/";
+    op.Key = "feb9cf7859fa4b828e9dec6a5534b50a";
+    op.DeploymentName = "gpt-35-turbo";
+});
 
 var app = builder.Build();
 

@@ -77,4 +77,15 @@ public partial class ReportDialog
             }
         }
     }
+
+    private bool _diagnosis;
+    private string? _diagnosisResult;
+
+    private async Task OnClickDiagnosis()
+    {
+        var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
+        var response = await client.PostAsJsonAsync("api/OpenAI", "123");
+        _diagnosisResult = await response.Content.ReadAsStringAsync();
+        _diagnosis = true;
+    }
 }

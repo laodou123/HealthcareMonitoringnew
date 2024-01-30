@@ -1,3 +1,4 @@
+using BootstrapBlazor.Components;
 using HealthcareMonitoring.Client;
 using HealthcareMonitoring.Client.Services;
 using HealthcareMonitoring.Shared.Services;
