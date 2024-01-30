@@ -1,38 +1,36 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager Navigation
 
-<div class="main-admin">
-    <div class="top-row ps-3 navbar navbar-dark">
-        <div class="container-fluid">
-            <div class="navbar-brand">Health</div>
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <div class="navbar-brand">Health</div>
 
-            <AuthorizeView>
-                <Authorized>
-                    <div class="nav">
-                        <div class="nav-item px-3">
-                            <NavLink class="nav-link" href="authentication/profile" Match="NavLinkMatch.All">
-                                <span class="oi oi-person" aria-hidden="true"></span> @context.User.Identity?.Name!
-                            </NavLink>
-                        </div>
-                        <div class="nav-item px-3">
-                            <NavLink class="nav-link" href="#" @onclick="BeginLogOut" Match="NavLinkMatch.All">
-                                <span class="oi oi-account-logout" aria-hidden="true"></span> Log Out
-                            </NavLink>
-                        </div>
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav">
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="authentication/profile" Match="NavLinkMatch.All">
+                            <span class="oi oi-person" aria-hidden="true"></span> @context.User.Identity?.Name!
+                        </NavLink>
                     </div>
-                </Authorized>
-            </AuthorizeView>
-        </div>
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="#" @onclick="BeginLogOut" Match="NavLinkMatch.All">
+                            <span class="oi oi-account-logout" aria-hidden="true"></span> Log Out
+                        </NavLink>
+                    </div>
+                </div>
+            </Authorized>
+        </AuthorizeView>
     </div>
+</div>
 
-    <div class="page">
-        <div class="sidebar">
-            <NavMenu />
-        </div>
-        <main>
-            @Body
-        </main>
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
     </div>
+    <main>
+        @Body
+    </main>
 </div>
 
 @code {
