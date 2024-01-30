@@ -25,6 +25,8 @@ public partial class Index
 
     private const string Url = "api/Doctors";
 
+    private DoctorSpecialization _specialization = DoctorSpecialization.General;
+
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
@@ -44,7 +46,11 @@ public partial class Index
             _doctor = doctors.FirstOrDefault(i => i.Email == userName);
         }
 
-        _doctor ??= new() { Email = userName };
+        _doctor ??= new() { Email = userName, DoctorSpecialization = DoctorSpecialization.General.ToString() };
+        if (Enum.TryParse<DoctorSpecialization>(_doctor.DoctorSpecialization, out var s))
+        {
+            _specialization = s;
+        }
         await client.PostAsJsonAsync(Url, _doctor);
     }
 
@@ -53,6 +59,7 @@ public partial class Index
         // 写回数据库
         if (_doctor != null)
         {
+            _doctor.DoctorSpecialization = _specialization.ToString();
             var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
             var response = await client.PutAsJsonAsync($"{Url}/{_doctor.Id}", _doctor);
             if (response.IsSuccessStatusCode)
