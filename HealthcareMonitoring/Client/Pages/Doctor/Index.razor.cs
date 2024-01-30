@@ -27,6 +27,8 @@ public partial class Index
 
     private DoctorSpecialization _specialization = DoctorSpecialization.General;
 
+    private DateTimeRangeValue _rangeValue = new() { Start = DateTime.Today.AddDays(-1), End = DateTime.Today };
+
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
@@ -51,7 +53,27 @@ public partial class Index
         {
             _specialization = s;
         }
+        ParseAvailedTime();
         await client.PostAsJsonAsync(Url, _doctor);
+    }
+
+    void ParseAvailedTime()
+    {
+        if (_doctor?.DoctorAvailavleTime != null)
+        {
+            var segs = _doctor.DoctorAvailavleTime.Split('|');
+            if (segs.Length == 2)
+            {
+                if (DateTime.TryParse(segs[0], out var star))
+                {
+                    _rangeValue.Start = star;
+                }
+                if (DateTime.TryParse(segs[1], out var end))
+                {
+                    _rangeValue.End = end;
+                }
+            }
+        }
     }
 
     private async Task OnSubmit(EditContext context)
@@ -60,6 +82,7 @@ public partial class Index
         if (_doctor != null)
         {
             _doctor.DoctorSpecialization = _specialization.ToString();
+            _doctor.DoctorAvailavleTime = $"{_rangeValue.Start:yyyy-MM-dd}|{_rangeValue.End:yyyy-MM-dd}";
             var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
             var response = await client.PutAsJsonAsync($"{Url}/{_doctor.Id}", _doctor);
             if (response.IsSuccessStatusCode)

@@ -23,7 +23,7 @@ namespace HealthcareMonitoring.Shared.Domain
         public string? DoctorSpecialization { get; set; }
         [Display(Name = "AvailavleTime")]
         [Required]
-        public DateTime? DoctorAvailavleTime { get; set; }
+        public string? DoctorAvailavleTime { get; set; }
         [Display(Name = "Experience")]
         [Required]
         public int? DoctorExperience { get; set; }

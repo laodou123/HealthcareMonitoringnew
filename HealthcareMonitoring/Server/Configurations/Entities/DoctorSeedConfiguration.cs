@@ -23,7 +23,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 DoctorLocation = "北京",
                 DoctorPhoneNumber = 123456789,
                 DoctorSpecialization = "Cardiologist",
-                DoctorAvailavleTime = System.DateTime.Now,
+                DoctorAvailavleTime = $"{DateTime.Today.AddDays(-1):yyyy-MM-dd}|{DateTime.Today:yyyy-MM-dd}",
                 DoctorExperience = 5,
                 DoctorNationality = "中国",
                 DoctorIntroduction = "张三",
@@ -37,7 +37,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 DoctorLocation = "上海",
                 DoctorPhoneNumber = 87654321,
                 DoctorSpecialization = "Pulmonologist",
-                DoctorAvailavleTime = System.DateTime.Now,
+                DoctorAvailavleTime = $"{DateTime.Today.AddDays(-1):yyyy-MM-dd}|{DateTime.Today:yyyy-MM-dd}",
                 DoctorExperience = 4,
                 DoctorNationality = "中国",
                 DoctorIntroduction = "张三",
@@ -51,7 +51,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 DoctorLocation = "黑龙江",
                 DoctorPhoneNumber = 87688321,
                 DoctorSpecialization = "Orthopedist",
-                DoctorAvailavleTime = System.DateTime.Now,
+                DoctorAvailavleTime = $"{DateTime.Today.AddDays(-1):yyyy-MM-dd}|{DateTime.Today:yyyy-MM-dd}",
                 DoctorExperience = 5,
                 DoctorNationality = "中国",
                 DoctorIntroduction = "张三",
@@ -65,11 +65,10 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 DoctorLocation = "温州",
                 DoctorPhoneNumber = 12376543,
                 DoctorSpecialization = "General",
-                DoctorAvailavleTime = System.DateTime.Now,
+                DoctorAvailavleTime = $"{DateTime.Today.AddDays(-1):yyyy-MM-dd}|{DateTime.Today:yyyy-MM-dd}",
                 DoctorExperience = 10,
                 DoctorNationality = "中国",
-                DoctorIntroduction = "张三",
-
+                DoctorIntroduction = "张三"
             }
         );
         }

@@ -236,7 +236,7 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
         private Doctor CreateDoctor()
         {
             Doctor doctor = new Doctor();   
-            doctor.DoctorAvailavleTime = DateTime.Now;
+            doctor.DoctorAvailavleTime = " ";
             doctor.DoctorExperience = 0;
             doctor.DoctorIntroduction = " ";
             doctor.DoctorLocation = " ";
