@@ -154,6 +154,7 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                     {
                         var pat = CreatePatient();
                         pat.UserId = userId;
+                        pat.Email = Input.Email;
                         _context.Patients.Add(pat);
                         _context.SaveChanges();
                     }

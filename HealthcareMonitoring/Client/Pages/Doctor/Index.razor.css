@@ -11,14 +11,16 @@
     padding: 10px 20px; /* Larger padding */
 }
 
+body {
+    background-image: url('/img/doctormainpage.png');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 form {
     background: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 8px;
 }
 
-.form-footer {
-    border-top: 1px solid var(--bs-border-color);
-    padding-top: 0.5rem;
-    text-align: right;
-}
+
