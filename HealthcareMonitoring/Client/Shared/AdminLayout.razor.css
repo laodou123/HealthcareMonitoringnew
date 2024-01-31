@@ -1,10 +1,18 @@
-﻿.page {
+﻿.main-admin {
+    background-image: url('/img/doctormainpage.png');
+    background-size: cover;
+    background-attachment: fixed;
+    --health-sidebar-width: 280px;
+}
+
+.page {
     display: flex;
 }
 
 .sidebar {
-    width: 280px;
+    width: var(--health-sidebar-width);
     background-color: rgb(38 72 105 / 80%);
+    transition: .3s width linear;
 }
 
 main {
@@ -22,13 +30,34 @@ main {
         --bs-nav-link-color: #fff;
     }
 
-.main-admin {
-    background-image: url('/img/doctormainpage.png');
-    background-size: cover;
-    background-attachment: fixed;
-}
-
 ::deep .groupbox .legend {
     color: #000;
     border-radius: 6px;
 }
+
+.navbar > .container-fluid {
+    position: relative;
+}
+
+.btn-toggle {
+    position: absolute;
+    left: 280px;
+    --bs-btn-border-color: #2a905f;
+    --bb-toggle-min-width: 48px;
+}
+
+    .btn-toggle i {
+        transition: .3s transform linear;
+    }
+
+.collapsed {
+    --health-sidebar-width: 76px;
+}
+
+    .collapsed .btn-toggle i {
+        transform: rotate(90deg);
+    }
+
+    .collapsed ::deep .nav-link > span {
+        display: none;
+    }

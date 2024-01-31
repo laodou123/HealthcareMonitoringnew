@@ -1,12 +1,14 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager Navigation
 
-<MouseFollower>
-    <div class="main-admin">
+<div class="main-admin @ToggleString">
+    <MouseFollower>
         <div class="top-row ps-3 navbar navbar-dark">
             <div class="container-fluid">
                 <div class="navbar-brand">Health</div>
-
+                <button class="btn btn-toggle" @onclick="OnToggleSidebar">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
                 <AuthorizeView>
                     <Authorized>
                         <div class="nav">
@@ -34,14 +36,23 @@
                 @Body
             </main>
         </div>
-    </div>
-</MouseFollower>
+    </MouseFollower>
+</div>
 
-<Live2DDisplay Source="./models/shizuku/shizuku.model.json"></Live2DDisplay>
+<Live2DDisplay Source="./models/shizuku/shizuku.model.json" Scale="0.2" Position="LivePosition.BottomLeft" IsDraggable="true"></Live2DDisplay>
 
 @code {
+    private string? ToggleString => toggle ? "collapsed" : null;
+
+    private bool toggle;
+
     private void BeginLogOut()
     {
         Navigation.NavigateToLogout("authentication/logout", "/");
+    }
+
+    private void OnToggleSidebar()
+    {
+        toggle = !toggle;
     }
 }
