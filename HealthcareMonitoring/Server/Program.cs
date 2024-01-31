@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using HealthcareMonitoring.Server.IRepository;
 using HealthcareMonitoring.Server.Repository;
 using BootstrapBlazor.Components;
+using Microsoft.AspNetCore.StaticFiles;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -65,6 +66,15 @@ else
 app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
+
+var provider = new FileExtensionContentTypeProvider();
+provider.Mappings[".properties"] = "application/octet-stream";
+provider.Mappings[".moc"] = "application/x-msdownload";
+provider.Mappings[".moc3"] = "application/x-msdownload";
+provider.Mappings[".mtn"] = "application/x-msdownload";
+
+app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = provider });
+
 app.UseStaticFiles();
 
 app.UseRouting();
