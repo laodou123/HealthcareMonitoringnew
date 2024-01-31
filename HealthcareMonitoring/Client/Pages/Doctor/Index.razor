@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-12 col-sm-6">
                     <label required="true" class="form-label">Specialization</label>
-                    <Select @bind-Value="_specialization" ShowLabel="false" SkipValidate="true"></Select>
+                    <MultiSelect @bind-Value="_doctor.DoctorSpecialization" Items="_items" ShowLabel="false" SkipValidate="true"></MultiSelect>
                 </div>
                 <div class="col-12 col-sm-6">
                     <BootstrapInput @bind-Value="_doctor.DoctorNationality"></BootstrapInput>

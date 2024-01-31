@@ -25,7 +25,9 @@ public partial class Index
 
     private const string Url = "api/Doctors";
 
-    private DoctorSpecialization _specialization = DoctorSpecialization.General;
+    private string _specialization = "";
+
+    private List<SelectedItem> _items = default!;
 
     private DateTimeRangeValue _rangeValue = new() { Start = DateTime.Today.AddDays(-1), End = DateTime.Today };
 
@@ -49,10 +51,8 @@ public partial class Index
         }
 
         _doctor ??= new() { Email = userName, DoctorSpecialization = DoctorSpecialization.General.ToString() };
-        if (Enum.TryParse<DoctorSpecialization>(_doctor.DoctorSpecialization, out var s))
-        {
-            _specialization = s;
-        }
+        _items = typeof(DoctorSpecialization).ToSelectList();
+
         ParseAvailedTime();
         await client.PostAsJsonAsync(Url, _doctor);
     }
@@ -81,7 +81,6 @@ public partial class Index
         // 写回数据库
         if (_doctor != null)
         {
-            _doctor.DoctorSpecialization = _specialization.ToString();
             _doctor.DoctorAvailavleTime = $"{_rangeValue.Start:yyyy-MM-dd}|{_rangeValue.End:yyyy-MM-dd}";
             var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
             var response = await client.PutAsJsonAsync($"{Url}/{_doctor.Id}", _doctor);
