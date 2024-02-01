@@ -8,11 +8,12 @@ using HealthcareMonitoring.Server.IRepository;
 using HealthcareMonitoring.Server.Repository;
 using BootstrapBlazor.Components;
 using Microsoft.AspNetCore.StaticFiles;
-
+using HealthcareMonitoring.Server.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSignalR();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
@@ -86,6 +87,7 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
+app.MapHub<Chathub>("/chathub");
 
 using (var scope = app.Services.CreateScope())
 {
