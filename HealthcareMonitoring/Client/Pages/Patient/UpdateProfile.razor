@@ -101,7 +101,7 @@
     async Task CreatePatient()
     {
       await _client.PutAsJsonAsync($"{Endpoints.Patients}/{id}", patient);
-      _navManager.NavigateTo("/");
+      _navManager.NavigateTo("/patient/homepage");
         
     }
 }

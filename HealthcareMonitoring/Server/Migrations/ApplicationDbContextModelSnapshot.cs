@@ -239,7 +239,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4c3d426a-b617-4222-88d8-8dba2d23a107",
+                            ConcurrencyStamp = "a3620db3-ceff-4765-936c-8b0397c75446",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -247,9 +247,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECODlR5yY3I2ueZ1zpu0DbJPR83p7MfkmDjZyaOqYTKYvxvkPtyjJSCWu1JCISbmXA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECG64oYdOG00Rc1d2XZBDUO/h75T/DyyWvqQrjdflOhdxWCOH8I3+9CL0FBXevFtVA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "87812e97-a838-460a-a6ef-e8d3aa5bc8e2",
+                            SecurityStamp = "f92ea254-4a4f-46b9-bcf5-16a4b16d7ab7",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -257,7 +257,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "693e710c-008f-435b-a997-77f10812374d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5e968b52-0e33-4380-92e1-a19888677182",
+                            ConcurrencyStamp = "01682fe3-1305-41f9-bf4c-49a9fe1b5641",
                             Email = "13858860788a@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Hu",
@@ -265,9 +265,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "13858860788A@GMAIL.COM",
                             NormalizedUserName = "13858860788A@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOEFXSfAojtfZGUQpI/K3LqGjaSP5LXsNG1wHU5KU9zEcAShwCK3CB9/mmaMQG5Jjw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGP8O56ElSNruKRbct1JX4yBjYP3Z5dPnTzm138ZJ24VmomBxzL7gGX0UQeQMM/d/w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d1cb5c76-7c8b-460b-abc0-0f13d0533235",
+                            SecurityStamp = "0e094200-0f44-431b-8867-4f97fb81d543",
                             TwoFactorEnabled = false,
                             UserName = "13858860788a@gmail.com"
                         });
@@ -312,8 +312,11 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Time")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan?>("TimeEnd")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan?>("TimeStart")
+                        .HasColumnType("time");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -452,7 +455,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 30, 9, 19, 2, 867, DateTimeKind.Local).AddTicks(6166),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 31, 18, 28, 39, 665, DateTimeKind.Local).AddTicks(3784),
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "北京",
@@ -464,8 +467,8 @@ namespace HealthcareMonitoring.Server.Migrations
                         },
                         new
                         {
-                            Id = 5,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 30, 9, 19, 2, 867, DateTimeKind.Local).AddTicks(6182),
+                            Id = 2,
+                            DoctorAvailavleTime = new DateTime(2024, 1, 31, 18, 28, 39, 665, DateTimeKind.Local).AddTicks(3800),
                             DoctorExperience = 4,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "上海",
@@ -478,7 +481,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 3,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 30, 9, 19, 2, 867, DateTimeKind.Local).AddTicks(6185),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 31, 18, 28, 39, 665, DateTimeKind.Local).AddTicks(3803),
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "黑龙江",
@@ -491,7 +494,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 4,
-                            DoctorAvailavleTime = new DateTime(2024, 1, 30, 9, 19, 2, 867, DateTimeKind.Local).AddTicks(6188),
+                            DoctorAvailavleTime = new DateTime(2024, 1, 31, 18, 28, 39, 665, DateTimeKind.Local).AddTicks(3805),
                             DoctorExperience = 10,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "温州",
@@ -806,7 +809,8 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = 1,
                             Address = "singapore",
                             AllergyDes = "seafood",
-                            DOB = new DateTime(2024, 1, 30, 9, 19, 2, 867, DateTimeKind.Local).AddTicks(8889),
+                            DOB = new DateTime(2024, 1, 31, 18, 28, 39, 665, DateTimeKind.Local).AddTicks(5245),
+                            Email = "pat@pat.com",
                             Gender = "Male",
                             LastName = "Tan",
                             NRIC = "S1234567G",

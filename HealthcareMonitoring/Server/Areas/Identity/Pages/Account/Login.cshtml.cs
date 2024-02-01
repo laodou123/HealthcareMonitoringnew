@@ -124,9 +124,9 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                         {
                             return LocalRedirect("~/Admin");
                         }
-                        else if (roles.Contains("User"))
+                        else if (roles.Contains("Patient"))
                         {
-                            return LocalRedirect("~/User");
+                            return LocalRedirect("~/patient/homepage");
                         }
                         else if (roles.Contains("Doctor"))
                         {

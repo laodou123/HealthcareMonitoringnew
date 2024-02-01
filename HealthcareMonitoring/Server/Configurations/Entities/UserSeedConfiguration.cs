@@ -36,6 +36,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 PasswordHash = hasher.HashPassword(null, "P@ssword1")
 
             }
+            
             );
         }
     }

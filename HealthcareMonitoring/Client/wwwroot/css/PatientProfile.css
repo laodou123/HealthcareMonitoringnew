@@ -8,9 +8,14 @@
 }
 
     .form-group label {
-        display: block;
-        margin-bottom: .5rem;
+        display: inline-block; /* Makes the label and input on the same line */
+        width: 180px; /* Adjust the width to your preference */
+        vertical-align: top; /* Aligns the label with the top of the input */
     }
+.input-description {
+    margin-top: 5px; /* Adds space between the input and <p> element */
+    color: #555; /* Optional: Adjust the color to your preference */
+}
 
 .form-control {
     display: block;

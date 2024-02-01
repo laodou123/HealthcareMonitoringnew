@@ -31,7 +31,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
             },
             new Doctor
             {
-                Id = 5,
+                Id = 2,
                 Email = "doc@doc.com",
                 DoctorName = "李四",
                 DoctorLocation = "上海",
