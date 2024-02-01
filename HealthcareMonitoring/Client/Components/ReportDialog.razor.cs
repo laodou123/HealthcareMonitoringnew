@@ -83,15 +83,9 @@ public partial class ReportDialog
 
     private async Task OnClickDiagnosis()
     {
-        if (_report != null)
-        {
-            var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
-            var content = $"""
-                heartRate = {_report.heartRate} rhythm = Normal P_wave = Normal PR_Interval = 42.56 QRS_Complex = 73.89 QT_Interval = 64.25 ST_Interval = 38.12 T_Wave = Normal hb = 11.85 hct = 37.24 rbc = 4.68 wbc = 12.59 plt = 234.56 lumarSpine = 6.32 totalHip = 45.78 tscoreL = 3.14 tscoreH = 4.29 fvc = 3.78 fev1 = 4.03 fev1_fvc_ratio = 0.85 pef = 8.91 tv = 0.54 MedicalType = Type A Based on this medical report, give me the possible of illiness may arise from the data above This is just an example of medical report give me the respond
-                """;
-            var response = await client.PostAsJsonAsync("api/OpenAI", content);
-            _diagnosisResult = await response.Content.ReadAsStringAsync();
-            _diagnosis = true;
-        }
+        var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
+        var response = await client.PostAsJsonAsync("api/OpenAI", "123");
+        _diagnosisResult = await response.Content.ReadAsStringAsync();
+        _diagnosis = true;
     }
 }
