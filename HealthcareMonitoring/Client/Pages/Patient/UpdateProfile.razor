@@ -76,6 +76,6 @@
     {
 
         await _client.PostAsJsonAsync(Endpoints.Patients, patient);
-        _navManager.NavigateTo("/");
+        _navManager.NavigateTo("/patient/homepage");
     }
 }

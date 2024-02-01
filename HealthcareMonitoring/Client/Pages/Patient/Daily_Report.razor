@@ -2,6 +2,9 @@
 @using HealthcareMonitoring.Client.Static;
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Components.Authorization
+@attribute [Authorize]
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,15 +33,15 @@
                 <InputNumber @bind-Value="med.diastolicPressure" class="form-control" />
                 <ValidationMessage For="@(() => med.diastolicPressure)" />
             </div>
-            
+
             <div class="form-group">
                 <label>Blood Sugar Level: </label>
                 <InputNumber @bind-Value="med.bloodSugarLevel" class="form-control" />
                 <ValidationMessage For="@(() => med.bloodSugarLevel)" />
             </div>
-            
-            <Button type="submit" class="btn btn-primary btn-block">
-                Update Profile
+
+            <Button ButtonType="ButtonType.Submit" class="btn btn-primary btn-block">
+                Update Daily Report
             </Button>
         </fieldset>
     </EditForm>
@@ -49,11 +52,32 @@
 
 
     MedRDaily med = new MedRDaily();
-
+    private IList<Patient>? patients;
     private async Task CreateDailyReport()
     {
         await _client.PostAsJsonAsync(Endpoints.MedRDailies, med);
-        _navManager.NavigateTo("/");
+        _navManager.NavigateTo("/patient/homepage");
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        patients = await _client.GetFromJsonAsync<IList<Patient>>($"{Endpoints.Patients}");
+        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userName = state.User?.Identity?.Name;
+        System.Console.WriteLine($"User Name: {userName}");
+
+        if (patients != null)
+        {
+            foreach (var pat in patients)
+            {
+                System.Console.WriteLine($"Pat id: {pat.Id}");
+                System.Console.WriteLine($"Pat Userid: {pat.UserId}");
+                if (pat.Email == userName)
+                {
+                    med.PatientId = pat.Id;
+                    System.Console.WriteLine($"Pat id: {pat.Id}");
+                }
+            }
+        }
+
     }
 }
-

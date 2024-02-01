@@ -24,6 +24,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 PhoneNumber = "12345678",
                 Address = "singapore",
                 AllergyDes ="seafood",
+                Email="pat@pat.com",
       
                 Age = null,
 

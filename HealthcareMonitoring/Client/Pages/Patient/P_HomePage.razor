@@ -1,6 +1,186 @@
 ﻿@page "/patient/homepage"
-<h3>PHomePage</h3>
+@using HealthcareMonitoring.Client.Static;
+@inject HttpClient _client
+@inject NavigationManager _navManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Components.Authorization
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/PatientHomePage.css">
+    
+</head>
+
+<div class="status-container">
+    <!-- Today's Status -->
+    
+    @if (needUpdate)
+    {
+        <p>No daily status to display. Please update your daily status
+        </p>
+       
+
+    }
+    else
+    {
+        <!-- Card for BPM -->
+        <div class="reading-card">
+            <img src="img/heart-attack.png" alt="bpm">
+            <div>@medR.bpm bpm</div>
+        </div>
+
+        <!-- Card for Blood Pressure -->
+        <div class="reading-card">
+            <img src="img/blood-pressure.png" alt="bloodpressure">
+            <div>@medR.systolicPressure / @medR.diastolicPressure mmHg</div>
+        </div>
+
+        <!-- Card for Blood Sugar -->
+        <div class="reading-card">
+            <img src="img/sugar-blood-level.png" alt="bloodsugar">
+            <div>@medR.bloodSugarLevel mg/dL</div>
+        </div>
+
+        <!-- Status Indicator -->
+        <div class="status-indicator">
+            <h2 style="color:black">Status Indicator</h2>
+            <div>
+                @if (IsStatusNormalBPM && IsStatusNormalBP && IsStatusNormalBSL)
+                {
+                    <p style="@normalStyle">All Status is under Normal Range</p>
+                }
+                else
+                {
+                    if (!IsStatusNormalBPM)
+                    {
+                        <p style="@abnormalStyle">Heart rate (BPM) is out of the normal range</p>
+                    }
+                    else
+                    {
+                        <p style="@normalStyle">Heart rate (BPM) is at the normal range</p>
+                    }
+                    if (!IsStatusNormalBP)
+                    {
+                        <p style="@abnormalStyle">Blood pressure is out of the normal range</p>
+                    }
+                    else
+                    {
+                        <p style="@normalStyle">Blood pressure is at the normal range</p>
+                    }
+                    if (!IsStatusNormalBSL)
+                    {
+                        <p style="@abnormalStyle">Blood sugar level is out of the normal range</p>
+                    }
+                    else
+                    {
+                        <p style="@normalStyle">Blood sugar level is at the normal range</p>
+                    }
+                    <p style="color:black">Please contact a doctor!</p>
+                }
+            </div>
+        </div>
+    }
+    
+</div>
+
 
 @code {
+    private IList<MedRDaily>? med;
+    private IList<Patient>? patients;
+    private List<DateTime?> dateMedR;
+    Patient patient = new Patient();
+    MedRDaily medR = new MedRDaily();
+    private int id;
+    List<DateTime?> sortedList;
+    private bool IsStatusNormalBPM;
+    private bool IsStatusNormalBP;
+    private bool IsStatusNormalBSL;
+    string normalStyle = "color: green;";
+    string abnormalStyle = "color: red;";
+    DateTime? latestdate;
+    private bool needUpdate = false;
 
+    protected async override Task OnInitializedAsync()
+    {
+        med = await _client.GetFromJsonAsync<IList<MedRDaily>>($"{Endpoints.MedRDailies}");
+        patients = await _client.GetFromJsonAsync<IList<Patient>>($"{Endpoints.Patients}");
+        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userName = state.User?.Identity?.Name;
+        dateMedR = new List<DateTime?>();
+
+        if (patients != null)
+        {
+            foreach (var pat in patients)
+            {
+                System.Console.WriteLine($"Pat id: {pat.Id}");
+                System.Console.WriteLine($"Pat Userid: {pat.UserId}");
+                if (pat.Email == userName)
+                {
+                    id = pat.Id;
+                    System.Console.WriteLine($"Pat id: {pat.Id}");
+                }
+            }
+        }
+        if (med != null)
+        {
+            foreach (var medd in med)
+            {
+                if (medd.PatientId == id)
+                {
+                    System.Console.WriteLine(medd.DateCreated.ToString());
+                    DateTime? datetemp = medd.DateCreated;
+                    dateMedR.Add(datetemp);
+
+                }
+
+            }
+        }
+
+        sortedList = dateMedR.OrderBy(dt => dt).ToList();
+        if (sortedList.Any())
+        {
+            latestdate = sortedList.Last();
+            System.Console.WriteLine($"time id: {latestdate}");
+        }
+        else
+        {
+            needUpdate = true;
+        }
+        if (latestdate != null)
+        {
+            if (latestdate.Value.Date == DateTime.Now.Date)
+        {
+            foreach(var meddd in med)
+            {
+                if (meddd.PatientId == id && meddd.DateCreated == latestdate)
+                {
+                    medR = meddd;
+
+                    if (meddd.bpm < 100 && meddd.bpm > 60)
+                    {
+                        IsStatusNormalBPM = true;
+                    }
+                    if (meddd.systolicPressure < 120 && meddd.diastolicPressure < 80)
+                    {
+                        IsStatusNormalBP = true;
+                    }
+                    if (meddd.bloodSugarLevel < 150 && meddd.bloodSugarLevel > 90)
+                    {
+                        IsStatusNormalBSL = true;
+                    }
+
+                }
+            }
+        }
+        else if (latestdate.Value.Date < DateTime.Now.Date)
+        {
+            needUpdate = true;
+        }
+        }
+        
+    }
+    private void NavigateToAnotherPage()
+    {
+        _navManager.NavigateTo("/patient/dailyreport"); // Replace "another-page" with your target page's URL
+    }
 }
