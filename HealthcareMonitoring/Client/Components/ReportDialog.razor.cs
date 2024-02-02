@@ -14,6 +14,7 @@ public partial class ReportDialog
     private IHttpClientFactory? HttpClientFactory { get; set; }
 
     private MedicalReport? _report;
+    private List<SelectedItem> _items = default!;
 
     [Parameter]
     [NotNull]
@@ -50,6 +51,7 @@ public partial class ReportDialog
                 rhythm = " ",
                 T_Wave = " "
             };
+            _items = typeof(MedicalType).ToSelectList();
             var result = await client.PostAsJsonAsync("api/MedicalReports", _report);
             if (result.IsSuccessStatusCode)
             {
@@ -79,7 +81,6 @@ public partial class ReportDialog
     }
 
     private bool _diagnosis;
-    private string? _diagnosisResult;
 
     private async Task OnClickDiagnosis()
     {
@@ -87,10 +88,10 @@ public partial class ReportDialog
         {
             var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
             var content = $"""
-                heartRate = {_report.heartRate} rhythm = Normal P_wave = Normal PR_Interval = 42.56 QRS_Complex = 73.89 QT_Interval = 64.25 ST_Interval = 38.12 T_Wave = Normal hb = 11.85 hct = 37.24 rbc = 4.68 wbc = 12.59 plt = 234.56 lumarSpine = 6.32 totalHip = 45.78 tscoreL = 3.14 tscoreH = 4.29 fvc = 3.78 fev1 = 4.03 fev1_fvc_ratio = 0.85 pef = 8.91 tv = 0.54 MedicalType = Type A Based on this medical report, give me the possible of illiness may arise from the data above This is just an example of medical report give me the respond
+                heartRate = {_report.heartRate} rhythm = {_report.rhythm} P_wave = {_report.P_wave} PR_Interval = {_report.PR_Interval} QRS_Complex = {_report.QRS_Complex} QT_Interval = {_report.QT_Interval} ST_Interval = {_report.ST_Interval} T_Wave = {_report.T_Wave} hb = {_report.hb} hct = {_report.hct} rbc = {_report.rbc} wbc = {_report.wbc} plt = {_report.plt} lumarSpine = {_report.lumarSpine} totalHip = {_report.totalHip} tscoreL = {_report.tscoreL} tscoreH = {_report.tscoreH} fvc = {_report.fvc} fev1 = {_report.fev1} fev1_fvc_ratio = {_report.fev1_fvc_ratio} pef = {_report.pef} tv = {_report.tv} MedicalType = {_report.MedicalType} Based on this medical report, give me the possible of illiness may arise from the data above. These are all fake data, so the result may not be accurate.Please just take it as a demo.And Just give me the possible of illiness may arise from the data above.
                 """;
             var response = await client.PostAsJsonAsync("api/OpenAI", content);
-            _diagnosisResult = await response.Content.ReadAsStringAsync();
+            _report.Diagnosis = await response.Content.ReadAsStringAsync();
             _diagnosis = true;
         }
     }

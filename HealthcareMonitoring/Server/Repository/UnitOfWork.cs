@@ -17,7 +17,6 @@ namespace HealthcareMonitoring.Server.Repository
     {
         private readonly ApplicationDbContext _context;
         private IGenericRepository<Doctor> _doctors;
-        private IGenericRepository<Diagnosis> _diagnoses;
         private IGenericRepository<Prescription> _prescriptions;
         private IGenericRepository<Patient> _patients;
         private IGenericRepository<MedicalReport> _medicalReports;
@@ -35,8 +34,6 @@ namespace HealthcareMonitoring.Server.Repository
 
         public IGenericRepository<Doctor> Doctors
             => _doctors ??= new GenericRepository<Doctor>(_context);
-        public IGenericRepository<Diagnosis> Diagnoses
-            => _diagnoses ??= new GenericRepository<Diagnosis>(_context);
         public IGenericRepository<Prescription> Prescriptions
            => _prescriptions ??= new GenericRepository<Prescription>(_context);
         public IGenericRepository<Patient> Patients

@@ -1,5 +1,6 @@
 using BootstrapBlazor.Components;
 using HealthcareMonitoring.Client.Components;
+using HealthcareMonitoring.Shared.Domain;
 using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Json;
@@ -24,6 +25,7 @@ public partial class Patients
     {
         var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
         var patients = await client.GetFromJsonAsync<List<HealthcareMonitoring.Shared.Domain.Patient>?>(Url);
+
         patients ??= new();
 
         return new QueryData<HealthcareMonitoring.Shared.Domain.Patient>()
@@ -46,7 +48,11 @@ public partial class Patients
             options.ShowFooter = false;
         });
     }
-
+    private async Task OnClickDeleteButton(HealthcareMonitoring.Shared.Domain.Patient item)
+    {
+        var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
+        var patients = await client.DeleteFromJsonAsync<Patients>($"api/Patient/{item.Id}");
+    }
     private async Task OnClickPrescriptionButton(HealthcareMonitoring.Shared.Domain.Patient item)
     {
         await DialogService.ShowSaveDialog<PrescriptionDialog>("Prescription Dialog", parametersFactory: dict =>

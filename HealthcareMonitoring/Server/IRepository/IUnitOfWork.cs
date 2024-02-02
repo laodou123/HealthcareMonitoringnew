@@ -12,7 +12,6 @@ namespace HealthcareMonitoring.Server.IRepository
     {
         Task Save(HttpContext httpContext);
         IGenericRepository<Doctor> Doctors { get; }
-        IGenericRepository<Diagnosis> Diagnoses { get; }
         IGenericRepository<Prescription> Prescriptions { get; }
         IGenericRepository<Patient> Patients { get; }
         IGenericRepository<MedRDaily> MedRDaily { get; }

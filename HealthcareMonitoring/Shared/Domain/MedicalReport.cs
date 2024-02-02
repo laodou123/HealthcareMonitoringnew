@@ -29,5 +29,13 @@
         public float tv { get; set; }
 
         public string MedicalType { get; set; }
+        public string? Diagnosis { get; set; }
     }
+}
+public enum MedicalType
+{
+    Cardiologist,
+    Pulmonologist,
+    Orthopedist,
+    General
 }

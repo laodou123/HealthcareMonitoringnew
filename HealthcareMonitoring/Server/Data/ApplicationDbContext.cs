@@ -16,7 +16,6 @@ namespace HealthcareMonitoring.Server.Data
         {
         }
         public DbSet<Appointment> Appointments { get; set; }
-        public DbSet<Diagnosis> Diagnosis { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<MedicalReport> MedicalReports { get; set; }
         public DbSet<MedRDaily> MedRDailies { get; set; }
@@ -30,7 +29,6 @@ namespace HealthcareMonitoring.Server.Data
             builder.ApplyConfiguration(new MedRDailySeedConfiguration());
             builder.ApplyConfiguration(new PrescriptionSeedConfiguration());
             builder.ApplyConfiguration(new MedicalReportSeedConfiguration());
-            builder.ApplyConfiguration(new DiagnosisSeedConfiguration());
             builder.ApplyConfiguration(new PatientSeedConfiguration());
             builder.ApplyConfiguration(new UserSeedConfiguration());
             builder.ApplyConfiguration(new RoleSeedConfiguration());

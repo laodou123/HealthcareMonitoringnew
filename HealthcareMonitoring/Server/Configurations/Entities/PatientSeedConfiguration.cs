@@ -29,6 +29,8 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 Age = null,
 
             }
+
+
         );
         }
     }
