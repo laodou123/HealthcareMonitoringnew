@@ -25,7 +25,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 Address = "singapore",
                 AllergyDes ="seafood",
                 Email="pat@pat.com",
-      
+                UserId= "8607cd47-e3bc-4a1b-96f9-e83d9e4ab0e3",
                 Age = null,
 
             }

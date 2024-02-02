@@ -28,6 +28,12 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                 Id = "cd2bcf0c-20db-474f-8407-5a6b159518bc",
                 Name = "Doctor",
                 NormalizedName = "DOCTOR"
+            },
+            new IdentityRole
+            {
+                Id = "5f31c948 - 0df8 - 4ed4 - ba1b - 23efcf131af9",
+                Name = "Patient",
+                NormalizedName = "PATIENT"
             }
             );
         }

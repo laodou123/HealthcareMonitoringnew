@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthcareMonitoring.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240130075951_Range")]
-    partial class Range
+    [Migration("20240202082433_newdb")]
+    partial class newdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -242,7 +242,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b70b1c98-0025-49e9-b459-2c7831469537",
+                            ConcurrencyStamp = "f5ffae47-3ab8-42c3-9d92-e2a682837db4",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -250,9 +250,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOkb0OXWBXu2ocVQA1CjYqFRqDKXZlBy7RZeYjgaoGb12ZF7pn+QO0F7YckOoseJUQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMddweuu+N3N27dHND8hzwoibJm/zv/arBLB2iF2f0dBj5e9HKXwHfiT/2yKGpx9rg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e40256c-3b38-489d-a4c5-c1c99b60f153",
+                            SecurityStamp = "0344768f-e457-4926-85a9-b5ed79720915",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -260,7 +260,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "693e710c-008f-435b-a997-77f10812374d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ed5362ce-baec-4d18-a707-16edd92e5d04",
+                            ConcurrencyStamp = "73fff3f2-6cf2-4e1d-8879-713b87290e66",
                             Email = "13858860788a@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Hu",
@@ -268,11 +268,29 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "13858860788A@GMAIL.COM",
                             NormalizedUserName = "13858860788A@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDDL42nFBS2rrVTiZqUPKM9dH7oshhDMKGsj2vz5G0q9apMkr666oO6KNPQ3be49PQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB8XaRG32GMMVgmpHmP9yqjz0P9lZ9yBH/Q6tqxLXl9EzlahvtARPZM5kVtejbuy7g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7db04a56-878b-44c8-b9f6-163d722ae9fb",
+                            SecurityStamp = "93655e22-3f58-4226-973d-893721c6eb15",
                             TwoFactorEnabled = false,
                             UserName = "13858860788a@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "8607cd47-e3bc-4a1b-96f9-e83d9e4ab0e3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1152f3e7-341e-4583-a5fc-8fc611bd8431",
+                            Email = "pat@pat.com",
+                            EmailConfirmed = false,
+                            FirstName = "jiawei",
+                            LastName = "tan",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PAT@PAT.COM",
+                            NormalizedUserName = "PAT@PAT.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIhu3YZhEFARAZXFcDoeE9+sh8ClspkZ+rB2XX6IwyjAqUulDeFaWV4wn1tb63fHCA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7d66bef8-f311-477d-859f-7d0679406db3",
+                            TwoFactorEnabled = false,
+                            UserName = "pat@pat.com"
                         });
                 });
 
@@ -287,9 +305,6 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -299,11 +314,17 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("End")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -315,7 +336,7 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Time")
+                    b.Property<DateTime?>("Start")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Type")
@@ -455,7 +476,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DoctorAvailavleTime = "2024-01-29|2024-01-30",
+                            DoctorAvailavleTime = "2024-02-01|2024-02-02",
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "北京",
@@ -467,8 +488,8 @@ namespace HealthcareMonitoring.Server.Migrations
                         },
                         new
                         {
-                            Id = 5,
-                            DoctorAvailavleTime = "2024-01-29|2024-01-30",
+                            Id = 2,
+                            DoctorAvailavleTime = "2024-02-01|2024-02-02",
                             DoctorExperience = 4,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "上海",
@@ -481,7 +502,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 3,
-                            DoctorAvailavleTime = "2024-01-29|2024-01-30",
+                            DoctorAvailavleTime = "2024-02-01|2024-02-02",
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "黑龙江",
@@ -494,7 +515,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 4,
-                            DoctorAvailavleTime = "2024-01-29|2024-01-30",
+                            DoctorAvailavleTime = "2024-02-01|2024-02-02",
                             DoctorExperience = 10,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "温州",
@@ -557,18 +578,140 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 1,
+                            DateCreated = new DateTime(2024, 2, 1, 12, 0, 34, 0, DateTimeKind.Unspecified),
                             PatientId = 1,
                             bloodSugarLevel = 1,
-                            bpm = 1,
+                            bpm = 66,
                             diastolicPressure = 1,
                             systolicPressure = 1
                         },
                         new
                         {
                             Id = 2,
+                            DateCreated = new DateTime(2024, 2, 1, 8, 0, 34, 0, DateTimeKind.Unspecified),
                             PatientId = 1,
                             bloodSugarLevel = 15,
-                            bpm = 5,
+                            bpm = 62,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(2024, 1, 31, 12, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 73,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateCreated = new DateTime(2024, 1, 30, 12, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 80,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateCreated = new DateTime(2024, 1, 29, 12, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 82,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DateCreated = new DateTime(2024, 1, 28, 12, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 72,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DateCreated = new DateTime(2024, 1, 27, 12, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 70,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DateCreated = new DateTime(2024, 1, 26, 12, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 78,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DateCreated = new DateTime(2024, 1, 24, 12, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 79,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DateCreated = new DateTime(2024, 1, 23, 12, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 74,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DateCreated = new DateTime(2024, 1, 22, 12, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 71,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 12,
+                            DateCreated = new DateTime(2024, 1, 22, 11, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 60,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 13,
+                            DateCreated = new DateTime(2024, 1, 21, 16, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 69,
+                            diastolicPressure = 12,
+                            systolicPressure = 10
+                        },
+                        new
+                        {
+                            Id = 14,
+                            DateCreated = new DateTime(2024, 1, 20, 16, 0, 34, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            bloodSugarLevel = 15,
+                            bpm = 70,
                             diastolicPressure = 12,
                             systolicPressure = 10
                         });
@@ -681,29 +824,29 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 1,
-                            MedicalType = "1",
+                            MedicalType = "Cardiologist,Pulmonologist,Orthopedist,General",
                             PR_Interval = 1f,
                             P_wave = "1",
                             QRS_Complex = 1f,
                             QT_Interval = 1f,
                             ST_Interval = 1f,
                             T_Wave = "1",
-                            fev1 = 1f,
-                            fev1_fvc_ratio = 1f,
-                            fvc = 1f,
-                            hb = 1f,
-                            hct = 1f,
+                            fev1 = 4f,
+                            fev1_fvc_ratio = 4f,
+                            fvc = 4f,
+                            hb = 2f,
+                            hct = 2f,
                             heartRate = 1,
-                            lumarSpine = 1f,
-                            pef = 1f,
-                            plt = 1f,
-                            rbc = 1f,
+                            lumarSpine = 3f,
+                            pef = 4f,
+                            plt = 2f,
+                            rbc = 2f,
                             rhythm = "Test",
-                            totalHip = 1f,
-                            tscoreH = 1f,
-                            tscoreL = 1f,
-                            tv = 1f,
-                            wbc = 1f
+                            totalHip = 3f,
+                            tscoreH = 3f,
+                            tscoreL = 3f,
+                            tv = 4f,
+                            wbc = 2f
                         },
                         new
                         {
@@ -801,6 +944,10 @@ namespace HealthcareMonitoring.Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PrescriptionId")
+                        .IsUnique()
+                        .HasFilter("[PrescriptionId] IS NOT NULL");
+
                     b.ToTable("Patients");
 
                     b.HasData(
@@ -809,12 +956,14 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = 1,
                             Address = "singapore",
                             AllergyDes = "seafood",
-                            DOB = new DateTime(2024, 1, 30, 15, 59, 51, 28, DateTimeKind.Local).AddTicks(6834),
+                            DOB = new DateTime(2024, 2, 2, 16, 24, 33, 302, DateTimeKind.Local).AddTicks(2972),
+                            Email = "pat@pat.com",
                             Gender = "Male",
                             LastName = "Tan",
                             NRIC = "S1234567G",
                             Name = "Jia Wei",
-                            PhoneNumber = "12345678"
+                            PhoneNumber = "12345678",
+                            UserId = "8607cd47-e3bc-4a1b-96f9-e83d9e4ab0e3"
                         });
                 });
 
@@ -856,6 +1005,9 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("MedicineUsage")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PatId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -871,16 +1023,48 @@ namespace HealthcareMonitoring.Server.Migrations
                             MedicineName = "Test",
                             MedicinePrescriptionDoctor = "Test",
                             MedicineQuantity = 1,
-                            MedicineUsage = "Test"
+                            MedicineUsage = "Test",
+                            PatId = 1
                         },
                         new
                         {
                             Id = 2,
-                            MedicineDescription = "Test",
-                            MedicineName = "Test",
-                            MedicinePrescriptionDoctor = "Test",
-                            MedicineQuantity = 1,
-                            MedicineUsage = "Test"
+                            MedicineDescription = "Test2",
+                            MedicineName = "Test2",
+                            MedicinePrescriptionDoctor = "Test2",
+                            MedicineQuantity = 2,
+                            MedicineUsage = "Tes2t",
+                            PatId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            MedicineDescription = "Test2",
+                            MedicineName = "Test2",
+                            MedicinePrescriptionDoctor = "Test2",
+                            MedicineQuantity = 2,
+                            MedicineUsage = "Tes2t",
+                            PatId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            MedicineDescription = "Test3",
+                            MedicineName = "Test3",
+                            MedicinePrescriptionDoctor = "Test3",
+                            MedicineQuantity = 2,
+                            MedicineUsage = "Test3",
+                            PatId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            MedicineDescription = "Test2",
+                            MedicineName = "Test2",
+                            MedicinePrescriptionDoctor = "Test2",
+                            MedicineQuantity = 2,
+                            MedicineUsage = "Tes2t",
+                            PatId = 2
                         });
                 });
 
@@ -929,6 +1113,12 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = "cd2bcf0c-20db-474f-8407-5a6b159518bc",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
+                        },
+                        new
+                        {
+                            Id = "5f31c948 - 0df8 - 4ed4 - ba1b - 23efcf131af9",
+                            Name = "Patient",
+                            NormalizedName = "PATIENT"
                         });
                 });
 
@@ -1030,6 +1220,11 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             UserId = "693e710c-008f-435b-a997-77f10812374d",
                             RoleId = "bd2bcf0c-20db-474f-8407-5a6b159518bb"
+                        },
+                        new
+                        {
+                            UserId = "8607cd47-e3bc-4a1b-96f9-e83d9e4ab0e3",
+                            RoleId = "5f31c948 - 0df8 - 4ed4 - ba1b - 23efcf131af9"
                         });
                 });
 
@@ -1076,6 +1271,13 @@ namespace HealthcareMonitoring.Server.Migrations
                         .HasForeignKey("PatientId");
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Patient", b =>
+                {
+                    b.HasOne("HealthcareMonitoring.Shared.Domain.Prescription", null)
+                        .WithOne("Patient")
+                        .HasForeignKey("HealthcareMonitoring.Shared.Domain.Patient", "PrescriptionId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1127,6 +1329,11 @@ namespace HealthcareMonitoring.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Prescription", b =>
+                {
+                    b.Navigation("Patient");
                 });
 #pragma warning restore 612, 618
         }

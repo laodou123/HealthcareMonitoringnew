@@ -5,6 +5,7 @@ using HealthcareMonitoring.Shared.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Radzen;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -27,5 +28,9 @@ builder.Services.AddHttpClient("HealthcareMonitoring.ServerAPI", client => clien
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("HealthcareMonitoring.ServerAPI"));
 
 builder.Services.AddApiAuthorization();
+
+builder.Services.AddRadzenComponents();
+
+builder.Services.AddScoped<Radzen.DialogService>();
 
 await builder.Build().RunAsync();
