@@ -14,10 +14,11 @@
         <TableColumn @bind-Field="context.Name"></TableColumn>
         <TableColumn @bind-Field="context.NRIC"></TableColumn>
         <TableColumn @bind-Field="context.PhoneNumber"></TableColumn>
+        <TableColumn @bind-Field="context.Gender"></TableColumn>
+        <TableColumn @bind-Field="context.Email"></TableColumn>
     </TableColumns>
     <RowButtonTemplate>
         <Button Icon="fa-fw fa-solid fa-pen-to-square" Text="Report" OnClick="() => OnClickReportButton(context)" Color="Color.Primary" Size="Size.ExtraSmall" />
         <Button Icon="fa-fw fa-solid fa-pen-to-square" Text="Prescription" OnClick="() => OnClickPrescriptionButton(context)" Color="Color.Success" Size="Size.ExtraSmall" />
-        <Button Icon="fa-fw fa-solid fa-pen-to-square" Text="Delete" OnClick="() => OnClickDeleteButton(context)" Color="Color.Primary" Size="Size.ExtraSmall" />
     </RowButtonTemplate>
 </Table>
