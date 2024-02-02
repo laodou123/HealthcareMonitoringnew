@@ -13,6 +13,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddBootstrapBlazor(configureOptions: options =>
 {
     options.IgnoreLocalizerMissing = true;
+    options.DefaultCultureInfo = "en-US";
 });
 
 builder.Services.AddScoped<IAppContext, DefaultAppContext>();
