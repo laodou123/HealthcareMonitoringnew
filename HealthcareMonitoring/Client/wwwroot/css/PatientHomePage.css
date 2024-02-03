@@ -91,23 +91,27 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .reading-card, .status-indicator {
-        width: 80%; /* Adjust width for mobile */
-        height: auto; /* Height can be automatic to accommodate content */
-        margin: 10px auto; /* Center cards with automatic horizontal margins */
+        width: 80%; 
+        height: auto; 
+        margin: 10px auto; 
         font-size: 1.2em;
     }
 }
 .icon-text-container {
     display: flex;
-    align-items: center; /* Align items vertically in the container */
+    align-items: center; 
 }
 
 .icon-image {
-    width: 24px; /* Adjust the width of the icon as needed */
-    height: 24px; /* Adjust the height of the icon as needed */
-    margin-right: 8px; /* Add spacing between the icon and text */
+    width: 24px; 
+    height: 24px; 
+    margin-right: 8px; 
 }
 
 .text {
-    font-size: 16px; /* Adjust the font size as needed */
+    font-size: 24px;
+    text-decoration: underline;
+}
+.text-red {
+    color: red;
 }
