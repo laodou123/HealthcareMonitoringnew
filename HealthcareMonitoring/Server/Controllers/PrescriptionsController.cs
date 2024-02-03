@@ -26,6 +26,21 @@ namespace HealthcareMonitoring.Server.Controllers
             var prescriptions = await _unitOfWork.Prescriptions.GetAll();
             return Ok(prescriptions);
         }
+        // GET: api/Prescriptions/Patient/1
+        [HttpGet("Patient/{id}")]
+        public async Task<IActionResult> GetPatientPrescriptions(int id)
+        {
+            List<Prescription> patprescription = new List<Prescription>();
+            var prescriptions = await _unitOfWork.Prescriptions.GetAll();
+            foreach (var prescription in prescriptions)
+            {
+                if(prescription.PatId == id)
+                {
+                    patprescription.Add(prescription);
+                }
+            }
+            return Ok(patprescription);
+        }
 
         // GET: api/Prescriptions/5
         [HttpGet("{id}")]

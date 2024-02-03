@@ -48,9 +48,24 @@ namespace HealthcareMonitoring.Server.Controllers
 
             return Ok(MedRDaily);
         }
-        // PUT: api/MedRDailies/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+		// GET: api/MedRDailiess/Patient/1
+		[HttpGet("Patient/{id}")]
+		public async Task<IActionResult> GetPatientPrescriptions(int id)
+		{
+			List<MedRDaily> patprescription = new List<MedRDaily>();
+			var MedRDailiess = await _unitOfWork.MedRDaily.GetAll();
+			foreach (var app in MedRDailiess)
+			{
+				if (app.PatientId == id)
+				{
+					patprescription.Add(app);
+				}
+			}
+			return Ok(patprescription);
+		}
+		// PUT: api/MedRDailies/5
+		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+		[HttpPut("{id}")]
         public async Task<IActionResult> PutMedRDaily(int id, MedRDaily MedRDaily)
         {
             if (id != MedRDaily.Id)

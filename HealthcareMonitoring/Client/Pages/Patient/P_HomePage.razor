@@ -137,7 +137,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        med = await _client.GetFromJsonAsync<IList<MedRDaily>>($"{Endpoints.MedRDailies}");
+        
         patients = await _client.GetFromJsonAsync<IList<Patient>>($"{Endpoints.Patients}");
         var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var userName = state.User?.Identity?.Name;
@@ -156,18 +156,16 @@
                 }
             }
         }
+        med = await _client.GetFromJsonAsync<IList<MedRDaily>>($"{Endpoints.MedRDailies}/Patient/{id}");
         if (med != null)
         {
             foreach (var medd in med)
             {
-                if (medd.PatientId == id)
-                {
                     System.Console.WriteLine(medd.DateCreated.ToString());
                     DateTime? datetemp = medd.DateCreated;
                     dateMedR.Add(datetemp);
                     medTemp.Add(medd);
                     
-                }
 
             }
         }

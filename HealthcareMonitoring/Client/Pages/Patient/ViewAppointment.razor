@@ -11,13 +11,20 @@
 <body>
     <link rel="stylesheet" href="css/PatientHomePage.css">
 </body>
-<div class="icon-text-container">
-    <img src="img/appointment.png" alt="Icon Image" class="icon-image" />
-    <span class="text" style="color:black">You have @tempApp.Count() Appointment!</span>
-    
-</div>
+@if(appointments == null)
+{
+}
+else
+{
+    <div class="icon-text-container">
+        <img src="img/appointment.png" alt="Icon Image" class="icon-image" />
+        <span class="text" style="color:black">You have @appointments.Count() Appointment!</span>
+
+    </div>
+}
+
 <br />
-<RadzenScheduler  Data="@tempApp" TItem="Appointment" StartProperty="Start" EndProperty="End" TextProperty="Reason" SelectedIndex="0" style="height: 650px;"
+<RadzenScheduler Data="@appointments" TItem="Appointment" StartProperty="Start" EndProperty="End" TextProperty="Reason" SelectedIndex="0" style="height: 650px;"
                  AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender SlotRender=@OnSlotRender 
                  AppointmentMouseEnter=@OnAppointmentMouseEnter AppointmentMouseLeave=@OnAppointmentMouseLeave>
     
@@ -28,10 +35,9 @@
 </RadzenScheduler>
 @code {
     private IList<Patient>? patients;
-    private IList<Appointment>? appointments = null;
+    private IList<Appointment>? appointments;
     private IList<Doctor>? doctors;
     private int patid;
-    private List<Appointment> tempApp = new List<Appointment>();
 
     private int appId;
     private string docName;
@@ -41,7 +47,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        appointments = await _client.GetFromJsonAsync<IList<Appointment>>($"{Endpoints.Appointments}");
+        
         patients = await _client.GetFromJsonAsync<IList<Patient>>($"{Endpoints.Patients}");
         doctors = await _client.GetFromJsonAsync<IList<Doctor>>($"{Endpoints.Doctors}");
         var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
@@ -61,25 +67,7 @@
                 }
             }
         }
-        if(appointments != null)
-        {
-            foreach( var app in appointments)
-            {
-                if (app.PatientId == patid)
-                {
-                    tempApp.Add(app);
-                    System.Console.WriteLine($"app end: {app.End}");
-                }
-            }
-        }
-        if (tempApp.Any())
-        {
-            System.Console.WriteLine("have thing");
-        }
-        else
-        {
-            System.Console.WriteLine("no thing");
-        }
+        appointments = await _client.GetFromJsonAsync<IList<Appointment>>($"{Endpoints.Appointments}/Patient/{patid}");
 
     }
 
@@ -115,7 +103,7 @@
                     var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete this appointment?");
                     if (confirm)
                     {
-                        tempApp = tempApp.Where(a => a.Id != appId).ToList(); // Reassign with a new instance without the deleted appointment
+                        appointments = appointments.Where(a => a.Id != appId).ToList(); // Reassign with a new instance without the deleted appointment
                         await _client.DeleteAsync($"{Endpoints.Appointments}/{appId}");
                         StateHasChanged();
 

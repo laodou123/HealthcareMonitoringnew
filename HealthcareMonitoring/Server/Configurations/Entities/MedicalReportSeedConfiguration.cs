@@ -68,7 +68,7 @@ namespace HealthcareMonitoring.Server.Configurations.Entities
                     fev1_fvc_ratio = 10,
                     pef = 10,
                     tv = 10,
-                    MedicalType = "Test",
+                    MedicalType = "Cardiologist,Pulmonologist",
                 }
             );
         }

@@ -57,4 +57,14 @@ public partial class Patients
             options.ShowFooter = false;
         });
     }
+    private async Task OnClickViewPrescriptionButton(HealthcareMonitoring.Shared.Domain.Patient item)
+    {
+        await DialogService.ShowSaveDialog<ViewPrescriptionDialog>(" View Prescription Dialog", parametersFactory: dict =>
+        {
+            dict.Add("Value", item);
+        }, configureOption: options =>
+        {
+            options.ShowFooter = false;
+        });
+    }
 }

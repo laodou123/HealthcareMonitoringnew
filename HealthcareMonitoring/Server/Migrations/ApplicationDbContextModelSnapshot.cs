@@ -239,7 +239,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f5ffae47-3ab8-42c3-9d92-e2a682837db4",
+                            ConcurrencyStamp = "2c93518e-e2aa-4a1a-8ac7-265d050573b6",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -247,9 +247,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMddweuu+N3N27dHND8hzwoibJm/zv/arBLB2iF2f0dBj5e9HKXwHfiT/2yKGpx9rg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKglGM1akl6i0X3ScvI+deNDHVWh2j5XPTty8aNMRnBSqcmVupAeCMIZzOCKd+eXdQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0344768f-e457-4926-85a9-b5ed79720915",
+                            SecurityStamp = "6c9477bd-315c-433e-a03e-e31c3671226d",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -257,7 +257,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "693e710c-008f-435b-a997-77f10812374d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "73fff3f2-6cf2-4e1d-8879-713b87290e66",
+                            ConcurrencyStamp = "45af86da-f81e-4894-b0cc-19486b584937",
                             Email = "13858860788a@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Hu",
@@ -265,9 +265,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "13858860788A@GMAIL.COM",
                             NormalizedUserName = "13858860788A@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEB8XaRG32GMMVgmpHmP9yqjz0P9lZ9yBH/Q6tqxLXl9EzlahvtARPZM5kVtejbuy7g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBMp8B8jKpfOfDwN32vZRBIzJaKTVDbFc5u1AZebnT8i9LC+iMXodnCDRMfyFdmuqQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "93655e22-3f58-4226-973d-893721c6eb15",
+                            SecurityStamp = "a664bba6-abb5-49cf-a857-2763ba98f5d5",
                             TwoFactorEnabled = false,
                             UserName = "13858860788a@gmail.com"
                         },
@@ -275,7 +275,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "8607cd47-e3bc-4a1b-96f9-e83d9e4ab0e3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1152f3e7-341e-4583-a5fc-8fc611bd8431",
+                            ConcurrencyStamp = "c57a1202-d0bb-4a41-be0b-9c50a4fc3bbb",
                             Email = "pat@pat.com",
                             EmailConfirmed = false,
                             FirstName = "jiawei",
@@ -283,9 +283,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PAT@PAT.COM",
                             NormalizedUserName = "PAT@PAT.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIhu3YZhEFARAZXFcDoeE9+sh8ClspkZ+rB2XX6IwyjAqUulDeFaWV4wn1tb63fHCA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECAZLCNNnTYHvdViBZBGbZm2+SzXOJzq+ZpvIdGYKGWNhwiB4DQ8Szmcbe/ogC1ijw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7d66bef8-f311-477d-859f-7d0679406db3",
+                            SecurityStamp = "7c058235-06fd-4cb1-84dd-430b90b3ab4a",
                             TwoFactorEnabled = false,
                             UserName = "pat@pat.com"
                         });
@@ -473,7 +473,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DoctorAvailavleTime = "2024-02-01|2024-02-02",
+                            DoctorAvailavleTime = "2024-02-02|2024-02-03",
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "北京",
@@ -486,7 +486,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 2,
-                            DoctorAvailavleTime = "2024-02-01|2024-02-02",
+                            DoctorAvailavleTime = "2024-02-02|2024-02-03",
                             DoctorExperience = 4,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "上海",
@@ -499,7 +499,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 3,
-                            DoctorAvailavleTime = "2024-02-01|2024-02-02",
+                            DoctorAvailavleTime = "2024-02-02|2024-02-03",
                             DoctorExperience = 5,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "黑龙江",
@@ -512,7 +512,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 4,
-                            DoctorAvailavleTime = "2024-02-01|2024-02-02",
+                            DoctorAvailavleTime = "2024-02-02|2024-02-03",
                             DoctorExperience = 10,
                             DoctorIntroduction = "张三",
                             DoctorLocation = "温州",
@@ -848,7 +848,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         new
                         {
                             Id = 2,
-                            MedicalType = "Test",
+                            MedicalType = "Cardiologist,Pulmonologist",
                             PR_Interval = 10f,
                             P_wave = "Test",
                             QRS_Complex = 10f,
@@ -953,13 +953,14 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = 1,
                             Address = "singapore",
                             AllergyDes = "seafood",
-                            DOB = new DateTime(2024, 2, 2, 16, 24, 33, 302, DateTimeKind.Local).AddTicks(2972),
+                            DOB = new DateTime(2024, 2, 3, 11, 33, 59, 271, DateTimeKind.Local).AddTicks(1607),
                             Email = "pat@pat.com",
                             Gender = "Male",
                             LastName = "Tan",
                             NRIC = "S1234567G",
                             Name = "Jia Wei",
                             PhoneNumber = "12345678",
+                            ReportId = 1,
                             UserId = "8607cd47-e3bc-4a1b-96f9-e83d9e4ab0e3"
                         });
                 });
