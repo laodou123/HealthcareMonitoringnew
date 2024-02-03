@@ -8,9 +8,15 @@ using HealthcareMonitoring.Server.IRepository;
 using HealthcareMonitoring.Server.Repository;
 using BootstrapBlazor.Components;
 using Microsoft.AspNetCore.StaticFiles;
+<<<<<<< HEAD
 using HealthcareMonitoring.Server.Hubs;
+=======
+using Radzen;
+>>>>>>> jiaweiRa
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRadzenComponents();
 
 // Add services to the container.
 builder.Services.AddSignalR();
