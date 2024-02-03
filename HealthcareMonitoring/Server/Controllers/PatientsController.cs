@@ -1,4 +1,5 @@
-﻿using HealthcareMonitoring.Server.IRepository;
+﻿using System.Security.Claims;
+using HealthcareMonitoring.Server.IRepository;
 using HealthcareMonitoring.Shared.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,8 +28,10 @@ namespace HealthcareMonitoring.Server.Controllers
             return Ok(Patients);
         }
 
-        // GET: api/Patients/5
-        [HttpGet("{id}")]
+
+
+		// GET: api/Patients/5
+		[HttpGet("{id}")]
         public async Task<ActionResult<Patient>> Getpatient(int id)
         {
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HealthcareMonitoring.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class addmigrationnew : Migration
+    public partial class @new : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -421,8 +421,8 @@ namespace HealthcareMonitoring.Server.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "f4fd9a9b-71b4-4cbe-9506-3570cf8ef265", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEBNMIgBczONpai6XxHqaenYbuCU04WvNhw8ZqFyNXoE+HDXo44PchmRq2mZ6rpzyqA==", null, false, "c09cd5c5-1339-4ea8-ba58-032459fe7972", false, "admin@localhost.com" },
-                    { "693e710c-008f-435b-a997-77f10812374d", 0, "7626991c-7362-4f68-8ee9-a53a507d2fb0", "13858860788a@gmail.com", false, "Hu", "Yi", false, null, "13858860788A@GMAIL.COM", "13858860788A@GMAIL.COM", "AQAAAAIAAYagAAAAEDCDFdDkIJMbUulxE/x2c6aeqnYfPuQPonNybFAExEZvtDtd2gIdes1wQBsyn6CXzg==", null, false, "72ebe384-5955-4d76-b8d9-7c9f17b4c817", false, "13858860788a@gmail.com" }
+                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "f5e63e3c-106a-42c8-89fc-a885ab22b16c", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEG9KW3JtRfnwk1QiuFvIihXDcaNNhqtpeJrTYDEInVbmmkUTE7hUQPXcLN4u2nY05g==", null, false, "9a8e8fd8-df94-434e-a0d8-a84f919672f5", false, "admin@localhost.com" },
+                    { "693e710c-008f-435b-a997-77f10812374d", 0, "099f8656-1ed9-4fa8-9aa0-17e2414fa448", "13858860788a@gmail.com", false, "Hu", "Yi", false, null, "13858860788A@GMAIL.COM", "13858860788A@GMAIL.COM", "AQAAAAIAAYagAAAAENZkpKFM/roWPAlU4BVb+s5yg2qur0gCAImjJN320vkFBXe5y3P/yUG2JeBvJuDXMg==", null, false, "4af9de1e-a90f-4f6b-ac9b-4bb4e0680e05", false, "13858860788a@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -430,10 +430,10 @@ namespace HealthcareMonitoring.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "DoctorAvailavleTime", "DoctorExperience", "DoctorIntroduction", "DoctorLocation", "DoctorName", "DoctorNationality", "DoctorPhoneNumber", "DoctorSpecialization", "Email", "UpdatedBy", "UserId" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, null, null, "2024-02-01|2024-02-02", 5, "张三", "北京", "张三", "中国", 123456789, "Cardiologist", "13858860788aaa@gmail.com", null, null },
-                    { 2, null, null, null, null, null, "2024-02-01|2024-02-02", 4, "张三", "上海", "李四", "中国", 87654321, "Pulmonologist", "doc@doc.com", null, null },
-                    { 3, null, null, null, null, null, "2024-02-01|2024-02-02", 5, "张三", "黑龙江", "王六", "中国", 87688321, "Orthopedist", "doc@doc.com", null, null },
-                    { 4, null, null, null, null, null, "2024-02-01|2024-02-02", 10, "张三", "温州", "胡涵博", "中国", 12376543, "General", "doc@doc.com", null, null }
+                    { 1, null, null, null, null, null, "2024-02-02|2024-02-03", 5, "张三", "北京", "张三", "中国", 123456789, "Cardiologist", "13858860788aaa@gmail.com", null, null },
+                    { 2, null, null, null, null, null, "2024-02-02|2024-02-03", 4, "张三", "上海", "李四", "中国", 87654321, "Pulmonologist", "doc@doc.com", null, null },
+                    { 3, null, null, null, null, null, "2024-02-02|2024-02-03", 5, "张三", "黑龙江", "王六", "中国", 87688321, "Orthopedist", "doc@doc.com", null, null },
+                    { 4, null, null, null, null, null, "2024-02-02|2024-02-03", 10, "张三", "温州", "胡涵博", "中国", 12376543, "General", "doc@doc.com", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -448,7 +448,7 @@ namespace HealthcareMonitoring.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Patients",
                 columns: new[] { "Id", "Address", "Age", "AllergyDes", "CreatedBy", "DOB", "DateCreated", "DateDeleted", "DateUpdated", "DeletedBy", "Email", "Gender", "LastName", "NRIC", "Name", "PhoneNumber", "PrescriptionId", "ReportId", "UpdatedBy", "UserId" },
-                values: new object[] { 1, "singapore", null, "seafood", null, new DateTime(2024, 2, 2, 18, 11, 30, 238, DateTimeKind.Local).AddTicks(112), null, null, null, null, "pat@pat.com", "Male", "Tan", "S1234567G", "Jia Wei", "12345678", null, null, null, null });
+                values: new object[] { 1, "singapore", null, "seafood", null, new DateTime(2024, 2, 3, 13, 52, 54, 678, DateTimeKind.Local).AddTicks(6088), null, null, null, null, "pat@pat.com", "Male", "Tan", "S1234567G", "Jia Wei", "12345678", null, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "Prescriptions",

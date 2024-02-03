@@ -1,0 +1,84 @@
+﻿@page "/receivechat"
+@using Microsoft.Extensions.Localization
+@using HealthcareMonitoring.Client.Shared
+@using Microsoft.AspNetCore.SignalR.Client
+
+@inject IHttpClientFactory HttpClientFactory
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject MessageService MessageService
+@layout EmptyLayout
+
+@foreach (var chatItem in ChatItems)
+{
+	<div class="@($"chat-item {(chatItem.UserId == CurrentUserId ? "current-user" : string.Empty)}")">
+		<div>send: @chatItem.SendId user:@chatItem.UserId</div>
+		@CurrentUserId
+		<div class="chat-content">@chatItem.Content</div>
+		<div class="chat-timestamp">@chatItem.CreatedTime.ToString("g")</div>
+	</div>
+}
+
+<div class="message-input-area">
+	<textarea class="message-input" @bind="NewMessage"></textarea>
+	<button class="send-button" @onclick="SendMessage">Send</button>
+</div>
+@code {
+	private List<ChatItem> ChatItems { get; set; } = new List<ChatItem>();
+	private int CurrentUserId = 1;
+
+	private string NewMessage { get; set; } = string.Empty;
+	private HubConnection hubConnection;
+	public class ChatItem
+	{
+		public string Content { get; set; }
+		public int SendId { get; set; }
+		public int UserId { get; set; }
+		public string SendName { get; set; }
+		public DateTime CreatedTime { get; set; }
+	}
+
+	protected override async Task OnInitializedAsync()
+	{
+		hubConnection = new HubConnectionBuilder()
+			.WithUrl(NavigationManager.ToAbsoluteUri("/chatHub"))
+			.Build();
+
+		hubConnection.On<int, int, string>("ReceiveMessage", (user, id, message) =>
+		{
+			if (user == CurrentUserId)
+			{
+				return;
+			}
+
+			if(id != CurrentUserId)
+			{
+				return;
+			}
+
+			ChatItems.Add(new ChatItem()
+				{
+					Content = message,
+					SendId = user,
+					UserId = id,
+					CreatedTime = DateTime.Now
+				});
+
+			StateHasChanged();
+		});
+		await hubConnection.StartAsync();
+	}
+
+	private async Task SendMessage()
+	{
+		if (!string.IsNullOrWhiteSpace(NewMessage))
+		{
+			var id = ChatItems.FirstOrDefault(x => x.SendId != CurrentUserId).SendId;
+			ChatItems.Add(new ChatItem { Content = NewMessage, SendId = CurrentUserId, UserId = id, CreatedTime = DateTime.Now, });
+			await hubConnection.SendAsync("SendMessage", CurrentUserId, id, NewMessage);
+			NewMessage = string.Empty; // Clear the message input after sending
+		}
+	}
+	public bool IsConnected =>
+	hubConnection.State == HubConnectionState.Connected;
+}

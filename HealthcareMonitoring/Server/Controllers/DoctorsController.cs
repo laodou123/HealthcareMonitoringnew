@@ -41,6 +41,22 @@ namespace HealthcareMonitoring.Server.Controllers
 
             return Ok(doctor);
         }
+
+        // GET: api/Doctors?name=xxx
+        [HttpGet("NameDoctor")]
+        public async Task<ActionResult<Doctor>> GetNameDoctor(String name)
+        {
+
+            var doctor = await _unitOfWork.Doctors.Get(q => q.Email == name);
+
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(doctor);
+        }
+
         // PUT: api/Doctors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
