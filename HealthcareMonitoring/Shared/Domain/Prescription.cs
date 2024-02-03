@@ -4,7 +4,7 @@ namespace HealthcareMonitoring.Shared.Domain
 {
     public class Prescription : BaseDomainModel
     {
-        public int? PatientId { get; set; }
+        
         [Display(Name = "Name")]
         public string? MedicineName { get; set; }
 
