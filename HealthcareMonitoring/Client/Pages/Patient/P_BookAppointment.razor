@@ -86,7 +86,7 @@
         doctors = await _client.GetFromJsonAsync<IList<Doctor>>($"{Endpoints.Doctors}");
         patients = await _client.GetFromJsonAsync<IList<Patient>>($"{Endpoints.Patients}");
         var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var userName = state.User?.Identity?.Name;
+        var userName = state.User?.Identity?.Name; 
         System.Console.WriteLine($"User Name: {userName}");
         if (patients != null)
         {
