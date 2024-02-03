@@ -62,13 +62,13 @@ public partial class ViewPrescriptionDialog
     }
     private async Task OnClickEditPrescriptionButton(HealthcareMonitoring.Shared.Domain.Prescription item)
     {
-        await DialogService.ShowSaveDialog<EditPrescriptionDialog>(" View Prescription Dialog", saveCallback: () =>
-        {
-            _tablePrescription.QueryAsync();
-            return Task.FromResult(true);
-        }, parametersFactory: dict =>
+        await DialogService.ShowSaveDialog<EditPrescriptionDialog>(" View Prescription Dialog", parametersFactory: dict =>
         {
             dict.Add("Value", item);
+            dict.Add("OnValueChanged", new Func<Task>(async () =>
+            {
+                await _tablePrescription.QueryAsync();
+            }));
         }, configureOption: options =>
         {
             options.ShowFooter = false;

@@ -13,11 +13,9 @@ namespace HealthcareMonitoring.Client.Components;
 
 public partial class EditPrescriptionDialog
 {
-    
     [Inject]
     [NotNull]
     private IHttpClientFactory? HttpClientFactory { get; set; }
-
 
     private Prescription Prescription = new Prescription();
     private const string Url = "api/Prescriptions";
@@ -31,6 +29,10 @@ public partial class EditPrescriptionDialog
     [Inject]
     [NotNull]
     private ToastService? ToastService { get; set; }
+
+    [Parameter]
+    public Func<Task>? OnValueChanged { get; set; }
+
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
@@ -41,11 +43,11 @@ public partial class EditPrescriptionDialog
 
         await base.OnInitializedAsync();
         var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
-        Prescription = await client.GetFromJsonAsync< HealthcareMonitoring.Shared.Domain.Prescription > ($"{Url}/{Value.Id}");
+        Prescription = await client.GetFromJsonAsync<HealthcareMonitoring.Shared.Domain.Prescription>($"{Url}/{Value.Id}");
         System.Console.WriteLine(Value.MedicineName);
 
     }
-    
+
     private async Task OnSubmit(EditContext context)
     {
         var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
@@ -54,8 +56,10 @@ public partial class EditPrescriptionDialog
         {
             await OnCloseAsync();
             await ToastService.Success("edited Prescription", "edited prescription successful");
+            if (OnValueChanged != null)
+            {
+                await OnValueChanged();
+            }
         }
-
     }
-
 }
