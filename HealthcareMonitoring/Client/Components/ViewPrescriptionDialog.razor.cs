@@ -1,11 +1,6 @@
 using BootstrapBlazor.Components;
-using HealthcareMonitoring.Client.Pages.Doctor;
-using HealthcareMonitoring.Client.Static;
 using HealthcareMonitoring.Shared.Domain;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.Extensions.Options;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Json;
 
@@ -34,6 +29,8 @@ public partial class ViewPrescriptionDialog
     [CascadingParameter]
     [NotNull]
     private Func<Task>? OnCloseAsync { get; set; }
+
+    private Table<Prescription> _tablePrescription = default!;
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
@@ -45,14 +42,14 @@ public partial class ViewPrescriptionDialog
         await base.OnInitializedAsync();
         var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
         prescriptions = await client.GetFromJsonAsync<IList<HealthcareMonitoring.Shared.Domain.Prescription>?>($"{Url}/{Value.Id}");
-        
+
 
     }
     private async Task<QueryData<HealthcareMonitoring.Shared.Domain.Prescription>> OnQueryAsync(QueryPageOptions options)
     {
         var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
         prescriptions = await client.GetFromJsonAsync<IList<HealthcareMonitoring.Shared.Domain.Prescription>?>($"{Url}/{Value.Id}");
-        
+
 
         return new QueryData<HealthcareMonitoring.Shared.Domain.Prescription>()
         {
@@ -65,19 +62,19 @@ public partial class ViewPrescriptionDialog
     }
     private async Task OnClickEditPrescriptionButton(HealthcareMonitoring.Shared.Domain.Prescription item)
     {
-        await DialogService.ShowSaveDialog<EditPrescriptionDialog>(" View Prescription Dialog", parametersFactory: dict =>
+        await DialogService.ShowSaveDialog<EditPrescriptionDialog>(" View Prescription Dialog", saveCallback: () =>
+        {
+            _tablePrescription.QueryAsync();
+            return Task.FromResult(true);
+        }, parametersFactory: dict =>
         {
             dict.Add("Value", item);
         }, configureOption: options =>
         {
             options.ShowFooter = false;
         });
-
-        // Trigger a UI update to refresh the table
-        StateHasChanged();
-
     }
-    
+
     private async Task OnClickDeletePrescriptionButton(HealthcareMonitoring.Shared.Domain.Prescription item)
     {
         await DialogService.ShowSaveDialog<DeletePrescriptionDialog>(" View Prescription Dialog", parametersFactory: dict =>
@@ -95,8 +92,8 @@ public partial class ViewPrescriptionDialog
         // Trigger a UI update to refresh the table
         StateHasChanged();
     }
-    
-    }
+
+}
 
 
 

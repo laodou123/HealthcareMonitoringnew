@@ -3,7 +3,7 @@
 @using HealthcareMonitoring.Client.Static;
 @inject HttpClient _client
 
-<Table TItem="Prescription" EditDialogShowMaximizeButton="true"
+<Table TItem="Prescription" EditDialogShowMaximizeButton="true" @ref="_tablePrescription"
        IsPagination="true" PageItemsSource="@PageItemsSource"
        IsStriped="true" IsBordered="true"
        ShowToolbar="false" ShowSkeleton="true"
