@@ -9,10 +9,6 @@ namespace HealthcareMonitoring.Shared.Domain
     public class Appointment : BaseDomainModel
     {
         public string Location { get; set; }
-        public DateTime? Date { get; set; }
-
-        public TimeSpan? TimeStart { get; set; }
-        public TimeSpan? TimeEnd { get; set; }
 
         public string Type { get; set; }
 
@@ -21,6 +17,11 @@ namespace HealthcareMonitoring.Shared.Domain
         public virtual Patient? Patient { get; set; }
         public int? PatientId { get; set; }
         public string? Reason { get; set; }
+
+        public DateTime? Start { get; set; }
+        public DateTime? End { get; set; }
+        public bool Delete { get; set; } = false;
+
 
     }
 }

@@ -19,5 +19,12 @@ namespace HealthcareMonitoring.Shared.Domain
 
         [Display(Name = "Doctor")]
         public string? MedicinePrescriptionDoctor { get; set; }
+
+        public virtual Patient? Patient { get; set; }
+
+        public int? PatId { get; set; }
+
+
+        
     }
 }

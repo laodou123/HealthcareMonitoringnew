@@ -1,0 +1,102 @@
+using BootstrapBlazor.Components;
+using HealthcareMonitoring.Client.Pages.Doctor;
+using HealthcareMonitoring.Client.Static;
+using HealthcareMonitoring.Shared.Domain;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Extensions.Options;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Net.Http.Json;
+
+
+namespace HealthcareMonitoring.Client.Components;
+
+public partial class ViewPrescriptionDialog
+{
+    private readonly List<int> PageItemsSource = new() { 20, 40, 80 };
+    [Inject]
+    [NotNull]
+    private IHttpClientFactory? HttpClientFactory { get; set; }
+
+
+    private IList<Prescription>? prescriptions;
+    private Prescription newPrescription = new Prescription();
+    private const string Url = "api/Prescriptions/Patient";
+
+    [Parameter]
+    [NotNull]
+    public Patient? Value { get; set; }
+
+    [Inject]
+    [NotNull]
+    private DialogService? DialogService { get; set; }
+    [CascadingParameter]
+    [NotNull]
+    private Func<Task>? OnCloseAsync { get; set; }
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    /// <returns></returns>
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        await base.OnInitializedAsync();
+        var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
+        prescriptions = await client.GetFromJsonAsync<IList<HealthcareMonitoring.Shared.Domain.Prescription>?>($"{Url}/{Value.Id}");
+        
+
+    }
+    private async Task<QueryData<HealthcareMonitoring.Shared.Domain.Prescription>> OnQueryAsync(QueryPageOptions options)
+    {
+        var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
+        prescriptions = await client.GetFromJsonAsync<IList<HealthcareMonitoring.Shared.Domain.Prescription>?>($"{Url}/{Value.Id}");
+        
+
+        return new QueryData<HealthcareMonitoring.Shared.Domain.Prescription>()
+        {
+            Items = prescriptions,
+            TotalCount = prescriptions.Count,
+            IsSorted = true,
+            IsFiltered = true,
+            IsSearch = true
+        };
+    }
+    private async Task OnClickEditPrescriptionButton(HealthcareMonitoring.Shared.Domain.Prescription item)
+    {
+        await DialogService.ShowSaveDialog<EditPrescriptionDialog>(" View Prescription Dialog", parametersFactory: dict =>
+        {
+            dict.Add("Value", item);
+        }, configureOption: options =>
+        {
+            options.ShowFooter = false;
+        });
+
+        // Trigger a UI update to refresh the table
+        StateHasChanged();
+
+    }
+    
+    private async Task OnClickDeletePrescriptionButton(HealthcareMonitoring.Shared.Domain.Prescription item)
+    {
+        await DialogService.ShowSaveDialog<DeletePrescriptionDialog>(" View Prescription Dialog", parametersFactory: dict =>
+        {
+            dict.Add("Value", item);
+        }, configureOption: options =>
+        {
+            options.ShowFooter = false;
+        });
+        if (prescriptions != null)
+        {
+            prescriptions.Remove(item);
+        }
+
+        // Trigger a UI update to refresh the table
+        StateHasChanged();
+    }
+    
+    }
+
+
+

@@ -97,3 +97,17 @@ body {
         font-size: 1.2em;
     }
 }
+.icon-text-container {
+    display: flex;
+    align-items: center; /* Align items vertically in the container */
+}
+
+.icon-image {
+    width: 24px; /* Adjust the width of the icon as needed */
+    height: 24px; /* Adjust the height of the icon as needed */
+    margin-right: 8px; /* Add spacing between the icon and text */
+}
+
+.text {
+    font-size: 16px; /* Adjust the font size as needed */
+}

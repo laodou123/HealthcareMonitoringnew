@@ -4,6 +4,7 @@
 @inject NavigationManager _navManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @using Microsoft.AspNetCore.Components.Authorization
+
 @attribute [Authorize]
 
 <head>
@@ -27,10 +28,11 @@
             <div class="form-group">
                 <label for="appointmentType">Select Appointment Type:</label>
                 <select id="appointmentType" @onchange="HandleAppointmentTypeChange" class="form-control">
-                    <option value="General">General</option>
+                    
                     <option value="Cardiologist">Cardiologist</option>
                     <option value="Pulmonologist">Pulmonologist</option>
                     <option value="Orthopedist">Orthopedist</option>
+                    <option value="General">General</option>
                 </select>
             </div>
             @if (selectedAppointmentType != null)
@@ -56,7 +58,7 @@
                 <ValidationMessage For="@(() => app.Reason)" />
             </div>
 
-            <Button ButtonType="ButtonType.Submit" class="btn btn-primary btn-block">
+            <Button ButtonType="BootstrapBlazor.Components.ButtonType.Submit" class="btn btn-primary btn-block" disabled="@IsSubmitDisabled">
                 Book Appointment
             </Button>
         </fieldset>
@@ -73,7 +75,7 @@
     private string selectedDoctorLoc = "Null";
     private string selectedDoctorId = "0"; // Initialize to an invalid value
     private List<Doctor>? filteredDoctors;
-    private bool IsSubmitDisabled => filteredDoctors.Count == 0;
+    private bool IsSubmitDisabled ;
     Doctor selctedDoc = new Doctor();
     private int id;
     private DateTime date;
@@ -116,6 +118,11 @@
 
         // Populate filteredDoctors based on the selected appointment type
         filteredDoctors = doctors.Where(d => d.DoctorSpecialization == selectedAppointmentType).ToList();
+        if (filteredDoctors?.Count < 0)
+        {
+            IsSubmitDisabled = true;
+        }
+
 
 
 
@@ -126,7 +133,8 @@
         selectedDoctorId = a.Value.ToString();
         System.Console.WriteLine($"selected doc id : {selectedDoctorId}");
         int result = Int32.Parse(selectedDoctorId);
-        selctedDoc = doctors.ElementAt(result);
+        System.Console.WriteLine($"selected doc  : {doctors.Count()}");
+        selctedDoc = doctors.ElementAt(result-1);
         app.Location = selctedDoc.DoctorLocation;
         System.Console.WriteLine($"doc loc: {app.Location}");
         app.DoctorId = result;
@@ -138,11 +146,10 @@
         DateTime dateTime = DateTime.ParseExact(datentime, "yyyy-MM-ddTHH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
         date = dateTime.Date;
         time = dateTime.TimeOfDay;
-        app.Date = date;
-        app.TimeStart = time;
         TimeSpan oneHour = TimeSpan.FromHours(1);
         TimeSpan endTime = time.Add(oneHour);
-        app.TimeEnd = endTime;
+        app.End = date + endTime;
+        app.Start = date + time;
 
 
     }

@@ -41,9 +41,24 @@ namespace HealthcareMonitoring.Server.Controllers
 
             return Ok(Appointment);
         }
-        // PUT: api/Appointments/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+		// GET: api/Appointments/Patient/1
+		[HttpGet("Patient/{id}")]
+		public async Task<IActionResult> GetPatientPrescriptions(int id)
+		{
+			List<Appointment> patprescription = new List<Appointment>();
+			var appointments = await _unitOfWork.Appointments.GetAll();
+			foreach (var app in appointments)
+			{
+				if (app.PatientId == id)
+				{
+					patprescription.Add(app);
+				}
+			}
+			return Ok(patprescription);
+		}
+		// PUT: api/Appointments/5
+		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+		[HttpPut("{id}")]
         public async Task<IActionResult> PutAppointment(int id, Appointment Appointment)
         {
             if (id != Appointment.Id)
