@@ -78,6 +78,10 @@ public partial class ViewPrescriptionDialog
         await DialogService.ShowSaveDialog<DeletePrescriptionDialog>(" Delete Prescription Dialog", parametersFactory: dict =>
         {
             dict.Add("Value", item);
+            dict.Add("OnValueChanged", new Func<Task>(async () =>
+            {
+                await _tablePrescription.QueryAsync();
+            }));
         }, configureOption: options =>
         {
             options.ShowFooter = false;
