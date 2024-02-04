@@ -36,8 +36,6 @@ public partial class ReportDialog
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-		_items = typeof(MedicalType).ToSelectList();
-		_report ??= new() { Id = _report.Id, MedicalType = MedicalType.General.ToString() };
 
 		//从数据库中读取 Doctor Profile
 		var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");

@@ -13,7 +13,12 @@
 	<div class="chat-header">
 		<h3>Chat with Doctor</h3>
 		<div class="doctor-info">Doctor: @doctor?.DoctorName</div>
-	</div>
+		<div> PhoneNumber: @doctor?.DoctorPhoneNumber</div>
+</div>
+</div>
+
+
+
 	@foreach (var chatItem in ChatItems)
 	{
 		<div class="@($"chat-item {(chatItem.SendId == CurrentUserId ? "current-user" : string.Empty)}")">
@@ -27,7 +32,6 @@
 		<textarea class="message-input" @bind="NewMessage"></textarea>
 		<button class="send-button" @onclick="SendMessage">Send</button>
 	</div>
-</div>
 @code {
 	private HealthcareMonitoring.Shared.Domain.Doctor? _doctor;
 	private const string Url = "api/Doctors";
