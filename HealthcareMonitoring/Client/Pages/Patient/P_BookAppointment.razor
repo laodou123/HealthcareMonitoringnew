@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="css/PatientProfile.css">
 
 </head>
+
 <div class="form-wrapper">
-    <h3>Book Your Appointment</h3>
+    <h3 style="color:#D2691E">Book Your Appointment</h3>
     <EditForm Model="@app" OnValidSubmit="CreateAppointment">
         <DataAnnotationsValidator />
         <ValidationSummary />
@@ -28,11 +29,12 @@
             <div class="form-group">
                 <label for="appointmentType">Select Appointment Type:</label>
                 <select id="appointmentType" @onchange="HandleAppointmentTypeChange" class="form-control">
-                    
+                    <option value="">-- Select Appointment Type --</option>
+                    <option value="General">General</option>
                     <option value="Cardiologist">Cardiologist</option>
                     <option value="Pulmonologist">Pulmonologist</option>
                     <option value="Orthopedist">Orthopedist</option>
-                    <option value="General">General</option>
+
                 </select>
             </div>
             @if (selectedAppointmentType != null)
@@ -52,6 +54,26 @@
                     <ValidationMessage For="@(() => app.DoctorId)" />
                 </div>
             }
+            @if (selectedDoc != null)
+            {
+                <div class="card" style="@(isCardFlipped ? "transform: rotateY(180deg);" : "")" @onclick="ToggleCard">
+                    <div class="card-side card-front">
+                        <p style="color:#505050">Doctor's Information:</p>
+                        <p style="color:#505050">Email: @selectedDoc.Email</p>
+                        <p style="color:#505050">Phone Number: @selectedDoc.DoctorPhoneNumber</p>
+                        <p style="color:#505050">Years of Experience: @selectedDoc.DoctorExperience</p>
+                    </div>
+                    
+                    <div class="card-side card-back">
+                        <p style="color:#505050">Introduction:</p>
+                        <p style="color:#505050">@selectedDoc.DoctorIntroduction</p>
+                    </div>
+                </div>
+                <br />
+            }
+
+
+
             <div class="form-group">
                 <label>Reason: </label>
                 <InputText @bind-Value="app.Reason" class="form-control" />
@@ -66,6 +88,7 @@
 </div>
 
 
+
 @code {
     public bool Disabled { get; set; } = false;
     Appointment app = new Appointment();
@@ -75,18 +98,19 @@
     private string selectedDoctorLoc = "Null";
     private string selectedDoctorId = "0"; // Initialize to an invalid value
     private List<Doctor>? filteredDoctors;
-    private bool IsSubmitDisabled ;
-    Doctor selctedDoc = new Doctor();
+    private bool IsSubmitDisabled;
+    Doctor selectedDoc = new Doctor();
     private int id;
     private DateTime date;
     private TimeSpan time;
+    private bool isCardFlipped = false;
 
     protected async override Task OnInitializedAsync()
     {
         doctors = await _client.GetFromJsonAsync<IList<Doctor>>($"{Endpoints.Doctors}");
         patients = await _client.GetFromJsonAsync<IList<Patient>>($"{Endpoints.Patients}");
         var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var userName = state.User?.Identity?.Name; 
+        var userName = state.User?.Identity?.Name;
         System.Console.WriteLine($"User Name: {userName}");
         if (patients != null)
         {
@@ -101,13 +125,14 @@
                 }
             }
         }
+
     }
 
     private async Task CreateAppointment()
     {
 
         await _client.PostAsJsonAsync(Endpoints.Appointments, app);
-        _navManager.NavigateTo("/patient/homepage");
+        _navManager.NavigateTo("/patient/viewappointment");
     }
     private void HandleAppointmentTypeChange(ChangeEventArgs e)
     {
@@ -117,7 +142,7 @@
         System.Console.WriteLine($"app type: {selectedAppointmentType}");
 
         // Populate filteredDoctors based on the selected appointment type
-        filteredDoctors = doctors.Where(d => d.DoctorSpecialization == selectedAppointmentType).ToList();
+        filteredDoctors = doctors.Where(d => d.DoctorSpecialization.Contains(selectedAppointmentType)).ToList();
         if (filteredDoctors?.Count < 0)
         {
             IsSubmitDisabled = true;
@@ -134,10 +159,11 @@
         System.Console.WriteLine($"selected doc id : {selectedDoctorId}");
         int result = Int32.Parse(selectedDoctorId);
         System.Console.WriteLine($"selected doc  : {doctors.Count()}");
-        selctedDoc = doctors.ElementAt(result-1);
-        app.Location = selctedDoc.DoctorLocation;
+        selectedDoc = doctors.ElementAt(result - 1);
+        app.Location = selectedDoc.DoctorLocation;
         System.Console.WriteLine($"doc loc: {app.Location}");
         app.DoctorId = result;
+
 
     }
     private void dateandtime(ChangeEventArgs b)
@@ -153,6 +179,9 @@
 
 
     }
-
+    private void ToggleCard()
+    {
+        isCardFlipped = !isCardFlipped;
+    }
 
 }

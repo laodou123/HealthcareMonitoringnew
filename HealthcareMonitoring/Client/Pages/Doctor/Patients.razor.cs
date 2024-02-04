@@ -96,4 +96,15 @@ public partial class Patients
             options.ShowFooter = false;
         });
     }
+    private async Task OnClickViewMedRDailyButton(HealthcareMonitoring.Shared.Domain.Patient item)
+    {
+        await DialogService.ShowSaveDialog<ViewMedRDailyDialog>(" View Daily status Dialog", parametersFactory: dict =>
+        {
+            dict.Add("Value", item);
+        }, configureOption: options =>
+        {
+            options.ShowFooter = false;
+        });
+    }
+    
 }

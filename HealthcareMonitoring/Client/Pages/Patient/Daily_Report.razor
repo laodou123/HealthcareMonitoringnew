@@ -55,6 +55,7 @@
     private IList<Patient>? patients;
     private async Task CreateDailyReport()
     {
+        System.Console.WriteLine($"Pat id: {med.PatientId}");
         await _client.PostAsJsonAsync(Endpoints.MedRDailies, med);
         _navManager.NavigateTo("/patient/homepage");
     }

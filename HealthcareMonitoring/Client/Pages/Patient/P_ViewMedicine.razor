@@ -4,7 +4,7 @@
 @inject NavigationManager _navManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @using Microsoft.AspNetCore.Components.Authorization
-<h5 class="card-title">Prescription</h5>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,22 +12,31 @@
 
 </head>
 <div class="cards-container">
-@foreach (var prescription in Patprescriptions)
-{
+    @if (Patprescriptions.Any())
+    {
+        
+        @foreach (var prescription in Patprescriptions)
+        {
 
-    <div class="medicine-card">
-            <!-- Display Prescription Data -->
+            <div class="medicine-card">
+                <!-- Display Prescription Data -->
 
-        <p class="medicine-name">Medicine Name: @prescription.MedicineName</p>
-        <p class="medicine-quantity">Medicine Quantity: @prescription.MedicineQuantity</p>
-        <p class="medicine-description">Medicine Description: @prescription.MedicineDescription</p>
-        <p class="medicine-usage">Medicine Usage: @prescription.MedicineUsage</p>
-        <p class="medicine-prescription-doctor">Prescription Doctor: @prescription.MedicinePrescriptionDoctor</p>
-    </div>
+                <p class="medicine-name">Medicine Name: @prescription.MedicineName</p>
+                <p class="medicine-quantity">Medicine Quantity: @prescription.MedicineQuantity</p>
+                <p class="medicine-description">Medicine Description: @prescription.MedicineDescription</p>
+                <p class="medicine-usage">Medicine Usage: @prescription.MedicineUsage</p>
+                <p class="medicine-prescription-doctor">Prescription Doctor: @prescription.MedicinePrescriptionDoctor</p>
+            </div>
 
-    <br />
+            <br />
 
-}
+        }
+    }
+    else
+    {
+        <h3>You have no prescriptions.</h3>
+    }
+
 </div>
 
 @code {

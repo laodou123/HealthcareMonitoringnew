@@ -31,12 +31,15 @@ public partial class DeletePrescriptionDialog
     [Inject]
     [NotNull]
     private ToastService? ToastService { get; set; }
+
+    [Parameter]
+    public Func<Task>? OnValueChanged { get; set; }
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
     /// <returns></returns>
 
-   
+
     private async Task OnSubmit(EditContext context)
     {
         var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
@@ -45,7 +48,12 @@ public partial class DeletePrescriptionDialog
         {
             await OnCloseAsync();
             await ToastService.Success("deleted Prescription", "deleted prescription successful");
+            if (OnValueChanged != null)
+            {
+                await OnValueChanged();
+            }
         }
+
 
     }
 

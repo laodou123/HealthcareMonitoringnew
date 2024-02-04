@@ -26,9 +26,7 @@ public partial class ViewPrescriptionDialog
     [Inject]
     [NotNull]
     private DialogService? DialogService { get; set; }
-    [CascadingParameter]
-    [NotNull]
-    private Func<Task>? OnCloseAsync { get; set; }
+
 
     private Table<Prescription> _tablePrescription = default!;
     /// <summary>
@@ -77,21 +75,18 @@ public partial class ViewPrescriptionDialog
 
     private async Task OnClickDeletePrescriptionButton(HealthcareMonitoring.Shared.Domain.Prescription item)
     {
-        await DialogService.ShowSaveDialog<DeletePrescriptionDialog>(" View Prescription Dialog", parametersFactory: dict =>
+        await DialogService.ShowSaveDialog<DeletePrescriptionDialog>(" Delete Prescription Dialog", parametersFactory: dict =>
         {
             dict.Add("Value", item);
+            dict.Add("OnValueChanged", new Func<Task>(async () =>
+            {
+                await _tablePrescription.QueryAsync();
+            }));
         }, configureOption: options =>
         {
             options.ShowFooter = false;
         });
-        if (prescriptions != null)
-        {
-            prescriptions.Remove(item);
 
-        }
-
-        // Trigger a UI update to refresh the table
-        StateHasChanged();
     }
 
 }

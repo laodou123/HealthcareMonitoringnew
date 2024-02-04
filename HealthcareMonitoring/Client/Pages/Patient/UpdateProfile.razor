@@ -100,6 +100,12 @@
     }
     async Task CreatePatient()
     {
+        var today = DateTime.Today;
+
+        var a = (today.Year * 100 + today.Month) * 100 + today.Day;
+        var b = (patient.DOB.Value.Year * 100 + patient.DOB.Value.Month) * 100 + patient.DOB.Value.Day;
+
+        patient.Age = (a - b )/ 10000;
         await _client.PutAsJsonAsync($"{Endpoints.Patients}/{id}", patient);
         _navManager.NavigateTo("/patient/homepage");
 

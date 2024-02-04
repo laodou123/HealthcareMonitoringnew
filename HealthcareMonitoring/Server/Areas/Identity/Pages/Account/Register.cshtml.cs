@@ -187,7 +187,7 @@ namespace HealthcareMonitoring.Server.Areas.Identity.Pages.Account
                         }
                         else if (Input.UserRole == "Patient")
                         {
-                            return LocalRedirect("~/patient/homepage");
+                            return LocalRedirect("~/patient/profile");
                         }
                         else if (Input.UserRole == "Doctor")
                         {
