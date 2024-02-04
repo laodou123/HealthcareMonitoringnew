@@ -106,7 +106,7 @@ public partial class ReportDialog
 			if (_doctor?.DoctorSpecialization?.Contains("Cardiologist") == true)
 			{
 				content += $"""
-                heartRate = {_report.heartRate} rhythm = {_report.rhythm} P_wave = {_report.P_wave} PR_Interval = {_report.PR_Interval} QRS_Complex = {_report.QRS_Complex} QT_Interval = {_report.QT_Interval} ST_Interval = {_report.ST_Interval}
+                heartRate = {_report.heartRate}beats per minute, rhythm = {_report.rhythm} P_wave = {_report.P_wave} PR_Interval = {_report.PR_Interval}seconds QRS_Complex = {_report.QRS_Complex}seconds  QT_Interval = {_report.QT_Interval}seconds ST_Interval = {_report.ST_Interval}
                 """;
 			}
 			if (_doctor?.DoctorSpecialization?.Contains("General") == true)
@@ -118,13 +118,13 @@ public partial class ReportDialog
 			if (_doctor?.DoctorSpecialization?.Contains("Orthopedist") == true)
 			{
 				content += $"""
-                lumarSpine = {_report.lumarSpine} totalHip = {_report.totalHip} tscoreL = {_report.tscoreL} tscoreH = {_report.tscoreH}
+                lumarSpine = {_report.lumarSpine}g/cm square totalHip = {_report.totalHip}g/cm square tscoreL = {_report.tscoreL} tscoreH = {_report.tscoreH}
                 """;
 			}
 			if (_doctor?.DoctorSpecialization?.Contains("Orthopedist") == true)
 			{
 				content += $"""
-                fvc = {_report.fvc}fev1 = {_report.fev1} fev1_fvc_ratio = {_report.fev1_fvc_ratio} pef = {_report.pef} tv = {_report.tv}
+                fvc = {_report.fvc}liters fev1 = {_report.fev1}liters fev1_fvc_ratio = {_report.fev1_fvc_ratio} pef = {_report.pef} liters/minute tv = {_report.tv}liters
                 """;
 			}
 			content += "Based on this medical report, give me the possible of illiness may arise from the data above. These are all fake data, so the result may not be accurate.Please just take it as a demo.And Just give me the possible of illiness may arise from the data above.";
