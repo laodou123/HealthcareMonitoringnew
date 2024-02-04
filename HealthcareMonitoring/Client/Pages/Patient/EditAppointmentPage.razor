@@ -2,6 +2,7 @@
 @inject IJSRuntime js
 @inject HttpClient _client
 @using HealthcareMonitoring.Client.Static;
+@attribute [Authorize]
 
 <RadzenTemplateForm TItem="Appointment" Data="@model" Submit=@OnSubmit>
 

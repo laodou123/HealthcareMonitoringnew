@@ -4,7 +4,6 @@
 @inject NavigationManager _navManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @using Microsoft.AspNetCore.Components.Authorization
-
 @attribute [Authorize]
 
 <head>
@@ -118,6 +117,7 @@
             {
                 System.Console.WriteLine($"Pat id: {pat.Id}");
                 System.Console.WriteLine($"Pat Userid: {pat.UserId}");
+                System.Console.WriteLine($"Pat Userid: {pat.Email}");
                 if (pat.Email == userName)
                 {
                     app.PatientId = pat.Id;

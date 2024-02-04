@@ -49,7 +49,8 @@ public partial class ReportDialog
 		if (doctors != null)
 		{
 			_doctor = doctors.FirstOrDefault(i => i.Email == userName);
-		}
+            System.Console.WriteLine($"doc type: {_doctor.DoctorSpecialization}");
+        }
 
 
 
@@ -61,11 +62,12 @@ public partial class ReportDialog
 		{
 			_report = new HealthcareMonitoring.Shared.Domain.MedicalReport
 			{
-				MedicalType = " ",
+				
 				P_wave = " ",
 				rhythm = " ",
-				T_Wave = " "
-			};
+				T_Wave = " ",
+                MedicalType = _doctor.DoctorSpecialization
+            };
 			var result = await client.PostAsJsonAsync("api/MedicalReports", _report);
 			if (result.IsSuccessStatusCode)
 			{

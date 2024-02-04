@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthcareMonitoring.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240204041312_new")]
+    [Migration("20240204082318_new")]
     partial class @new
     {
         /// <inheritdoc />
@@ -242,7 +242,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2a19b56b-baf4-4e56-a998-189cdd08f3de",
+                            ConcurrencyStamp = "7a872598-56d2-46fe-beac-8eb519e94380",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -250,9 +250,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDkK7kiykEBKdmIbsSU3kJqkCln6BYzQGFUMs0cUQseLGZ9D5+tD8Fh4Kto6HNBNPA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAJBdELXfwvcqcSaeAjAq4M67qgEO4+m2+DuV1kXt63st4YjQORArccagmJmxfAEAg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d22d334d-c57d-488b-bb02-b7a0a91d5aad",
+                            SecurityStamp = "8b4180bf-e91d-4955-aeba-f2e2a74903ce",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -260,7 +260,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "693e710c-008f-435b-a997-77f10812374d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c15be589-e597-46e7-bdc0-2d260e117cd4",
+                            ConcurrencyStamp = "48963c47-a0ac-4170-adb1-dcfecdcbb20a",
                             Email = "13858860788a@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Hu",
@@ -268,9 +268,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "13858860788A@GMAIL.COM",
                             NormalizedUserName = "13858860788A@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHNVTOtDAHv7qh02WMbV0YrjCv8Cxam40HqzTVYmL/rIDd9RemUI+vyupwD91qY6ZQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBZKxkPLsKfAYQwKbwbst4e4/D8DI57ZEcoqxvPY/zCf1LwIv8DPMcK1Vh5wdr4+Hw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "630f69c7-e715-4954-92f8-4450e6dda818",
+                            SecurityStamp = "0886a94b-5a1b-4f38-bbf9-70cfe7b1483b",
                             TwoFactorEnabled = false,
                             UserName = "13858860788a@gmail.com"
                         },
@@ -278,7 +278,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "8607cd47-e3bc-4a1b-96f9-e83d9e4ab0e3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b9043f2b-d8c1-41f9-8126-9765be8849f5",
+                            ConcurrencyStamp = "e1259ab7-663f-4309-aa98-38d49fbce63f",
                             Email = "pat@pat.com",
                             EmailConfirmed = false,
                             FirstName = "jiawei",
@@ -286,9 +286,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PAT@PAT.COM",
                             NormalizedUserName = "PAT@PAT.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIi/jS8yamqw3wps0s9WKIrjyGrlH3GdZfLiVvHWuG3P5zvSo9UKPB7CwgfTYx9X4g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOh8cyFuKT39pyhBxeeHsSyiQQ5ny1md4niMTEPGvkASax9dhc/a9lExTCIR6jgz8Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "704ad451-5457-4ce1-b019-4bf0f07c8905",
+                            SecurityStamp = "054b0052-66bb-4fc2-9fe8-00bc67e199ea",
                             TwoFactorEnabled = false,
                             UserName = "pat@pat.com"
                         });
@@ -910,7 +910,7 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = 1,
                             Address = "singapore",
                             AllergyDes = "seafood",
-                            DOB = new DateTime(2024, 2, 4, 12, 13, 12, 516, DateTimeKind.Local).AddTicks(1449),
+                            DOB = new DateTime(2024, 2, 4, 16, 23, 17, 876, DateTimeKind.Local).AddTicks(1872),
                             Email = "pat@pat.com",
                             Gender = "Male",
                             LastName = "Tan",

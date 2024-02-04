@@ -1,4 +1,8 @@
 ﻿@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Components.Authorization
+@using HealthcareMonitoring.Client.Static
+@inject HttpClient _client;
 <header class="foxapp-header">
     <nav class="navbar navbar-expand-lg navbar-light" id="foxapp_menu">
         <div class="container">
@@ -24,7 +28,7 @@
                     <AuthorizeView>
                         <Authorized>
                             <div class="nav-item">
-                                <NavLink class="nav-link" href="@GetUrl()" Match="NavLinkMatch.All">
+                                <NavLink class="nav-link" href=@GetUrl Match="NavLinkMatch.All">
                                     <span class="oi oi-person" aria-hidden="true"></span> @context.User.Identity?.Name!
                                 </NavLink>
                             </div>
@@ -55,6 +59,10 @@
 </header>
 
 @code {
+    private IList<Doctor>? doctors;
+    private IList<Patient>? patients;
+    private string? GetUrl = null;
+
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
@@ -68,5 +76,31 @@
         Navigation.NavigateToLogout("authentication/logout", "/");
     }
 
-    private string GetUrl() => "/doctor";
+    protected async override Task OnInitializedAsync()
+    {
+        
+        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userName = state.User?.Identity?.Name;
+
+        System.Console.WriteLine($"User Name: {userName}");
+        if (userName != null)
+        {
+            doctors = await _client.GetFromJsonAsync<IList<Doctor>>($"{Endpoints.Doctors}");
+            patients = await _client.GetFromJsonAsync<IList<Patient>>($"{Endpoints.Patients}");
+            foreach (var pat in patients)
+            {
+                if (pat.Email == userName)
+                {
+                    GetUrl = "/patient/homepage";
+                }
+            }
+            foreach(var doc in doctors)
+            {
+                if(doc.Email == userName)
+                {
+                    GetUrl = "/doctor";
+                }
+            }
+        }
+    }
 }
