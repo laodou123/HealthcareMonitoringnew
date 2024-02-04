@@ -34,7 +34,7 @@ namespace HealthcareMonitoring.Server.Controllers
             var prescriptions = await _unitOfWork.Prescriptions.GetAll();
             foreach (var prescription in prescriptions)
             {
-                if(prescription.PatId == id)
+                if(prescription.PatientId == id)
                 {
                     patprescription.Add(prescription);
                 }

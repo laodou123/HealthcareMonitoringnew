@@ -22,7 +22,7 @@ namespace HealthcareMonitoring.Shared.Domain
 
         public virtual Patient? Patient { get; set; }
 
-        public int? PatId { get; set; }
+        public int? PatientId { get; set; }
 
 
         

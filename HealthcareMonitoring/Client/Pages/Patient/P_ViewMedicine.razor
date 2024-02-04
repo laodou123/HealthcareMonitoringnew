@@ -43,7 +43,7 @@
 @code {
     private IList<Prescription>? prescriptions;
     private IList<Patient>? patients;
-    private int patId;
+    private int patientId;
     private List<Prescription>? Patprescriptions = new List<Prescription>();
 
     protected async override Task OnInitializedAsync()
@@ -61,7 +61,7 @@
 
                 if (pat.Email == userName)
                 {
-                    patId = pat.Id;
+                    patientId = pat.Id;
                     System.Console.WriteLine($"Pat id: {pat.Id}");
                 }
             }
@@ -70,7 +70,7 @@
         {
             foreach(var pre in prescriptions)
             {
-                if(pre.PatId == patId)
+                if(pre.PatientId == patientId)
                 {
                     Patprescriptions.Add(pre);
                 }

@@ -7,7 +7,7 @@
 @inject NavigationManager NavigationManager
 @inject MessageService MessageService
 
-@layout EmptyLayout
+
 
 <div class="right-column">
 	<div class="chat-header">
@@ -32,6 +32,7 @@
 		<textarea class="message-input" @bind="NewMessage"></textarea>
 		<button class="send-button" @onclick="SendMessage">Send</button>
 	</div>
+
 @code {
 	private HealthcareMonitoring.Shared.Domain.Doctor? _doctor;
 	private const string Url = "api/Doctors";
@@ -109,14 +110,7 @@
 	public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
 }
 <style>
-	.right-column {
-		flex-grow: 1;
-		display: flex;
-		flex-direction: column;
-		background-color: #f7f7f7;
-		padding: 20px;
-		height: 100vh;
-	}
+
 
 	.chat-header {
 		background-color: #007bff;
@@ -131,17 +125,56 @@
 		opacity: 0.85;
 	}
 
+
+	.container {
+		display: flex;
+		height: calc(100vh - 20px);
+	}
+
+	.left-column {
+		flex: 0 0 200px;
+		background-color: #f7f7f7;
+		overflow-y: auto;
+		padding: 10px;
+	}
+
+	.list-group-item {
+		border: 1px solid #ddd;
+		margin-bottom: -1px;
+		background-color: #fff;
+		color: #555;
+	}
+
+		.list-group-item.active {
+			background-color: #007bff;
+			border-color: #007bff;
+		}
+
+	.right-column {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		background-color: #eee;
+		padding: 10px;
+	}
+
+	.chat-window {
+		overflow-y: auto;
+		flex-grow: 1;
+	}
+
 	.chat-item {
 		margin-bottom: 10px;
 		padding: 10px;
 		border-radius: 8px;
-		background-color: #e9ecef;
-		border: 1px solid #dee2e6;
+		background-color: #fff;
+		color: #000000;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 	}
 
 	.current-user {
 		align-self: flex-end;
-		background-color: #d1e7dd;
+		background-color: #dcf8c6;
 	}
 
 	.sender-name {
@@ -154,35 +187,34 @@
 
 	.chat-timestamp {
 		text-align: right;
-		font-size: 0.85rem;
-		color: #6c757d;
-		margin-top: 5px;
+		font-size: smaller;
 	}
 
 	.message-input-area {
 		margin-top: auto;
 		display: flex;
-		padding: 10px 0;
+		padding: 10px;
+		border-top: 2px solid #ccc;
 	}
 
 	.message-input {
 		flex-grow: 1;
 		margin-right: 10px;
 		padding: 10px;
-		border: 1px solid #ced4da;
-		border-radius: 0.25rem;
+		border: 2px solid #ccc;
+		border-radius: 4px;
+		resize: none;
 	}
 
 	.send-button {
-		padding: 10px 15px;
-		background-color: #0d6efd;
-		color: white;
+		padding: 10px 20px;
+		background-color: #007bff;
 		border: none;
-		border-radius: 0.25rem;
+		border-radius: 4px;
 		cursor: pointer;
 	}
 
 		.send-button:hover {
-			background-color: #0b5ed7;
+			background-color: #0056b3;
 		}
 </style>

@@ -36,7 +36,7 @@ else
     private IList<Patient>? patients;
     private IList<Appointment>? appointments;
     private IList<Doctor>? doctors;
-    private int patid;
+    private int patientId;
 
     private int appId;
     private string docName;
@@ -61,12 +61,12 @@ else
                 System.Console.WriteLine($"Pat Userid: {pat.UserId}");
                 if (pat.Email == userName)
                 {
-                    patid = pat.Id;
+                    patientId = pat.Id;
                     System.Console.WriteLine($"Pat id: {pat.Id}");
                 }
             }
         }
-        appointments = await _client.GetFromJsonAsync<IList<Appointment>>($"{Endpoints.Appointments}/Patient/{patid}");
+        appointments = await _client.GetFromJsonAsync<IList<Appointment>>($"{Endpoints.Appointments}/Patient/{patientId}");
 
     }
 

@@ -6,6 +6,8 @@ public class Patient : BaseDomainModel
 
     public int? ReportId { get; set; }
 
+    public int? PrescriptionId { get; set; }
+
     public string? NRIC { get; set; }
 
     public string? Gender { get; set; }

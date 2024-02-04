@@ -71,7 +71,7 @@ public partial class PrescriptionDialog
             foreach (var prescription in prescriptions)
             {
                 prescription.MedicinePrescriptionDoctor = docName;
-                prescription.PatId = Value.Id;
+                prescription.PatientId = Value.Id;
                 var result = await client.PostAsJsonAsync("api/Prescriptions", prescription);
                 if (result.IsSuccessStatusCode)
                 {

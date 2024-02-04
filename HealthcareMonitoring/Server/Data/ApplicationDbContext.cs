@@ -27,7 +27,6 @@ namespace HealthcareMonitoring.Server.Data
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new DoctorSeedConfiguration());
             builder.ApplyConfiguration(new MedRDailySeedConfiguration());
-            builder.ApplyConfiguration(new PrescriptionSeedConfiguration());
             builder.ApplyConfiguration(new MedicalReportSeedConfiguration());
             builder.ApplyConfiguration(new PatientSeedConfiguration());
             builder.ApplyConfiguration(new UserSeedConfiguration());

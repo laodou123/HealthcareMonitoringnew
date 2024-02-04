@@ -239,7 +239,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7a872598-56d2-46fe-beac-8eb519e94380",
+                            ConcurrencyStamp = "1a3019b9-e7e2-46d2-b0e1-41752dd08869",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -247,9 +247,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAJBdELXfwvcqcSaeAjAq4M67qgEO4+m2+DuV1kXt63st4YjQORArccagmJmxfAEAg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEACx3OIfJ35YoM8uE4GowaCNyVe992ttoSqMG2OeFXYzZYo2j8ZYJSaJWtZcN7JJ+A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8b4180bf-e91d-4955-aeba-f2e2a74903ce",
+                            SecurityStamp = "73039220-9c1f-4b43-8278-f18712113cd3",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -257,7 +257,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "693e710c-008f-435b-a997-77f10812374d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "48963c47-a0ac-4170-adb1-dcfecdcbb20a",
+                            ConcurrencyStamp = "cf526814-c5f8-4611-b0a8-86ccfae0889a",
                             Email = "13858860788a@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Hu",
@@ -265,9 +265,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "13858860788A@GMAIL.COM",
                             NormalizedUserName = "13858860788A@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBZKxkPLsKfAYQwKbwbst4e4/D8DI57ZEcoqxvPY/zCf1LwIv8DPMcK1Vh5wdr4+Hw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAPpP6jhFVsuisjKU/lw1ZogqWdOxROTXq/M4FcX7EPcTMRoPY91qJfjCYXYyQ3/YQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0886a94b-5a1b-4f38-bbf9-70cfe7b1483b",
+                            SecurityStamp = "a9c752e6-c659-4737-b896-3e5fd4c6ba99",
                             TwoFactorEnabled = false,
                             UserName = "13858860788a@gmail.com"
                         },
@@ -275,7 +275,7 @@ namespace HealthcareMonitoring.Server.Migrations
                         {
                             Id = "8607cd47-e3bc-4a1b-96f9-e83d9e4ab0e3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e1259ab7-663f-4309-aa98-38d49fbce63f",
+                            ConcurrencyStamp = "4f0e05b6-9cd2-41f0-b371-794568f87f63",
                             Email = "pat@pat.com",
                             EmailConfirmed = false,
                             FirstName = "jiawei",
@@ -283,9 +283,9 @@ namespace HealthcareMonitoring.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "PAT@PAT.COM",
                             NormalizedUserName = "PAT@PAT.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOh8cyFuKT39pyhBxeeHsSyiQQ5ny1md4niMTEPGvkASax9dhc/a9lExTCIR6jgz8Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIxO7nNQkhXjc7xB+8yK4G0CGD3eTlyozCkRFkbpjc3k4QbdkYkX+kNHvdsUSpN+oA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "054b0052-66bb-4fc2-9fe8-00bc67e199ea",
+                            SecurityStamp = "8b4d468d-0dcf-4ff4-bba7-e8686753ec80",
                             TwoFactorEnabled = false,
                             UserName = "pat@pat.com"
                         });
@@ -895,10 +895,6 @@ namespace HealthcareMonitoring.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PrescriptionId")
-                        .IsUnique()
-                        .HasFilter("[PrescriptionId] IS NOT NULL");
-
                     b.ToTable("Patients");
 
                     b.HasData(
@@ -907,7 +903,7 @@ namespace HealthcareMonitoring.Server.Migrations
                             Id = 1,
                             Address = "singapore",
                             AllergyDes = "seafood",
-                            DOB = new DateTime(2024, 2, 4, 16, 23, 17, 876, DateTimeKind.Local).AddTicks(1872),
+                            DOB = new DateTime(2024, 2, 4, 17, 42, 50, 787, DateTimeKind.Local).AddTicks(8391),
                             Email = "pat@pat.com",
                             Gender = "Male",
                             LastName = "Tan",
@@ -957,7 +953,10 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Property<string>("MedicineUsage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PatId")
+                    b.Property<int?>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PatientId1")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -965,59 +964,9 @@ namespace HealthcareMonitoring.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Prescriptions");
+                    b.HasIndex("PatientId1");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            MedicineDescription = "Test",
-                            MedicineName = "Test",
-                            MedicinePrescriptionDoctor = "Test",
-                            MedicineQuantity = 1,
-                            MedicineUsage = "Test",
-                            PatId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            MedicineDescription = "Test2",
-                            MedicineName = "Test2",
-                            MedicinePrescriptionDoctor = "Test2",
-                            MedicineQuantity = 2,
-                            MedicineUsage = "Tes2t",
-                            PatId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            MedicineDescription = "Test2",
-                            MedicineName = "Test2",
-                            MedicinePrescriptionDoctor = "Test2",
-                            MedicineQuantity = 2,
-                            MedicineUsage = "Tes2t",
-                            PatId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            MedicineDescription = "Test3",
-                            MedicineName = "Test3",
-                            MedicinePrescriptionDoctor = "Test3",
-                            MedicineQuantity = 2,
-                            MedicineUsage = "Test3",
-                            PatId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            MedicineDescription = "Test2",
-                            MedicineName = "Test2",
-                            MedicinePrescriptionDoctor = "Test2",
-                            MedicineQuantity = 2,
-                            MedicineUsage = "Tes2t",
-                            PatId = 2
-                        });
+                    b.ToTable("Prescriptions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1225,11 +1174,13 @@ namespace HealthcareMonitoring.Server.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Patient", b =>
+            modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Prescription", b =>
                 {
-                    b.HasOne("HealthcareMonitoring.Shared.Domain.Prescription", null)
-                        .WithOne("Patient")
-                        .HasForeignKey("HealthcareMonitoring.Shared.Domain.Patient", "PrescriptionId");
+                    b.HasOne("HealthcareMonitoring.Shared.Domain.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId1");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1281,11 +1232,6 @@ namespace HealthcareMonitoring.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("HealthcareMonitoring.Shared.Domain.Prescription", b =>
-                {
-                    b.Navigation("Patient");
                 });
 #pragma warning restore 612, 618
         }
