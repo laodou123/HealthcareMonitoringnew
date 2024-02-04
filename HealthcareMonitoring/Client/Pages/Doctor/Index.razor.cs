@@ -49,12 +49,14 @@ public partial class Index
         {
             _doctor = doctors.FirstOrDefault(i => i.Email == userName);
         }
-
-        _doctor ??= new() { Email = userName, DoctorSpecialization = DoctorSpecialization.General.ToString() };
+        else
+        {
+            _doctor = new() { Email = userName, DoctorSpecialization = DoctorSpecialization.General.ToString() };
+            ParseAvailedTime();
+            await client.PostAsJsonAsync(Url, _doctor);
+        }
         _items = typeof(DoctorSpecialization).ToSelectList();
 
-        ParseAvailedTime();
-        await client.PostAsJsonAsync(Url, _doctor);
     }
 
     void ParseAvailedTime()
