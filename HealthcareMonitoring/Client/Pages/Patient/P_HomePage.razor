@@ -118,7 +118,6 @@
     private IList<MedRDaily>? med;
     private IList<Patient>? patients;
     private List<DateTime?> dateMedR;
-    private List<MedRDaily> medTemp = new List<MedRDaily>();
     private List<MedRDaily> filteredMedRDaily = new List<MedRDaily>();
     Patient patient = new Patient();
     MedRDaily medR = new MedRDaily();
@@ -164,7 +163,6 @@
                     System.Console.WriteLine(medd.DateCreated.ToString());
                     DateTime? datetemp = medd.DateCreated;
                     dateMedR.Add(datetemp);
-                    medTemp.Add(medd);
                     
 
             }
@@ -219,13 +217,13 @@
         startDate = today.AddDays(-13); // 14 days ago
         System.Console.WriteLine($"start id: {startDate}");
         // Filter records within the date range
-        var past14DaysRecords = medTemp.Where(record => record.DateCreated.Value >= startDate && record.DateCreated.Value <= today);
+        var past14DaysRecords = med.Where(record => record.DateCreated.Value >= startDate && record.DateCreated.Value <= today);
 
         if (past14DaysRecords.Any())
         {
             filteredMedRDaily = past14DaysRecords
             .GroupBy(record => record.DateCreated.Value.Date)
-            .Select(group => group.OrderByDescending(record => record.DateCreated.Value.Date).First())
+            .Select(group => group.OrderByDescending(record => record.DateCreated.Value.Date).Last())
             .ToList();
         }
         else
