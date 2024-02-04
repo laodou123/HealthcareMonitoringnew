@@ -87,6 +87,7 @@ public partial class ViewPrescriptionDialog
         if (prescriptions != null)
         {
             prescriptions.Remove(item);
+
         }
 
         // Trigger a UI update to refresh the table

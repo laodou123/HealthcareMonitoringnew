@@ -56,6 +56,26 @@ namespace HealthcareMonitoring.Server.Controllers
 			}
 			return Ok(patprescription);
 		}
+
+
+		// GET: api/Appointments/Patient/1
+		[HttpGet("Doctor/{patientId}")]
+		public async Task<IActionResult> GetDoctor(int patientId)
+		{
+			var appointments = await _unitOfWork.Appointments.Get(x=>x.PatientId == patientId);
+
+            if(appointments == null)
+            {
+				return NotFound();
+			}
+
+            var doctor = await _unitOfWork.Doctors.Get(x => x.Id == appointments.DoctorId);
+
+			return Ok(doctor);
+		}
+
+
+
 		// PUT: api/Appointments/5
 		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 		[HttpPut("{id}")]

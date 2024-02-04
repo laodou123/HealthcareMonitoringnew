@@ -38,6 +38,7 @@ public partial class Patients
        
 
 		var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
 		var userName = state.User?.Identity?.Name;
 		var doctors = await client.GetFromJsonAsync<List<HealthcareMonitoring.Shared.Domain.Doctor>?>(UrlDoctor);
 		if (doctors != null)

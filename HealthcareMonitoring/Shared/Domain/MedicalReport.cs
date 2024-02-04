@@ -34,8 +34,8 @@
 }
 public enum MedicalType
 {
-    Cardiologist,
-    Pulmonologist,
-    Orthopedist,
-    General
+	Cardiologist,
+	Pulmonologist,
+	Orthopedist,
+	General
 }

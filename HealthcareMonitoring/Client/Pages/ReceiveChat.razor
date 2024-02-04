@@ -2,32 +2,42 @@
 @using Microsoft.Extensions.Localization
 @using HealthcareMonitoring.Client.Shared
 @using Microsoft.AspNetCore.SignalR.Client
-
 @inject IHttpClientFactory HttpClientFactory
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @inject MessageService MessageService
+
 @layout EmptyLayout
 
-@foreach (var chatItem in ChatItems)
-{
-	<div class="@($"chat-item {(chatItem.UserId == CurrentUserId ? "current-user" : string.Empty)}")">
-		<div>send: @chatItem.SendId user:@chatItem.UserId</div>
-		@CurrentUserId
-		<div class="chat-content">@chatItem.Content</div>
-		<div class="chat-timestamp">@chatItem.CreatedTime.ToString("g")</div>
+<div class="right-column">
+	<div class="chat-header">
+		<h3>Chat with Doctor</h3>
+		<div class="doctor-info">Doctor: @doctor?.DoctorName</div>
 	</div>
-}
+	@foreach (var chatItem in ChatItems)
+	{
+		<div class="@($"chat-item {(chatItem.SendId == CurrentUserId ? "current-user" : string.Empty)}")">
+			<div class="sender-name">@chatItem.SendName</div>
+			<div class="chat-content">@chatItem.Content</div>
+			<div class="chat-timestamp">@chatItem.CreatedTime.ToString("g")</div>
+		</div>
+	}
 
-<div class="message-input-area">
-	<textarea class="message-input" @bind="NewMessage"></textarea>
-	<button class="send-button" @onclick="SendMessage">Send</button>
+	<div class="message-input-area">
+		<textarea class="message-input" @bind="NewMessage"></textarea>
+		<button class="send-button" @onclick="SendMessage">Send</button>
+	</div>
 </div>
 @code {
+	private HealthcareMonitoring.Shared.Domain.Doctor? _doctor;
+	private const string Url = "api/Doctors";
+	private const string Urlpat = "api/Patients";
+	private const string Urlappo = "api/Appointments";
 	private List<ChatItem> ChatItems { get; set; } = new List<ChatItem>();
 	private int CurrentUserId = 1;
-
+	private HealthcareMonitoring.Shared.Domain.Appointment _appointment;
 	private string NewMessage { get; set; } = string.Empty;
+	private HealthcareMonitoring.Shared.Domain.Doctor doctor;
 	private HubConnection hubConnection;
 	public class ChatItem
 	{
@@ -43,15 +53,29 @@
 		hubConnection = new HubConnectionBuilder()
 			.WithUrl(NavigationManager.ToAbsoluteUri("/chatHub"))
 			.Build();
+		var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
+		var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		var userName = state.User?.Identity?.Name;
+
+		var patients = await client.GetFromJsonAsync<List<HealthcareMonitoring.Shared.Domain.Patient>?>(Urlpat);
+		if (patients != null)
+		{
+			patients = patients.Where(i => i.Email == userName).ToList();
+		}
+
+		CurrentUserId = patients.FirstOrDefault().Id;
+
+		var appointment = await client.GetFromJsonAsync<List<HealthcareMonitoring.Shared.Domain.Appointment>?>(Urlappo);
+		if (appointment != null)
+		{
+			_appointment = appointment.Where(i => i.PatientId == CurrentUserId).FirstOrDefault();
+		}
+
+		doctor = (await client.GetFromJsonAsync<List<HealthcareMonitoring.Shared.Domain.Doctor>>(Url)).FirstOrDefault(x => x.Id == _appointment.DoctorId);
 
 		hubConnection.On<int, int, string>("ReceiveMessage", (user, id, message) =>
 		{
-			if (user == CurrentUserId)
-			{
-				return;
-			}
-
-			if(id != CurrentUserId)
+			if (user == CurrentUserId || id != CurrentUserId)
 			{
 				return;
 			}
@@ -73,12 +97,88 @@
 	{
 		if (!string.IsNullOrWhiteSpace(NewMessage))
 		{
-			var id = ChatItems.FirstOrDefault(x => x.SendId != CurrentUserId).SendId;
-			ChatItems.Add(new ChatItem { Content = NewMessage, SendId = CurrentUserId, UserId = id, CreatedTime = DateTime.Now, });
-			await hubConnection.SendAsync("SendMessage", CurrentUserId, id, NewMessage);
-			NewMessage = string.Empty; // Clear the message input after sending
+			ChatItems.Add(new ChatItem { Content = NewMessage, SendId = CurrentUserId, UserId = doctor.Id, CreatedTime = DateTime.Now });
+			await hubConnection.SendAsync("SendMessage", CurrentUserId, doctor.Id, NewMessage);
+			NewMessage = string.Empty;
 		}
 	}
-	public bool IsConnected =>
-	hubConnection.State == HubConnectionState.Connected;
+	public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
 }
+<style>
+	.right-column {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		background-color: #f7f7f7;
+		padding: 20px;
+		height: 100vh;
+	}
+
+	.chat-header {
+		background-color: #007bff;
+		color: white;
+		padding: 10px;
+		border-radius: 8px 8px 0 0;
+		margin-bottom: 20px;
+	}
+
+	.doctor-info {
+		font-size: 0.9rem;
+		opacity: 0.85;
+	}
+
+	.chat-item {
+		margin-bottom: 10px;
+		padding: 10px;
+		border-radius: 8px;
+		background-color: #e9ecef;
+		border: 1px solid #dee2e6;
+	}
+
+	.current-user {
+		align-self: flex-end;
+		background-color: #d1e7dd;
+	}
+
+	.sender-name {
+		font-weight: bold;
+	}
+
+	.chat-content {
+		margin-top: 5px;
+	}
+
+	.chat-timestamp {
+		text-align: right;
+		font-size: 0.85rem;
+		color: #6c757d;
+		margin-top: 5px;
+	}
+
+	.message-input-area {
+		margin-top: auto;
+		display: flex;
+		padding: 10px 0;
+	}
+
+	.message-input {
+		flex-grow: 1;
+		margin-right: 10px;
+		padding: 10px;
+		border: 1px solid #ced4da;
+		border-radius: 0.25rem;
+	}
+
+	.send-button {
+		padding: 10px 15px;
+		background-color: #0d6efd;
+		color: white;
+		border: none;
+		border-radius: 0.25rem;
+		cursor: pointer;
+	}
+
+		.send-button:hover {
+			background-color: #0b5ed7;
+		}
+</style>

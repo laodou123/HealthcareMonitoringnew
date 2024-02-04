@@ -16,6 +16,7 @@ public partial class ReportDialog
     private MedicalReport? _report;
     private List<SelectedItem> _items = default!;
 
+
     [Parameter]
     [NotNull]
     public Patient? Value { get; set; }
@@ -35,9 +36,11 @@ public partial class ReportDialog
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
+		_items = typeof(MedicalType).ToSelectList();
+		_report ??= new() { Id = _report.Id, MedicalType = MedicalType.General.ToString() };
 
-        //从数据库中读取 Doctor Profile
-        var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
+		//从数据库中读取 Doctor Profile
+		var client = HttpClientFactory.CreateClient("HealthcareMonitoring.ServerAPI");
         if (Value.ReportId.HasValue)
         {
             _report = await client.GetFromJsonAsync<MedicalReport>($"api/MedicalReports/{Value.ReportId}");
@@ -51,7 +54,6 @@ public partial class ReportDialog
                 rhythm = " ",
                 T_Wave = " "
             };
-            _items = typeof(MedicalType).ToSelectList();
             var result = await client.PostAsJsonAsync("api/MedicalReports", _report);
             if (result.IsSuccessStatusCode)
             {
